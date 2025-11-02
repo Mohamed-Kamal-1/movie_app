@@ -1,0 +1,37 @@
+{
+  "@@locale": "ar",
+  "evently": "Evently",
+  "commentOnBoardingScreenName": "onBoardingScreen",
+  "personalizeYourExperience": "خصص تجربتك",
+  "personalizeDescription": "اختر اللغة والمظهر المفضلين لديك للبدء بتجربة مريحة ومصممة لتناسب ذوقك.",
+  "language": "اللغة",
+  "theme": "المظهر",
+  "letsStart": "هيا نبدأ",
+
+  "commentRegisterAndLoginScreenName": "Register_and_Login_",
+  "register": " تسجيل الدخول",
+  "name": "الاسم",
+  "email": "البريد الإلكتروني",
+  "password": "كلمة المرور",
+  "rePassword": "إعادة كلمة المرور",
+  "createAccount": "إنشاء حساب",
+  "alreadyHaveAccount": "لديك حساب بالفعل؟",
+  "login": "تسجيل الدخول",
+  "forgetPassword": "نسيت كلمة المرور",
+  "doNotHaveAccount": "ليس لديك حساب؟",
+  "loginWithGoogle": "تسجيل الدخول باستخدام Google",
+  "resetPassword": "إعادة تعيين كلمة المرور",
+
+  "commentValidationInRegisterAndLoginScreenName": "تسجيل_ودخول_",
+  "pleaseEnter": "من فضلك أدخل",
+  "pleaseEnterValid": "من فضلك أدخل قيمة صحيحة لـ ",
+  "passwordsDoesNotMatch": "كلمة المرور غير متطابقة",
+  "passwordMust6Char": "كلمة المرور يجب ألا تقل عن 6 أحرف",
+
+  "commentHomeScreen" : "commentHomeScreen",
+  "all": "الكل",
+  "sport": "رياضة",
+  "gaming": "ألعاب",
+  "workshop": "ورشة عمل",
+  "birthday": "عيد ميلاد"
+}
