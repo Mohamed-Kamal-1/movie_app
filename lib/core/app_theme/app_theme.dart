@@ -10,22 +10,22 @@ class AppTheme {
     textTheme: TextTheme(
       titleMedium: GoogleFonts.inter(
         fontSize: 20,
-        color: AppColor.offWhite,
+        color: AppColor.white,
         fontWeight: FontWeight.bold,
       ),
       headlineSmall: GoogleFonts.inter(
-        color: AppColor.offWhite,
+        color: AppColor.white,
         fontSize: 24,
         fontWeight: FontWeight.bold,
       ),
       titleSmall: GoogleFonts.inter(
-        color: AppColor.offWhite,
+        color: AppColor.white,
         fontSize: 16,
         fontWeight: FontWeight.bold,
       ),
 
       headlineMedium: GoogleFonts.inter(
-        // color: AppColor.whitePrimaryColor,
+        color: AppColor.white,
         fontSize: 36,
         fontWeight: FontWeight.bold,
       ),
@@ -52,11 +52,11 @@ class AppTheme {
       ) ,
 
       labelStyle: GoogleFonts.inter(
-        color: AppColor.offWhite,
+        color: AppColor.white,
         fontWeight: FontWeight.w500,
       ),
       hintStyle: GoogleFonts.inter(
-        color: AppColor.offWhite,
+        color: AppColor.white,
         fontWeight: FontWeight.w500,
       ),
       prefixIconColor: AppColor.offWhite,
