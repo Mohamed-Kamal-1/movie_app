@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/core/app_theme/app_theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -12,8 +13,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       //   theme:
-      //   darkTheme:
-      //   themeMode:,
+        darkTheme: AppTheme.darkTheme,
+        themeMode:ThemeMode.dark,
       //   locale: Locale(appLanguageProvider.getAppLanguage()),
         debugShowCheckedModeBanner: false,
       //   localizationsDelegates: AppLocalizations.localizationsDelegates,
