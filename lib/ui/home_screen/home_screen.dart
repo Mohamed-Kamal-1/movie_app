@@ -69,7 +69,9 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     Text(AppString.action, style: context.fonts.titleMedium),
                     const Spacer(),
-                    Text(AppString.seeMore, style: context.fonts.titleSmall),
+                    Text(AppString.seeMore, style: context.fonts.titleSmall?.copyWith(
+                      color: AppColor.yellow
+                    )),
                     const SizedBox(width: 5),
                     const Icon(Icons.arrow_forward, color: AppColor.yellow),
                   ],
