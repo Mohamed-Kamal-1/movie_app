@@ -4,14 +4,20 @@ import 'package:google_fonts/google_fonts.dart';
 import '../colors/app_color.dart';
 
 class AppTheme {
-  static ThemeData darkTheme = ThemeData(
+  static ThemeData Theme = ThemeData(
     appBarTheme: AppBarTheme(backgroundColor: AppColor.black,foregroundColor: AppColor.yellow,),
     scaffoldBackgroundColor: AppColor.black,
     textTheme: TextTheme(
+      bodyLarge: GoogleFonts.inter(
+        fontSize: 36,
+        color: AppColor.white,
+        fontWeight: FontWeight.w500,
+      ),
+
       titleMedium: GoogleFonts.inter(
         fontSize: 20,
         color: AppColor.white,
-        fontWeight: FontWeight.bold,
+        fontWeight: FontWeight.w400,
       ),
       headlineSmall: GoogleFonts.inter(
         color: AppColor.white,
@@ -30,7 +36,7 @@ class AppTheme {
         fontWeight: FontWeight.bold,
       ),
     ),
-    inputDecorationTheme: InputDecorationThemeData(
+    inputDecorationTheme: InputDecorationTheme(
       filled:true ,
       // focusColor: AppColor.darkBluePrimaryColor,
       fillColor: Colors.transparent,
@@ -65,8 +71,13 @@ class AppTheme {
 
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        // backgroundColor: AppColor.bluePrimaryColor,
+        backgroundColor: AppColor.goldenYellow,
         // foregroundColor: AppColor.whitePrimaryColor,
+        textStyle: TextStyle(
+            color: AppColor.black,
+            fontSize: 20,
+            fontWeight: FontWeight.w500
+        ),
         padding: EdgeInsets.all(16),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadiusGeometry.circular(16),
@@ -74,9 +85,9 @@ class AppTheme {
       ),
     ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
-      // backgroundColor: AppColor.darkBluePrimaryColor,
-      // selectedItemColor: AppColor.whitePrimaryColor,
-      unselectedItemColor: AppColor.offWhite,
+      backgroundColor: AppColor.gray,
+      selectedItemColor: AppColor.yellow,
+      unselectedItemColor: AppColor.white,
     ),
   );
 }
