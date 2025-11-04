@@ -26,7 +26,7 @@ class _PageViewWidgetState extends State<PageViewWidget> {
             Text(widget.onBoarding.title,
                 softWrap: true,textAlign: TextAlign.center, style: Theme.of(context).textTheme.bodyLarge),
             SizedBox(height: 20,),
-            Text(widget.onBoarding.description,textAlign: TextAlign.center, style: Theme.of(context).textTheme.bodyMedium),
+            Text(widget.onBoarding.description,textAlign: TextAlign.center, style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Colors.white.withAlpha(153))),
             SizedBox(height: 20,),
             ElevatedButton(onPressed: () {
 
