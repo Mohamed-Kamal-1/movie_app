@@ -1,47 +1,44 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/core/colors/app_color.dart';
 import 'package:movie_app/core/images/app_image.dart';
+import 'package:movie_app/extensions/extension.dart';
+import 'package:movie_app/l10n/app_string.dart';
+import 'package:movie_app/ui/home_screen/bottom_navigation_section.dart';
+import 'package:movie_app/ui/home_screen/watch_now_section.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+import 'available_now_section.dart';
 
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  final PageController _pageController = PageController(viewportFraction: 0.65);
-  double currentPage = 0.0;
+class HomeScreen extends StatelessWidget {
+  HomeScreen({super.key});
 
   final List<String> images = [
+    AppImage.leftImage,
+    AppImage.midImage,
+    AppImage.rightImage,
+    AppImage.leftImage,
+    AppImage.midImage,
+    AppImage.rightImage,
+    AppImage.leftImage,
+    AppImage.midImage,
+    AppImage.rightImage,
     AppImage.leftImage,
     AppImage.midImage,
     AppImage.rightImage,
   ];
 
   @override
-  void initState() {
-    super.initState();
-    _pageController.addListener(() {
-      setState(() {
-        currentPage = _pageController.page!;
-      });
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: AppBottomNavigationSection(),
       body: Column(
         children: [
           Expanded(
             child: Stack(
               children: [
-                // الخلفية
                 Positioned.fill(
                   child: Image.asset(AppImage.midImage, fit: BoxFit.fill),
                 ),
 
-                // التدرج
                 Container(
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
@@ -57,56 +54,38 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
 
-                Column(
-                  children: [
-                    Image.asset(AppImage.availableNow, width: double.infinity),
-
-                    Expanded(
-                      child: PageView.builder(
-                        controller: _pageController,
-                        itemCount: images.length,
-                        itemBuilder: (context, index) {
-                          double scale = (1.5 - (currentPage - index).abs())
-                              .clamp(0.8, 1);
-                          return AnimatedScale(
-                            scale: scale,
-                            duration: Duration(milliseconds: 500),
-                            curve: Curves.easeInOut,
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                image: DecorationImage(
-                                  image: AssetImage(images[index]),
-                                  fit: BoxFit.fitWidth,
-                                ),
-                              ),
-                            ),
-                          );
-                          ;
-                        },
-                      ),
-                    ),
-
-                    Expanded(child: Image.asset(AppImage.watchNow, width: double.infinity)),
-                  ],
-                ),
-                Column(
-                  children: [
-                    Row(
-                      children: [
-                        // Text('A')
-                      ],
-                    ),
-                  ],
-                )
+                AvailableNowSection(images: images),
               ],
             ),
-
           ),
-
+          Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 12,
+                ),
+                child: Row(
+                  children: [
+                    Text(AppString.action, style: context.fonts.titleMedium),
+                    const Spacer(),
+                    Text(AppString.seeMore, style: context.fonts.titleSmall?.copyWith(
+                      color: AppColor.yellow
+                    )),
+                    const SizedBox(width: 5),
+                    const Icon(Icons.arrow_forward, color: AppColor.yellow),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 220,
+                width: double.infinity,
+                child: WatchNowSection(images: images),
+              ),
+            ],
+          ),
         ],
       ),
     );
   }
 }
-

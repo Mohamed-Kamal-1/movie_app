@@ -85,9 +85,9 @@ class AppTheme {
       ),
     ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
-      // backgroundColor: AppColor.darkBluePrimaryColor,
-      // selectedItemColor: AppColor.whitePrimaryColor,
-      unselectedItemColor: AppColor.offWhite,
+      backgroundColor: AppColor.gray,
+      selectedItemColor: AppColor.yellow,
+      unselectedItemColor: AppColor.white,
     ),
   );
 }
