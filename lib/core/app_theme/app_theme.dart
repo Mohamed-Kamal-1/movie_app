@@ -30,7 +30,7 @@ class AppTheme {
         fontWeight: FontWeight.bold,
       ),
     ),
-    inputDecorationTheme: InputDecorationThemeData(
+    inputDecorationTheme: InputDecorationTheme(
       filled:true ,
       // focusColor: AppColor.darkBluePrimaryColor,
       fillColor: Colors.transparent,
