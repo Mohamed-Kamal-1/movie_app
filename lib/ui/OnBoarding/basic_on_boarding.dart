@@ -54,20 +54,25 @@ class _BasicOnBoardingState extends State<BasicOnBoarding> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     SizedBox(height: 32),
-                    Text(mySlides[_index].title, textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.titleLarge,
+                    Text(
+                      mySlides[_index].title,
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.headlineSmall,
                     ),
                     SizedBox(height: 16),
                     Text(
                       mySlides[_index].description,
                       textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.bodyMedium
+                      style: Theme.of(context).textTheme.titleMedium,
                     ),
                     SizedBox(height: 24),
                     ElevatedButton(
                       onPressed: () {
                         _index == mySlides.length - 1
-                            ? Navigator.pushReplacementNamed(context, AppRoutes.HomeScreen.name)
+                            ? Navigator.pushReplacementNamed(
+                                context,
+                                AppRoutes.HomeScreen.name,
+                              )
                             : setState(() {
                                 if (_index != mySlides.length - 1) {
                                   _index++;
@@ -76,7 +81,10 @@ class _BasicOnBoardingState extends State<BasicOnBoarding> {
                       },
                       child: Text(
                         _index != (mySlides.length - 1) ? "Next" : "Finish",
-                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 20),),
+                        style: Theme.of(
+                          context,
+                        ).textTheme.bodyLarge?.copyWith(fontSize: 20),
+                      ),
                     ),
 
                     SizedBox(height: 16),
@@ -99,11 +107,15 @@ class _BasicOnBoardingState extends State<BasicOnBoarding> {
                                 borderRadius: BorderRadius.circular(15),
                               ),
                               child: Padding(
-                                padding: const EdgeInsets.all(10.0),
+                                padding: const EdgeInsets.all(16.0),
                                 child: Center(
                                   child: Text(
                                     "Back",
-                                    style: TextStyle(color: Colors.yellow),
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleMedium
+                                        ?.copyWith(color: Colors.yellow),
+                                    // style: T,
                                   ),
                                 ),
                               ),

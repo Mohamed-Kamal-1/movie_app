@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/ui/OnBoarding/widgets/page_view_widget.dart';
 
-
 import 'on_boarding_details.dart';
 
 class OnBoardingScreen extends StatelessWidget {
@@ -18,10 +17,10 @@ class OnBoardingScreen extends StatelessWidget {
               itemCount: 6,
               itemBuilder: (context, index) {
                 var onBoarding = OnBoardingDetails.onBoardingList[index];
-              return PageViewWidget(onBoarding: onBoarding);
-
-            },),
-          )
+                return PageViewWidget(onBoarding: onBoarding);
+              },
+            ),
+          ),
         ],
       ),
     );
