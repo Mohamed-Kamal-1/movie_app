@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/core/app_theme/app_theme.dart';
+import 'package:movie_app/core/routes/app_routes.dart';
+import 'package:movie_app/ui/home_screen/home_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,10 +21,10 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
       //   localizationsDelegates: AppLocalizations.localizationsDelegates,
       //   supportedLocales: AppLocalizations.supportedLocales,
-      //   initialRoute:
-      //   routes: {
-      //
-      //   },
+        initialRoute: AppRoutes.HomeScreen.name,
+        routes: {
+          AppRoutes.HomeScreen.name : (context) =>  HomeScreen(),
+        },
     );
   }
 }

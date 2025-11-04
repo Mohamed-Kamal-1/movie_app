@@ -41,6 +41,7 @@ dependencies:
   intl: any
   flutter_localizations:
     sdk: flutter
+  carousel_slider: ^5.1.1
 
 dev_dependencies:
   flutter_test:
@@ -68,6 +69,7 @@ flutter:
   assets:
     - assets/images/images_app/
     - assets/images/images_app/icon_app/
+    - assets/images/images_app/home_screen_images/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
