@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/core/routes/app_routes.dart';
 
 import 'on_boarding_details.dart';
 
@@ -66,21 +67,7 @@ class _BasicOnBoardingState extends State<BasicOnBoarding> {
                     ElevatedButton(
                       onPressed: () {
                         _index == mySlides.length - 1
-                            ? Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(
-                                  builder: (context) {
-                                    return Scaffold(
-                                      body: Center(
-                                        child: Container(
-                                          color: Colors.yellow,
-                                          height: 100,
-                                          width: 100,
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                ),
-                              )
+                            ? Navigator.pushReplacementNamed(context, AppRoutes.HomeScreen.name)
                             : setState(() {
                                 if (_index != mySlides.length - 1) {
                                   _index++;

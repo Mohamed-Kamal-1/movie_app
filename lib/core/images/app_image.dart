@@ -29,15 +29,18 @@ class AppImage {
   static const String onBoarding_5 = "${_onBoardingImages}OnBoarding_5.png";
   static const String onBoarding_6 = "${_onBoardingImages}OnBoarding_6.png";
 
-  // static const String avatar_1 = "assets/images/Avatar_1.png";
-  // static const String avatar_2 = "assets/images/Avatar_2.png";
-  // static const String avatar_3 = "assets/images/Avatar_3.png";
-  // static const String avatar_4 = "assets/images/Avatar_4.png";
-  // static const String avatar_5 = "assets/images/Avatar_5.png";
-  // static const String avatar_6 = "assets/images/Avatar_6.png";
-  // static const String avatar_7 = "assets/images/Avatar_7.png";
-  // static const String avatar_8 = "assets/images/Avatar_8.png";
-  // static const String avatar_9 = "assets/images/Avatar_9.png";
+
+  static const String _avatarImage= 'assets/images/avatar_image/';
+
+  static const String avatar_1 = "${_avatarImage}Avatar_1.png";
+  static const String avatar_2 = "${_avatarImage}Avatar_2.png";
+  static const String avatar_3 = "${_avatarImage}Avatar_3.png";
+  static const String avatar_4 = "${_avatarImage}Avatar_4.png";
+  static const String avatar_5 = "${_avatarImage}Avatar_5.png";
+  static const String avatar_6 = "${_avatarImage}Avatar_6.png";
+  static const String avatar_7 = "${_avatarImage}Avatar_7.png";
+  static const String avatar_8 = "${_avatarImage}Avatar_8.png";
+  static const String avatar_9 = "${_avatarImage}Avatar_9.png";
 
 
 }

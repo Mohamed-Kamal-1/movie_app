@@ -71,6 +71,7 @@ flutter:
     - assets/images/images_app/icon_app/
     - assets/images/images_app/home_screen_images/
     - assets/images/on_boarding_images/
+    - assets/images/avatar_image/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
