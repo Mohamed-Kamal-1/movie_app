@@ -1,0 +1,82 @@
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+import '../colors/app_color.dart';
+
+class AppTheme {
+  static ThemeData darkTheme = ThemeData(
+    appBarTheme: AppBarTheme(backgroundColor: AppColor.black,foregroundColor: AppColor.yellow,),
+    scaffoldBackgroundColor: AppColor.black,
+    textTheme: TextTheme(
+      titleMedium: GoogleFonts.inter(
+        fontSize: 20,
+        color: AppColor.white,
+        fontWeight: FontWeight.bold,
+      ),
+      headlineSmall: GoogleFonts.inter(
+        color: AppColor.white,
+        fontSize: 24,
+        fontWeight: FontWeight.bold,
+      ),
+      titleSmall: GoogleFonts.inter(
+        color: AppColor.white,
+        fontSize: 16,
+        fontWeight: FontWeight.bold,
+      ),
+
+      headlineMedium: GoogleFonts.inter(
+        color: AppColor.white,
+        fontSize: 36,
+        fontWeight: FontWeight.bold,
+      ),
+    ),
+    inputDecorationTheme: InputDecorationThemeData(
+      filled:true ,
+      // focusColor: AppColor.darkBluePrimaryColor,
+      fillColor: Colors.transparent,
+
+      floatingLabelBehavior: FloatingLabelBehavior.auto,
+      border: OutlineInputBorder(
+        borderSide: BorderSide(
+          // color: AppColor.darkBluePrimaryColor,
+          width: 1.5,
+        ),
+        borderRadius: BorderRadius.circular(16),
+      ),
+      enabledBorder: OutlineInputBorder(
+        // borderSide: BorderSide(color: AppColor.bluePrimaryColor, width: 1.5),
+        borderRadius: BorderRadius.circular(16),
+      ),
+      activeIndicatorBorder:BorderSide(
+        // color: AppColor.bluePrimaryColor
+      ) ,
+
+      labelStyle: GoogleFonts.inter(
+        color: AppColor.white,
+        fontWeight: FontWeight.w500,
+      ),
+      hintStyle: GoogleFonts.inter(
+        color: AppColor.white,
+        fontWeight: FontWeight.w500,
+      ),
+      prefixIconColor: AppColor.offWhite,
+      suffixIconColor: AppColor.offWhite,
+    ),
+
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        // backgroundColor: AppColor.bluePrimaryColor,
+        // foregroundColor: AppColor.whitePrimaryColor,
+        padding: EdgeInsets.all(16),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadiusGeometry.circular(16),
+        ),
+      ),
+    ),
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      // backgroundColor: AppColor.darkBluePrimaryColor,
+      // selectedItemColor: AppColor.whitePrimaryColor,
+      unselectedItemColor: AppColor.offWhite,
+    ),
+  );
+}
