@@ -14,7 +14,6 @@ class _AppBottomNavigationSectionState extends State<AppBottomNavigationSection>
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-
         backgroundColor:context.bottomNavBarTheme.backgroundColor,
         elevation: 0,
         showSelectedLabels: false,
