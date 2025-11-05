@@ -6,7 +6,7 @@ import 'package:movie_app/core/images/app_image.dart';
 import '../OnBoarding/widgets/CutomFormField.dart';
 
 class UpdateProfile extends StatefulWidget {
-   UpdateProfile({super.key});
+  UpdateProfile({super.key});
 
   @override
   State<UpdateProfile> createState() => _UpdateProfileState();
@@ -41,11 +41,11 @@ class _UpdateProfileState extends State<UpdateProfile> {
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w400,
-            color: AppColor.yellow,
+            color: AppColor.goldenYellow,
           ),
         ),
         leading: IconButton(
-          color: AppColor.yellow,
+          color: AppColor.goldenYellow,
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
             //  Navigator.pop(context);
@@ -91,7 +91,10 @@ class _UpdateProfileState extends State<UpdateProfile> {
 
             SizedBox(height: 16),
 
-            Text("reset password"),
+            Text("reset password",
+              style: Theme.of(context).textTheme.titleMedium,
+
+            ),
 
             Spacer(),
 
@@ -106,7 +109,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.red,
                     ),
-                    child: Text("Delete Account"),
+                    child: Text("Delete Account",style: Theme.of(context).textTheme.titleMedium,),
                   ),
                   SizedBox(height: 20),
                   ElevatedButton(
@@ -130,17 +133,17 @@ class _UpdateProfileState extends State<UpdateProfile> {
   _showBottomSheet(BuildContext ctx, List<String> imgs ) {
     showModalBottomSheet(
       context: ctx,
-        backgroundColor: Colors.transparent,
+      backgroundColor: Colors.transparent,
       builder: (context) {
         return Padding(
           padding: const EdgeInsets.all(8.0),
           child: Container(
             decoration: BoxDecoration(
-            color: Color(0xFF282A28) ,
-              borderRadius: BorderRadius.only(
-                topRight: Radius.circular(24),
-                topLeft: Radius.circular(24),
-              )
+                color: Color(0xFF282A28) ,
+                borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(24),
+                  topLeft: Radius.circular(24),
+                )
             ),
             height: 400,
             width: double.infinity,
@@ -160,10 +163,10 @@ class _UpdateProfileState extends State<UpdateProfile> {
                       });
                     },
                     child: Container(
-                      height: 108,
+                        height: 108,
                         width: 105,
                         decoration: BoxDecoration(
-                          color: selectedAvatar == index ? AppColor.yellow : Colors.transparent  ,
+                            color: selectedAvatar == index ? AppColor.yellow : Colors.transparent  ,
                             borderRadius: BorderRadius.circular(15),
                             border: Border.all(color: Colors.yellow)),
                         child: Image.asset(imgs[index], width: 86, height: 86)),
