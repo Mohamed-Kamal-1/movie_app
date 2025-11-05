@@ -33,7 +33,7 @@ class ForgetScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(15),
                   borderSide: BorderSide.none,
                 ),
-                prefixIcon: SvgPicture.asset(AppImage.emailIcon , fit: BoxFit.scaleDown,),
+                prefixIcon: SvgPicture.asset(AppImage.email_icon , fit: BoxFit.scaleDown,),
                 contentPadding: const EdgeInsets.symmetric(
                   vertical: 16,
                   horizontal: 20,

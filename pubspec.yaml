@@ -40,9 +40,10 @@ dependencies:
   intl: any
   flutter_localizations:
     sdk: flutter
-  carousel_slider: ^5.1.1
   flutter_svg: ^2.2.2
-
+  toggle_switch: ^2.3.0
+  animated_toggle_switch: ^0.8.5
+  provider: ^6.1.5+1
 
 dev_dependencies:
   flutter_test:
@@ -74,6 +75,9 @@ flutter:
     - assets/images/images_app/icon_app/
     - assets/images/images_app/home_screen_images/
     - assets/images/auth/
+    - assets/images/images_app/login_images/
+    - assets/images/on_boarding_images/
+    - assets/images/avatar_image/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
