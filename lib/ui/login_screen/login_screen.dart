@@ -100,7 +100,7 @@ class LoginScreen extends StatelessWidget {
               ///////////////////-----------login-button------------//////////////
               ElevatedButton(
                 onPressed: () {
-                  /////////////////!!!!!!!!///////////////
+                  Navigator.pushReplacementNamed(context, AppRoutes.HomeScreen.name);
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColor.yellow,
@@ -125,7 +125,7 @@ class LoginScreen extends StatelessWidget {
                   ),
                   InkWell(
                     onTap: () {
-                      ///////////////////!!!!!!!!!!!/////////////
+                     Navigator.pushNamed(context, AppRoutes.RegisterScreen.name);
                     },
                     child: Text(
                       'Create One',
