@@ -13,39 +13,42 @@ class _AppBottomNavigationSectionState extends State<AppBottomNavigationSection>
   int selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
-    return BottomNavigationBar(
-        backgroundColor:context.bottomNavBarTheme.backgroundColor,
-        elevation: 0,
-        showSelectedLabels: false,
-        type: BottomNavigationBarType.fixed,
-        onTap: (value) {
-          setState(() {
+    return Theme(      data: ThemeData(splashColor: Colors.transparent,highlightColor: Colors.transparent  ,hoverColor: Colors.transparent,colorScheme: ColorScheme.light(primary: AppColor.white)),
+      child: BottomNavigationBar(
 
-          });
-          selectedIndex = value;
-        },
-        currentIndex: selectedIndex,
-
-        items: [
-          BottomNavigationBarItem(
-
-            icon: Icon(Icons.warehouse_outlined),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.location_on_outlined),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.favorite_border),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person_pin),
-            label: '',
-          ),
-        ]
-
+          backgroundColor:context.bottomNavBarTheme.backgroundColor,
+          elevation: 0,
+          showSelectedLabels: false,
+          type: BottomNavigationBarType.fixed,
+          onTap: (value) {
+            setState(() {
+      
+            });
+            selectedIndex = value;
+          },
+          currentIndex: selectedIndex,
+      
+          items: [
+            BottomNavigationBarItem(
+      
+              icon: Icon(Icons.warehouse_outlined),
+              label: '',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.location_on_outlined),
+              label: '',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.favorite_border),
+              label: '',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person_pin),
+              label: '',
+            ),
+          ]
+      
+      ),
     );
   }
 }
