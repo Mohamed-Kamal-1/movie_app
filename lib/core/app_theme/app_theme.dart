@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../colors/app_color.dart';
 
 class AppTheme {
-  static ThemeData darkTheme = ThemeData(
+  static ThemeData theme = ThemeData(
     appBarTheme: AppBarTheme(backgroundColor: AppColor.black,foregroundColor: AppColor.yellow,),
     scaffoldBackgroundColor: AppColor.black,
     textTheme: TextTheme(
