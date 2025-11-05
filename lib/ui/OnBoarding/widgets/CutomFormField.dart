@@ -42,34 +42,34 @@ class _AppFormFieldState extends State<AppFormField> {
       padding: EdgeInsets.symmetric(vertical: 8),
       child: TextFormField(
 
-        maxLines: widget.lines,
-        controller: widget.controller,
+          maxLines: widget.lines,
+          controller: widget.controller,
           style: GoogleFonts.inter(
             fontSize: 16.0,
             color: Colors.white,
           ),
-        validator: widget.validator,
-        obscureText: widget.isPassword && secureText,
-        keyboardType: widget.keyboardType,
+          validator: widget.validator,
+          obscureText: widget.isPassword && secureText,
+          keyboardType: widget.keyboardType,
           decoration: InputDecoration(
-            filled: true,
-            fillColor: Color(0xFF282A28),
-          hint: Text(widget.hint ?? ""),
-          // labelText: widget.label,
-          prefixIcon: widget.icon!=null ? Icon(widget.icon , color: Colors.white,) : null,
-            suffixIcon: widget.isPassword?InkWell(
-              onTap: (){
-                setState(() {
-                  secureText = !secureText;
-                });
-              },
-              child: Icon(
-                  secureText ?
-                  Icons.visibility  :
-                  Icons.visibility_off
-              ),
-            ):null
-      )
+              filled: true,
+              fillColor: Color(0xFF282A28),
+              hint: Text(widget.hint ?? "",style: Theme.of(context).textTheme.titleMedium,),
+              // labelText: widget.label,
+              prefixIcon: widget.icon!=null ? Icon(widget.icon , color: Colors.white,) : null,
+              suffixIcon: widget.isPassword?InkWell(
+                onTap: (){
+                  setState(() {
+                    secureText = !secureText;
+                  });
+                },
+                child: Icon(
+                    secureText ?
+                    Icons.visibility  :
+                    Icons.visibility_off
+                ),
+              ):null
+          )
       ),
     );
   }
