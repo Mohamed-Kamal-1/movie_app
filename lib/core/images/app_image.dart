@@ -1,6 +1,6 @@
 class AppImage {
   // assets/images/images_app
-  static const String _basePath = 'assets/images/images_app/icon_app/';
+  static const String _basePath = 'assets/images/images_app/';
 
   static const String primaryLogo = '${_basePath}logoApp.png';
   static const String registerLogo = '${_basePath}registerLogo.png';
@@ -18,13 +18,6 @@ class AppImage {
   static const String leftImage = '${_basePathHome}carousel_image_3.png';
   static const String availableNow = '${_basePathHome}Available_Now.png';
   static const String watchNow = '${_basePathHome}Watch_Now.png';
-
-  static const String _basePathLogin = 'assets/images/images_app/login_images/';
-  static const String emailIcon = '${_basePathLogin}email.svg';
-  static const String lock = '${_basePathLogin}lock.svg';
-  static const String google = '${_basePathLogin}google.svg';
-  static const String loginLogo = '${_basePathLogin}login_logo.png';
-  static const String forgetImage = '${_basePathLogin}forget_password.png';
 
 
 
