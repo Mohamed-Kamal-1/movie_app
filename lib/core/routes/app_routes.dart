@@ -5,5 +5,6 @@ enum AppRoutes {
   RegistrScreen,
   LoginScreen,
   HomeScreen,
+  ForgetScreen,
   ;
 }

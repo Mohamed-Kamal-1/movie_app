@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/core/colors/app_color.dart';
 import 'package:movie_app/core/routes/app_routes.dart';
 
 import 'on_boarding_details.dart';
@@ -71,7 +72,7 @@ class _BasicOnBoardingState extends State<BasicOnBoarding> {
                         _index == mySlides.length - 1
                             ? Navigator.pushReplacementNamed(
                                 context,
-                                AppRoutes.HomeScreen.name,
+                                AppRoutes.LoginScreen.name,
                               )
                             : setState(() {
                                 if (_index != mySlides.length - 1) {
@@ -83,7 +84,7 @@ class _BasicOnBoardingState extends State<BasicOnBoarding> {
                         _index != (mySlides.length - 1) ? "Next" : "Finish",
                         style: Theme.of(
                           context,
-                        ).textTheme.bodyLarge?.copyWith(fontSize: 20),
+                        ).textTheme.bodyLarge?.copyWith(color: AppColor.black , fontSize: 20),
                       ),
                     ),
 

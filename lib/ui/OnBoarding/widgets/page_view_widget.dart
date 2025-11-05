@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:movie_app/ui/OnBoarding/basic_on_boarding.dart';
 import 'package:movie_app/ui/OnBoarding/on_boarding_details.dart';
 
+import '../../../core/colors/app_color.dart';
+
 class PageViewWidget extends StatefulWidget {
   const PageViewWidget({super.key, required this.onBoarding});
 
@@ -48,7 +50,7 @@ class _PageViewWidgetState extends State<PageViewWidget> {
                     ),
                   );
                 },
-                child: Text("Explore Now"),
+                child: Text("Explore Now" , style:TextStyle(color: AppColor.black),),
               ),
               SizedBox(height: 33),
             ],
