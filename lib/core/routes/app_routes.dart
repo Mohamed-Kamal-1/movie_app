@@ -2,7 +2,7 @@ enum AppRoutes {
   BasicOnBoarding,
   OnBoardingScreen,
   UpdateProfile,
-  RegistrScreen,
+  RegisterScreen,
   LoginScreen,
   HomeScreen,
   ForgetScreen,

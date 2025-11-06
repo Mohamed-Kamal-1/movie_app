@@ -1,7 +1,6 @@
 class AppImage {
   // assets/images/images_app
-  static const String _basePath = 'assets/images/images_app/icon_app/';
-
+  static const String _basePath = 'assets/images/images_app/';
   static const String primaryLogo = '${_basePath}logoApp.png';
   static const String registerLogo = '${_basePath}registerLogo.png';
   static const String sport = '${_basePath}Sport.png';
@@ -49,9 +48,10 @@ class AppImage {
   static const String avatar_8 = "${_avatarImage}Avatar_8.png";
   static const String avatar_9 = "${_avatarImage}Avatar_9.png";
 
-  static const String profile_icon = 'assets/images/images_app/icon_app/auth/profile.svg';
-  static const String email_icon = 'assets/images/images_app/icon_app/auth/email.svg';
-  static const String password_icon = 'assets/images/images_app/icon_app/auth/password.svg';
-  static const String phone_icon = 'assets/images/images_app/icon_app/auth/phone.svg';
+  static const String _authIconPath = 'assets/images/images_app/icon_app/auth/';
+  static const String profile_icon  = "${_authIconPath}profile.svg";
+  static const String email_icon    = "${_authIconPath}email.svg";
+  static const String password_icon = "${_authIconPath}password.svg";
+  static const String phone_icon    = "${_authIconPath}phone.svg";
 
 }
