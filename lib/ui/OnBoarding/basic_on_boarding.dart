@@ -36,95 +36,92 @@ class _BasicOnBoardingState extends State<BasicOnBoarding> {
           ),
 
           IntrinsicHeight(
-            child: Positioned(
-              bottom: 0,
-              // alignment: Alignment.bottomCenter,
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 16),
-                decoration: BoxDecoration(
-                  color: Colors.black,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(40),
-                    topRight: Radius.circular(40),
-                  ),
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              decoration: BoxDecoration(
+                color: Colors.black,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(40),
+                  topRight: Radius.circular(40),
                 ),
-                width: double.infinity,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    SizedBox(height: 32),
-                    Text(
-                      mySlides[_index].title,
-                      textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.headlineSmall,
+              ),
+              width: double.infinity,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  SizedBox(height: 32),
+                  Text(
+                    mySlides[_index].title,
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.headlineSmall,
+                  ),
+                  SizedBox(height: 16),
+                  mySlides[_index].description.isNotEmpty ?
+                  Text(
+                    mySlides[_index].description,
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ): SizedBox.shrink(),
+                  SizedBox(height: 24),
+                  ElevatedButton(
+                    onPressed: () {
+                      _index == mySlides.length - 1
+                          ? Navigator.pushReplacementNamed(
+                              context,
+                              AppRoutes.HomeScreen.name,
+                            )
+                          : setState(() {
+                              if (_index != mySlides.length - 1) {
+                                _index++;
+                              }
+                            });
+                    },
+                    child: Text(
+                      _index != (mySlides.length - 1) ? "Next" : "Finish",
+                      style: Theme.of(
+                        context,
+                      ).textTheme.bodyLarge?.copyWith(fontSize: 20),
                     ),
-                    SizedBox(height: 16),
-                    Text(
-                      mySlides[_index].description,
-                      textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                    SizedBox(height: 24),
-                    ElevatedButton(
-                      onPressed: () {
-                        _index == mySlides.length - 1
-                            ? Navigator.pushReplacementNamed(
-                                context,
-                                AppRoutes.HomeScreen.name,
-                              )
-                            : setState(() {
-                                if (_index != mySlides.length - 1) {
-                                  _index++;
-                                }
-                              });
-                      },
-                      child: Text(
-                        _index != (mySlides.length - 1) ? "Next" : "Finish",
-                        style: Theme.of(
-                          context,
-                        ).textTheme.bodyLarge?.copyWith(fontSize: 20),
-                      ),
-                    ),
+                  ),
 
-                    SizedBox(height: 16),
+                  SizedBox(height: 16),
 
-                    _index == 0
-                        ? SizedBox.shrink()
-                        : InkWell(
-                            onTap: () {
-                              setState(() {
-                                if (_index != 0) {
-                                  _index--;
-                                }
-                              });
-                            },
-                            child: Container(
-                              width: double.infinity,
-                              decoration: BoxDecoration(
-                                border: Border.all(color: Colors.yellow),
-                                color: Colors.transparent,
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(16.0),
-                                child: Center(
-                                  child: Text(
-                                    "Back",
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .titleMedium
-                                        ?.copyWith(color: Colors.yellow),
-                                    // style: T,
-                                  ),
+                  _index == 0
+                      ? SizedBox.shrink()
+                      : InkWell(
+                          onTap: () {
+                            setState(() {
+                              if (_index != 0) {
+                                _index--;
+                              }
+                            });
+                          },
+                          child: Container(
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.yellow),
+                              color: Colors.transparent,
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Center(
+                                child: Text(
+                                  "Back",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleMedium
+                                      ?.copyWith(color: Colors.yellow),
+                                  // style: T,
                                 ),
                               ),
                             ),
                           ),
+                        ),
 
-                    SizedBox(height: 16),
-                  ],
-                ),
+                  SizedBox(height: 16),
+                ],
               ),
             ),
           ),
