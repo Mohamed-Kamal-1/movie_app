@@ -4,6 +4,7 @@ import 'package:movie_app/core/routes/app_routes.dart';
 
 import 'on_boarding_details.dart';
 
+
 class BasicOnBoarding extends StatefulWidget {
   const BasicOnBoarding({super.key});
 
@@ -58,13 +59,14 @@ class _BasicOnBoardingState extends State<BasicOnBoarding> {
                     style: Theme.of(context).textTheme.headlineSmall,
                   ),
                   SizedBox(height: 16),
-                  mySlides[_index].description.isNotEmpty ?
-                  Text(
-                    mySlides[_index].description,
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.titleMedium,
-                  ): SizedBox.shrink(),
-                  SizedBox(height: 24),
+                  mySlides[_index].description.isNotEmpty
+                      ? Text(
+                          mySlides[_index].description,
+                          textAlign: TextAlign.center,
+                          style: Theme.of(context).textTheme.titleMedium,
+                        )
+                      : SizedBox.shrink(),
+                  const SizedBox(height: 24),
                   ElevatedButton(
                     onPressed: () {
                       _index == mySlides.length - 1
@@ -86,10 +88,10 @@ class _BasicOnBoardingState extends State<BasicOnBoarding> {
                     ),
                   ),
 
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
 
                   _index == 0
-                      ? SizedBox.shrink()
+                      ? const SizedBox.shrink()
                       : InkWell(
                           onTap: () {
                             setState(() {
@@ -110,9 +112,7 @@ class _BasicOnBoardingState extends State<BasicOnBoarding> {
                               child: Center(
                                 child: Text(
                                   "Back",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .titleMedium
+                                  style: Theme.of(context).textTheme.titleMedium
                                       ?.copyWith(color: Colors.yellow),
                                   // style: T,
                                 ),
@@ -121,7 +121,7 @@ class _BasicOnBoardingState extends State<BasicOnBoarding> {
                           ),
                         ),
 
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                 ],
               ),
             ),
