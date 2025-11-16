@@ -12,7 +12,6 @@ class AppImage {
   static const String profile = '${_basePath}Rout.png';
 
 
-
   static const String _basePathLogin = 'assets/images/images_app/login_images/';
   static const String emailIcon = '${_basePathLogin}email.svg';
   static const String lock = '${_basePathLogin}lock.svg';
@@ -29,7 +28,6 @@ class AppImage {
   static const String watchNow = '${_basePathHome}Watch_Now.png';
 
 
-
   static const String _onBoardingImages= 'assets/images/on_boarding_images/';
   static const String onBoarding_1 = "${_onBoardingImages}OnBoarding_1.png";
   static const String onBoarding_2 = "${_onBoardingImages}OnBoarding_2.png";
@@ -40,7 +38,6 @@ class AppImage {
 
 
   static const String _avatarImage= 'assets/images/avatar_image/';
-
   static const String avatar_1 = "${_avatarImage}Avatar_1.png";
   static const String avatar_2 = "${_avatarImage}Avatar_2.png";
   static const String avatar_3 = "${_avatarImage}Avatar_3.png";
@@ -51,7 +48,8 @@ class AppImage {
   static const String avatar_8 = "${_avatarImage}Avatar_8.png";
   static const String avatar_9 = "${_avatarImage}Avatar_9.png";
 
-  static const String _authIconPath = 'assets/images/images_app/icon_app/auth/';
+
+  static const String _authIconPath = 'assets/images/auth/';
   static const String profile_icon  = "${_authIconPath}profile.svg";
   static const String email_icon    = "${_authIconPath}email.svg";
   static const String password_icon = "${_authIconPath}password.svg";

@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_app/core/images/app_image.dart';
+import 'package:movie_app/extensions/extension.dart';
 import '../../core/AppFromField.dart';
-//import '../../core/Validator.dart';
 import '../../core/colors/app_color.dart';
 import '../../core/routes/app_routes.dart';
+import '../../core/validators.dart';
+import '../login_screen/toogle_switch_widget.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -128,14 +130,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       }
                       return null;
                     },
-                  ), //remove
+                  ),
                   AppFormField(
                     controller: emailController,
                     label: "Email",
                     icon: SvgPicture.asset(
                       AppImage.email_icon,
-                      width: 31,
-                      height: 31,
+                      width: 25,
+                      height: 25,
                       fit: BoxFit.contain,
                     ),
                     keyboardType: TextInputType.emailAddress,
@@ -143,9 +145,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       if (text?.trim().isEmpty == true) {
                         return "Please enter your email";
                       }
-                      // if (!isValidEmail(text)) {
-                      //   return "Please enter valid email";
-                      // }
+                      if (!isValidEmail(text)) {
+                        return "Please enter valid email";
+                      }
                     },
                   ),
                   AppFormField(
@@ -154,7 +156,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     icon: SvgPicture.asset(
                       AppImage.password_icon,
                       width: 25,
-                      height: 31,
+                      height: 28,
                       fit: BoxFit.contain,
                     ),
                     keyboardType: TextInputType.text,
@@ -174,7 +176,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     icon: SvgPicture.asset(
                       AppImage.password_icon,
                       width: 25,
-                      height: 31,
+                      height: 28,
                       fit: BoxFit.contain,
                     ),
                     keyboardType: TextInputType.text,
@@ -202,19 +204,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       if (text?.trim().isEmpty == true) {
                         return "Please enter your phone number";
                       }
-                      // if (!isValidPhone(text)) {
-                      //   return "Please enter valid Phone";
-                      // }
+                      if (!isValidPhone(text)) {
+                        return "Please enter valid Phone";
+                      }
                     },
                   ),
-                  const SizedBox(height: 24),
+                  const SizedBox(height: 16),
                   ElevatedButton(
-                    onPressed: () {},
-                    /*isLoading
+                    onPressed: isLoading
                         ? null
                         : () {
-                      createAccount();
-                    },*/
+                      //createAccount();
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColor.goldenYellow,
                       foregroundColor: Colors.black,
@@ -234,7 +235,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           )
                         : Text("Create Account"),
                   ),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 6),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -246,7 +247,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                       TextButton(
                         onPressed: () {
-                         Navigator.pop(context);
+                          Navigator.pop(context);
                         },
                         child: Text(
                           "Login",
@@ -254,6 +255,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                       ),
                     ],
+                  ),
+                  const SizedBox(height: 6),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 125.0),
+                    child: LanguageSwitcher(),
                   ),
                 ],
               ),
@@ -264,35 +270,3 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 }
-
-/*void createAccount() async {
-  if (validateForm() == false) {
-    return;
-  }
-  setState(() {
-    isLoading = true;
-  });
-
-  AppAuthProvider provider = Provider.of<AppAuthProvider>(
-    context,
-    listen: false,
-  );
-
-  AuthResponse response = await provider.register(
-    emailController.text,
-    passwordController.text,
-    nameController.text,
-  );
-
-  if (response.success) {
-    ScaffoldMessenger.of(
-      context,
-    ).showSnackBar(SnackBar(content: Text("User created successfully")));
-    Navigator.pushReplacementNamed(context, AppRoutes.HomeScreen.route);
-  } else {
-    handleAuthError(response);
-  }
-  setState(() {
-    isLoading = false;
-  });
-}*/
