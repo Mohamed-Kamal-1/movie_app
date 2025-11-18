@@ -67,7 +67,7 @@ class LoginScreen extends StatelessWidget {
                   suffixIcon: IconButton(
                     icon: const Icon(
                       Icons.visibility_off_outlined,
-                      color: Colors.grey,
+                      color: Colors.white,
                     ),
                     onPressed: () {
                       ///////////////!!!!!!!!///////////////
@@ -103,7 +103,7 @@ class LoginScreen extends StatelessWidget {
                   Navigator.pushReplacementNamed(context, AppRoutes.HomeScreen.name);
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColor.yellow,
+                  backgroundColor: AppColor.goldenYellow,
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15),
@@ -160,7 +160,7 @@ class LoginScreen extends StatelessWidget {
                   /////////////////!!!!!!!!///////////////
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColor.yellow,
+                  backgroundColor: AppColor.goldenYellow,
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15),

@@ -50,32 +50,29 @@ class _AppFormFieldState extends State<AppFormField> {
         keyboardType: widget.keyboardType,
         decoration: InputDecoration(
           labelText: widget.label,
-          labelStyle: GoogleFonts.inter(
-            fontSize: 16,
-            color: AppColor.white,
-          ),
+          labelStyle: GoogleFonts.inter(fontSize: 16, color: AppColor.white),
           filled: true,
           fillColor: AppColor.gray,
           prefixIcon: widget.icon != null
               ? Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 14,
-              vertical: 12,
-            ),
-            child: widget.icon,
-          )
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 14,
+                    vertical: 12,
+                  ),
+                  child: widget.icon,
+                )
               : null,
           suffixIcon: widget.isPassword
               ? InkWell(
-            onTap: () => setState(() => secureText = !secureText),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 14),
-              child: Icon(
-                secureText ? Icons.visibility_off : Icons.visibility,
-                color: AppColor.white,
-              ),
-            ),
-          )
+                  onTap: () => setState(() => secureText = !secureText),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 14),
+                    child: Icon(
+                      secureText ? Icons.visibility_off_outlined : Icons.visibility_outlined,
+                      color: AppColor.white,
+                    ),
+                  ),
+                )
               : null,
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(15),
