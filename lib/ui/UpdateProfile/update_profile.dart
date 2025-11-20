@@ -41,11 +41,11 @@ class _UpdateProfileState extends State<UpdateProfile> {
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w400,
-            color: AppColor.yellow,
+            color: AppColor.goldenYellow,
           ),
         ),
         leading: IconButton(
-          color: AppColor.yellow,
+          color: AppColor.goldenYellow,
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
             //  Navigator.pop(context);
@@ -91,7 +91,10 @@ class _UpdateProfileState extends State<UpdateProfile> {
 
             SizedBox(height: 16),
 
-            Text("reset password"),
+            Text("reset password",
+              style: Theme.of(context).textTheme.titleMedium,
+
+            ),
 
             Spacer(),
 
@@ -106,7 +109,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.red,
                     ),
-                    child: Text("Delete Account"),
+                    child: Text("Delete Account",style: Theme.of(context).textTheme.titleMedium,),
                   ),
                   SizedBox(height: 20),
                   ElevatedButton(

@@ -54,7 +54,7 @@ class _AppFormFieldState extends State<AppFormField> {
           decoration: InputDecoration(
             filled: true,
             fillColor: Color(0xFF282A28),
-          hint: Text(widget.hint ?? ""),
+          hint: Text(widget.hint ?? "",style: Theme.of(context).textTheme.titleMedium,),
           // labelText: widget.label,
           prefixIcon: widget.icon!=null ? Icon(widget.icon , color: Colors.white,) : null,
             suffixIcon: widget.isPassword?InkWell(
