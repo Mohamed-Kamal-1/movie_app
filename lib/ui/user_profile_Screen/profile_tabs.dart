@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/core/colors/app_color.dart';
 
 class ProfileTabs extends StatelessWidget {
   const ProfileTabs({super.key});
@@ -10,17 +11,29 @@ class ProfileTabs extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            color: Colors.grey,
+            color: Colors.black,
             child: const TabBar(
               labelColor: Colors.white,
               tabs: [
                 Tab(
-                  icon: Icon(Icons.remove_red_eye, color: Colors.yellow),
-                  text: "Watch List",
+                  icon: Icon(Icons.list,size: 30,
+                      color: AppColor.goldenYellow),
+                  child: Text("Watch List",
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: AppColor.white,
+                      fontWeight: FontWeight.w400,
+                    ),),
                 ),
                 Tab(
-                  icon: Icon(Icons.history, color: Colors.yellow),
-                  text: "History",
+                  icon: Icon(Icons.folder,size: 30,
+                      color: AppColor.goldenYellow),
+                  child: Text("History",
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: AppColor.white,
+                      fontWeight: FontWeight.w400,
+                    ),),
                 ),
               ],
             ),
@@ -51,7 +64,7 @@ class WatchListViewContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dummyList = List.generate(50, (i) => "item $i");
+    final dummyList = List.generate(5, (i) => "item $i");
 
     return GridView.builder(
       padding: const EdgeInsets.all(12),

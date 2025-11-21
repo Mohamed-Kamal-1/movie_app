@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/core/colors/app_color.dart';
+import 'package:movie_app/core/images/app_image.dart';
 import 'package:movie_app/ui/user_profile_Screen/profile_tabs.dart';
 import 'package:movie_app/ui/user_profile_Screen/user_profile_header.dart';
 
@@ -21,10 +23,10 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
             headerSliverBuilder: (context, innerBoxIsScrolled) {
               return [
                 SliverAppBar(
-                  backgroundColor: Colors.grey,
+                  backgroundColor: AppColor.black,
                   pinned: false,
-                  floating: true,
-                  snap: true,
+                  floating: false,
+                  snap: false,
                   expandedHeight: 300,
                   flexibleSpace: FlexibleSpaceBar(background: ProfileHeader()),
                 ),
@@ -33,17 +35,32 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                   pinned: true,
                   delegate: _TabBarDelegate(
                     child: PreferredSize(
-                      preferredSize: Size.fromHeight(60),
+                      preferredSize: Size.fromHeight(70),
                       child: Container(
-                        color: Colors.yellow,
+                        color: AppColor.whiteGrey,
                         child: const TabBar(
-                          labelColor: Colors.black,
+                          // labelColor: AppColor.goldenYellow,
                           tabs: [
                             Tab(
-                              icon: Icon(Icons.remove_red_eye),
-                              text: "Watch List",
+                              icon: Icon(Icons.list,size: 30,
+                                  color: AppColor.goldenYellow),
+                              child: Text("Watch List",
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: AppColor.white,
+                                fontWeight: FontWeight.w400,
+                              ),),
                             ),
-                            Tab(icon: Icon(Icons.history), text: "History"),
+                            Tab(
+                              icon: Icon(Icons.folder,size: 30,
+                                  color: AppColor.goldenYellow),
+                              child: Text("History",
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: AppColor.white,
+                                  fontWeight: FontWeight.w400,
+                                ),),
+                            ),
                           ],
                         ),
                       ),
@@ -53,14 +70,12 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
               ];
             },
 
-            body: const TabBarView(
+            body: TabBarView(
               children: [
-                WatchListViewContainer(),
+                const WatchListViewContainer(),
                 Center(
-                  child: Text(
-                    "History Content Here",
-                    style: TextStyle(color: Colors.white),
-                  ),
+                  child: Text("History Not Connected",
+                    style: Theme.of(context).textTheme.titleMedium,),
                 ),
               ],
             ),

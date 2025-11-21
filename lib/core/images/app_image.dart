@@ -55,4 +55,6 @@ class AppImage {
   static const String password_icon = 'assets/images/images_app/icon_app/auth/password.svg';
   static const String phone_icon = 'assets/images/images_app/icon_app/auth/phone.svg';
 
+  static const String empty = 'assets/images/images_app/icon_app/Empty.png';
+
 }

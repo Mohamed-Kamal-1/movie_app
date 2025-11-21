@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/core/colors/app_color.dart';
 import 'package:movie_app/ui/UpdateProfile/update_profile.dart';
 
 import '../../core/images/app_image.dart';
@@ -9,7 +10,7 @@ class ProfileHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(color: Colors.grey),
+      decoration: BoxDecoration(color: AppColor.whiteGrey),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         child: Column(
@@ -21,26 +22,33 @@ class ProfileHeader extends StatelessWidget {
                   children: [
                     ClipOval(
                       child: Image.asset(
-                        AppImage.midImage,
+                        AppImage.avatar_1,
                         width: 118,
                         height: 118,
                         fit: BoxFit.cover,
                       ),
                     ),
                     SizedBox(height: 20),
-                    Text("Mohamed"),
+                    Text("Mohamed",
+                      style: Theme.of(context).textTheme.headlineSmall,),
                   ],
                 ),
 
                 Column(
                   children: [
-                    Text("12"),
+                    Text("12",
+                      style: Theme.of(context).textTheme.headlineSmall,),
                     SizedBox(height: 20),
-                    Text("Wish List"),
+                    Text("Wish List",
+                      style: Theme.of(context).textTheme.headlineSmall,),
                   ],
                 ),
                 Column(
-                  children: [Text("10"), SizedBox(height: 20), Text("History")],
+                  children: [Text("10",
+                    style: Theme.of(context).textTheme.headlineSmall,),
+                    SizedBox(height: 20),
+                    Text("History",
+                      style: Theme.of(context).textTheme.headlineSmall,)],
                 ),
               ],
             ),
@@ -49,20 +57,32 @@ class ProfileHeader extends StatelessWidget {
 
             Row(
               children: [
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return UpdateProfile();
-                        },
-                      ),
-                    );
-                  },
-                  child: Text("Edit profile"),
+                Expanded(
+                  flex: 5,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return UpdateProfile();
+                          },
+                        ),
+                      );
+                    },
+                    child: Text("Edit profile"),
+                  ),
                 ),
                 SizedBox(width: 20),
-                ElevatedButton(onPressed: () {}, child: Text("Exit")),
+                Expanded(
+                    flex: 2,
+                    child: ElevatedButton(
+
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColor.red,
+                        ),
+                        child: Text("Exit",
+                      style: Theme.of(context).textTheme.titleSmall,))),
               ],
             ),
           ],
