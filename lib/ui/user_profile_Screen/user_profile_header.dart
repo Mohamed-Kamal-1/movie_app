@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/core/colors/app_color.dart';
 import 'package:movie_app/ui/UpdateProfile/update_profile.dart';
-
 import '../../core/images/app_image.dart';
 
 class ProfileHeader extends StatelessWidget {
