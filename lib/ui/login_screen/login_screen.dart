@@ -174,10 +174,10 @@ class LoginScreen extends StatelessWidget {
               ),
                SizedBox(height: 20,),
               ///////////////////-----------toogle------------//////////////
-               Padding(
-                 padding: const EdgeInsets.symmetric(horizontal: 125.0),
-                 child: LanguageSwitcher(),
-               ),
+              //  Padding(
+              //    padding: const EdgeInsets.symmetric(horizontal: 125.0),
+              //    child: LanguageSwitcher(),
+              //  ),
             ],
           ),
         ),

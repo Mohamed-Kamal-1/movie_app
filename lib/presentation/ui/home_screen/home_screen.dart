@@ -1,15 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/core/colors/app_color.dart';
+import 'package:movie_app/core/di/di.dart';
 import 'package:movie_app/core/images/app_image.dart';
 import 'package:movie_app/extensions/extension.dart';
 import 'package:movie_app/l10n/app_string.dart';
-import 'package:movie_app/ui/home_screen/bottom_navigation_section.dart';
-import 'package:movie_app/ui/home_screen/watch_now_section.dart';
+
 
 import 'available_now_section.dart';
+import 'bottom_navigation_section.dart';
+import 'cubit/home_screen_view_model.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  late HomeScreenViewModel viewModel;
+
 
   final List<String> images = [
     AppImage.leftImage,
@@ -25,7 +36,10 @@ class HomeScreen extends StatelessWidget {
     AppImage.midImage,
     AppImage.rightImage,
   ];
-
+  @override
+  void initState() {
+    viewModel = getIt.get<HomeScreenViewModel>();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,7 +68,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
 
-                AvailableNowSection(images: images),
+                AvailableNowSection(viewModel: viewModel,),
               ],
             ),
           ),
