@@ -30,11 +30,14 @@ class _AvailableNowSectionState extends State<AvailableNowSection> {
   }
 @override
   void initState() {
-    // TODO: implement initState
+    super.initState();
   widget.viewModel.getMoviesList('2025-11-25');
   }
   @override
   Widget build(BuildContext context) {
+    bool increment = false;
+    bool decrement = false;
+
 
     return Column(
       children: [
@@ -43,6 +46,7 @@ class _AvailableNowSectionState extends State<AvailableNowSection> {
         BlocBuilder<HomeScreenViewModel, HomeScreenState>(
           bloc: widget.viewModel,
           builder: (context, state) {
+
             if (state is HomeLoadingState) {
               return Expanded(flex: 4,child: Center(child: CircularProgressIndicator()));
             }
