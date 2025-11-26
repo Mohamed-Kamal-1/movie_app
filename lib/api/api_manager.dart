@@ -24,10 +24,7 @@ class ApiManager {
 
   Future<MovieResponseDto> getMoviesList(String dateAdded) async {
     try {
-      Map<String, String> parameter = {
-        'sort_by': dateAdded,
-        'order_by': 'desc',
-      };
+      Map<String, String> parameter = {'sort_by': dateAdded};
       Response response = await dio.get(
         Endpoints.moviesList,
         queryParameters: parameter,
@@ -35,16 +32,19 @@ class ApiManager {
       MovieResponseDto movieResponse = MovieResponseDto.fromJson(response.data);
       if (movieResponse.status == 'ok') {
         return movieResponse;
-      } else {
+      }
+      else {
         throw DioException(
+
           requestOptions: response.requestOptions,
           message: "Failed to load Movies",
         );
       }
+
     } on DioException catch (e) {
       if (e.type == DioExceptionType.connectionTimeout) {
-        throw Exception('connection Time out ');
-      } else if (e.type == DioExceptionType.receiveTimeout) {
+        throw Exception('connection Time out');
+      }  else if (e.type == DioExceptionType.receiveTimeout) {
         throw Exception('connection Time out');
       }
       rethrow;

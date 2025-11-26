@@ -11,10 +11,7 @@ import '../../../core/colors/app_color.dart';
 class AvailableNowSection extends StatefulWidget {
   final HomeScreenViewModel viewModel;
 
-  const AvailableNowSection({
-    super.key,
-    required this.viewModel,
-  });
+  const AvailableNowSection({super.key, required this.viewModel});
 
   @override
   State<AvailableNowSection> createState() => _AvailableNowSectionState();
@@ -22,85 +19,145 @@ class AvailableNowSection extends StatefulWidget {
 
 class _AvailableNowSectionState extends State<AvailableNowSection> {
   final PageController _pageController = PageController(viewportFraction: 0.65);
+  final ValueNotifier<int> currentPage = ValueNotifier(0);
 
   @override
   void dispose() {
     _pageController.dispose();
     super.dispose();
+    currentPage.dispose();
   }
-@override
+
+  @override
   void initState() {
     super.initState();
-  widget.viewModel.getMoviesList('2025-11-25');
+
+    _pageController.addListener(() {
+      if (_pageController.hasClients && _pageController.page != null) {
+        currentPage.value = _pageController.page!.round();
+
+      }
+    });
+
+    widget.viewModel.getMoviesList('2025-11-25');
   }
+
   @override
   Widget build(BuildContext context) {
-    bool increment = false;
-    bool decrement = false;
+    return BlocBuilder<HomeScreenViewModel, HomeScreenState>(
+      bloc: widget.viewModel,
+      builder: (context, state) {
+        if (state is HomeLoadingState) {
+          return const Expanded(
+            flex: 4,
+            child: Center(child: CircularProgressIndicator()),
+          );
+        }
 
+        if (state is HomeErrorState) {
+          return Center(
+            child: Text(
+              state.errorMessage ?? "Error",
+              style: context.fonts.bodyMedium?.copyWith(color: AppColor.white),
+            ),
+          );
+        }
 
-    return Column(
-      children: [
-        Expanded(child: Image.asset(AppImage.availableNow)),
+        if (state is HomeSuccessState) {
+          return Stack(
+            children: [
+              ValueListenableBuilder<int>(
+                valueListenable: currentPage,
+                builder: (context, value, child) {
+                  return Positioned.fill(
+                    child: CachedNetworkImage(
+                      fit: BoxFit.fill,
+                      imageUrl: state.moviesList![value].largeCoverImage ?? "",
 
-        BlocBuilder<HomeScreenViewModel, HomeScreenState>(
-          bloc: widget.viewModel,
-          builder: (context, state) {
-
-            if (state is HomeLoadingState) {
-              return Expanded(flex: 4,child: Center(child: CircularProgressIndicator()));
-            }
-
-            if (state is HomeErrorState) {
-              return Center(
-                child: Text(
-                  state.errorMessage ?? "Error",
-                  style: context.fonts.bodyMedium?.copyWith(
-                    color: AppColor.white,
-                  ),
-                ),
-              );
-            }
-
-            if (state is HomeSuccessState) {
-              return Expanded(
-                flex: 3,
-                child: PageView.builder(
-                  controller: _pageController,
-                  itemCount: state.moviesList?.length ?? 0,
-                  itemBuilder: (context, index) {
-                    return AnimatedBuilder(
-                      animation: _pageController,
-                      builder: (context, child) {
-                        double value = 1;
-                        if (_pageController.position.haveDimensions) {
-                          value = (_pageController.page! - index).abs();
-                          value = (1 - value * 0.3).clamp(0.8, 1.0);
-                        }
-                        return Transform.scale(scale: value, child: child);
-                      },
-                      child: Container(
-                        clipBehavior: Clip.antiAlias,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: CachedNetworkImage(
-                          fit: BoxFit.fill,
-                          imageUrl: state.moviesList![index].mediumCoverImage!,
-                        ),
+                      placeholder: (context, url) => Center(
+                        child: CircularProgressIndicator(),
                       ),
-                    );
-                  },
+
+                      errorWidget: (context, url, error) => Icon(
+                        Icons.broken_image,
+                        size: 40,
+                        color: Colors.grey,
+                      ),
+                    ),
+                  );
+                },
+              ),
+
+              Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    stops: const [0.0, 0.47, 1],
+                    colors: [
+                      const Color(0xFF121312).withValues(alpha: 0.45),
+                      const Color(0xFF121312).withValues(alpha: 0.6),
+                      const Color(0xFF121312).withValues(alpha: 1),
+                    ],
+                  ),
+                  // image: DecorationImage(image: image)
                 ),
-              );
-            }
+              ),
 
-            return SizedBox();
-          },
-        ),
+              Column(
+                children: [
+                  Image.asset(AppImage.availableNow),
+                  Expanded(
+                    child: PageView.builder(
+                      controller: _pageController,
+                      itemCount: state.moviesList?.length ?? 0,
+                      itemBuilder: (context, index) {
+                        return AnimatedBuilder(
+                          animation: _pageController,
+                          builder: (context, child) {
+                            double value = 1;
+                            if (_pageController.position.haveDimensions) {
+                              value = (_pageController.page! - index).abs();
+                              value = (1 - value * 0.3).clamp(0.8, 1.0);
+                            }
+                            return Transform.scale(scale: value, child: child);
+                          },
+                          child: Container(
+                            clipBehavior: Clip.antiAlias,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: CachedNetworkImage(
+                              fit: BoxFit.fill,
+                              imageUrl:
+                                  state.moviesList![index].mediumCoverImage ??
+                                  "",
+                              placeholder: (context, url) => Center(
+                                child: CircularProgressIndicator(),
+                              ),
 
-        Flexible(child: Image.asset(AppImage.watchNow)),
-      ],
+                              errorWidget: (context, url, error) => Icon(
+                                Icons.broken_image,
+                                size: 40,
+                                color: Colors.grey,
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                  Image.asset(AppImage.watchNow),
+                ],
+              ),
+            ],
+          );
+        }
+
+        return const SizedBox.shrink();
+      },
     );
   }
 }
+
+

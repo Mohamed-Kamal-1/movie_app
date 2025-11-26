@@ -10,6 +10,7 @@ import '../model/movie_list/movie_response_dto.dart';
 class MoviesListDataSourceImpl implements MoviesListDataSource {
   ApiManager apiManager;
   String? errorMessage;
+  String? statusCode;
 
   MoviesListDataSourceImpl(this.apiManager);
 
@@ -17,13 +18,20 @@ class MoviesListDataSourceImpl implements MoviesListDataSource {
   Future<List<MovieModel>> getMoviesList(String dateAdded) async {
     MovieResponseDto response = await apiManager.getMoviesList(dateAdded);
     response.statusMessage = errorMessage;
+    response.code = statusCode;
     return response.data?.movies
             ?.map((moviesDto) => moviesDto.getMoviesList())
-            .toList() ?? [];
+            .toList() ??
+        [];
   }
 
   @override
   String getErrorMessage() {
     return errorMessage ?? 'not Found';
+  }
+
+  @override
+  String getErrorStatusCode() {
+    return statusCode!;
   }
 }

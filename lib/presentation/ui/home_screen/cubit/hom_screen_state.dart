@@ -10,10 +10,13 @@ class HomeErrorState extends HomeScreenState {
   String? errorMessage;
 
   HomeErrorState({this.errorMessage});
+
 }
 
 class HomeSuccessState extends HomeScreenState {
   List<MovieModel>? moviesList;
+  // List<String>
+
 
   HomeSuccessState({this.moviesList});
 }

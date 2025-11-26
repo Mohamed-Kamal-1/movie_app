@@ -15,7 +15,34 @@ class HomeScreenViewModel extends Cubit<HomeScreenState> {
     try {
       emit(HomeLoadingState());
       var errorMessage = moviesListUseCase.getErrorMessage();
-      List<MovieModel> response = await moviesListUseCase.getMoviesList(dateAdded);
+      List<MovieModel> response = await moviesListUseCase.getMoviesList(
+        dateAdded,
+      );
+      if (response.isEmpty) {
+        emit(HomeErrorState(errorMessage: errorMessage));
+      }
+
+      // else if (moviesListUseCase.moviesRepo.getErrorStatusCode() == '404') {
+      //   emit(HomeErrorState(errorMessage: "404 not foumd ? "));
+      // }
+
+
+      else {
+        emit(HomeSuccessState(moviesList: response));
+      }
+    } catch (e) {
+      emit(HomeErrorState(errorMessage: e.toString()));
+    }
+  }
+
+  Future<void> getMoviesGenres(String dateAdded, int index) async {
+    try {
+      emit(HomeLoadingState());
+      var errorMessage = moviesListUseCase.getErrorMessage();
+      List<MovieModel> response = await moviesListUseCase.getMoviesList(
+        dateAdded,
+      );
+      response[index].genres?.first ?? '';
       if (response.isEmpty) {
         emit(HomeErrorState(errorMessage: errorMessage));
       } else {
