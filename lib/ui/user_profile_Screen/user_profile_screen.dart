@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/core/colors/app_color.dart';
-import 'package:movie_app/core/images/app_image.dart';
 import 'package:movie_app/ui/user_profile_Screen/profile_tabs.dart';
 import 'package:movie_app/ui/user_profile_Screen/user_profile_header.dart';
 

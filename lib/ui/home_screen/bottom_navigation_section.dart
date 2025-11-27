@@ -26,11 +26,11 @@ class _AppBottomNavigationSectionState extends State<AppBottomNavigationSection>
           });
           selectedIndex = value;
 
-          if (selectedIndex == 3) {
-            Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) {
-              return UserProfileScreen();
-            },));
-          }
+          // if (selectedIndex == 3) {
+          //   Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) {
+          //     return UserProfileScreen();
+          //   },));
+          // }
         },
         currentIndex: selectedIndex,
 
