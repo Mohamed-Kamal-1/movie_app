@@ -4,7 +4,7 @@ import 'package:movie_app/core/di/di.dart';
 import 'package:movie_app/core/images/app_image.dart';
 import 'package:movie_app/extensions/extension.dart';
 import 'package:movie_app/l10n/app_string.dart';
-import 'package:movie_app/presentation/ui/home_screen/tabs/search_tab/search_tab.dart';
+import 'package:movie_app/presentation/ui/home_screen/tabs/search_tab/search_screen.dart';
 import 'package:movie_app/presentation/ui/home_screen/tabs/home_tab/watch_now_section.dart';
 
 import '../../available_now_section/available_now_section.dart';
@@ -33,8 +33,6 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int selectIndex = 0;
-    List<Widget> tabs = [SearchTab()];
     return Column(
       children: [
         Expanded(child: AvailableNowSection(viewModel: viewModel)),

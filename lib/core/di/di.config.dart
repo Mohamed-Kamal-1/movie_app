@@ -38,7 +38,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i687.MoviesListUseCase>(
       () => _i687.MoviesListUseCase(gh<_i958.MoviesRepo>()),
     );
-    gh.factory<_i976.HomeScreenViewModel>(
+    gh.singleton<_i976.HomeScreenViewModel>(
       () => _i976.HomeScreenViewModel(gh<_i687.MoviesListUseCase>()),
     );
     return this;
