@@ -35,7 +35,7 @@ class RegisterCubit extends Cubit<RegisterState> {
           emit(ErrorState(message: failure.message));
         },
         (authResult) {
-          print("Register success: ${authResult.data?.token ?? "no token"}");
+          print("Register success: ${authResult.data}");
           // لو data موجودة استخدمها، ولو لأ خلي SuccessState من غير مشاكل
           emit(SuccessState(authResult));
         },

@@ -1,16 +1,12 @@
 import 'package:dio/dio.dart';
-import 'package:injectable/injectable.dart';
-import 'package:movie_app/auth/data/models/register_model.dart';
 import '../../../core/app_const/app_const.dart';
-import 'AuthDataSource.dart';
+import '../models/register_model.dart';
 
-@injectable
-class AuthDataSourceImpl implements AuthDataSource {
+class AuthDataSourceImpl {
   final Dio dio;
 
   AuthDataSourceImpl(this.dio);
 
-  @override
   Future<RegisterModel> register({
     required String name,
     required String email,
@@ -34,16 +30,9 @@ class AuthDataSourceImpl implements AuthDataSource {
     final data = response.data['data'];
 
     if (data is Map<String, dynamic>) {
-      return RegisterModel.fromJson(response.data);
-    } else if (data is List && data.isNotEmpty) {
-      final firstItem = data[0];
-      if (firstItem is Map<String, dynamic>) {
-        return RegisterModel.fromJson(firstItem);
-      } else {
-        throw Exception('Invalid response format: List item is not a Map');
-      }
+      return RegisterModel.fromJson(data);
     } else {
-      throw Exception('Invalid response data');
+      throw Exception("Invalid data format");
     }
   }
 }

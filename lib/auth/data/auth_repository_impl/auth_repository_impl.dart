@@ -32,7 +32,19 @@ class AuthRepositoryImpl implements AuthRepository {
       );
       return Right(result.toEntity());
     } on DioException catch (e) {
-      return Left(ServerFailure(message: e.response?.data['message'] ?? 'Server error'));
+      // ✅ تأكد من أن الرسالة دايمًا String حتى لو رجعت List
+      final error = e.response?.data?["message"];
+      String message;
+
+      if (error is List) {
+        message = error.join(", "); // دمج عناصر الليست
+      } else if (error is String) {
+        message = error;
+      } else {
+        message = "Server error";
+      }
+
+      return Left(ServerFailure(message: message));
     } catch (e) {
       return Left(ServerFailure(message: e.toString()));
     }
