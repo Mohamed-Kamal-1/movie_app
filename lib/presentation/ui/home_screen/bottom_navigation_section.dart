@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/core/colors/app_color.dart';
 import 'package:movie_app/extensions/extension.dart';
 
-import '../user_profile_Screen/user_profile_screen.dart';
 
 class AppBottomNavigationSection extends StatefulWidget {
   const AppBottomNavigationSection({super.key});
