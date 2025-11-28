@@ -6,7 +6,7 @@ import 'package:movie_app/extensions/extension.dart';
 import 'package:movie_app/presentation/ui/home_screen/cubit/hom_screen_state.dart';
 import 'package:movie_app/presentation/ui/home_screen/cubit/home_screen_view_model.dart';
 
-import '../../../../core/colors/app_color.dart';
+import '../../../../../core/colors/app_color.dart';
 
 class AvailableNowSection extends StatefulWidget {
   final HomeScreenViewModel viewModel;

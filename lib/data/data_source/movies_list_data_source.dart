@@ -8,4 +8,6 @@ abstract interface class MoviesListDataSource {
   String getErrorStatusCode();
 
   Future<List<MovieModel>> getMoviesListByGenres(String genre);
+
+  // Future<List<MovieModel>> searchByMoveTitle(String title);
 }

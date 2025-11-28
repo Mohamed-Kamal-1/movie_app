@@ -7,7 +7,7 @@ import 'package:movie_app/l10n/app_string.dart';
 import 'package:movie_app/presentation/ui/home_screen/tabs/search_tab/search_screen.dart';
 import 'package:movie_app/presentation/ui/home_screen/tabs/home_tab/watch_now_section.dart';
 
-import '../../available_now_section/available_now_section.dart';
+import 'available_now_section.dart';
 import 'bottom_navigation_section.dart';
 import '../../cubit/home_screen_view_model.dart';
 
