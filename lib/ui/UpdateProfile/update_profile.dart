@@ -9,6 +9,19 @@ import '../../core/di/di.dart';
 import 'bloc/profile_view_model.dart';
 import 'widget/CutomFormField.dart';
 
+
+final imgList = [
+  AppImage.avatar_1,
+  AppImage.avatar_2,
+  AppImage.avatar_3,
+  AppImage.avatar_4,
+  AppImage.avatar_5,
+  AppImage.avatar_6,
+  AppImage.avatar_7,
+  AppImage.avatar_8,
+  AppImage.avatar_9,
+];
+
 class UpdateProfile extends StatefulWidget {
   const UpdateProfile({super.key});
 
@@ -29,17 +42,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
     TextEditingController nameController = TextEditingController();
     TextEditingController phoneController = TextEditingController();
 
-    final imgList = [
-      AppImage.avatar_1,
-      AppImage.avatar_2,
-      AppImage.avatar_3,
-      AppImage.avatar_4,
-      AppImage.avatar_5,
-      AppImage.avatar_6,
-      AppImage.avatar_7,
-      AppImage.avatar_8,
-      AppImage.avatar_9,
-    ];
+
 
     return BlocBuilder<ProfileViewModel, ProfileScreenState>(
       builder: (context, state) {
