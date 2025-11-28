@@ -24,7 +24,7 @@ class ApiManager {
         requestBody: true,
       ),
     );
-    
+
     authDio.options.baseUrl = _authBaseUrl;
     authDio.interceptors.add(
       PrettyDioLogger(
@@ -39,10 +39,7 @@ class ApiManager {
 
   Future<MovieResponseDto> getMoviesList(String dateAdded) async {
     try {
-      Map<String, String> parameter = {
-        'sort_by': dateAdded,
-        'order_by': 'desc',
-      };
+      Map<String, String> parameter = {'sort_by': dateAdded};
       Response response = await dio.get(
         Endpoints.moviesList,
         queryParameters: parameter,
@@ -50,12 +47,45 @@ class ApiManager {
       MovieResponseDto movieResponse = MovieResponseDto.fromJson(response.data);
       if (movieResponse.status == 'ok') {
         return movieResponse;
-      } else {
+      }
+      else {
         throw DioException(
+
           requestOptions: response.requestOptions,
           message: "Failed to load Movies",
         );
       }
+
+    } on DioException catch (e) {
+      if (e.type == DioExceptionType.connectionTimeout) {
+        throw Exception('connection Time out');
+      }  else if (e.type == DioExceptionType.receiveTimeout) {
+        throw Exception('connection Time out');
+      }
+      rethrow;
+    }
+  }
+
+
+  Future<MovieResponseDto> getMoviesListByGenres(String genre) async {
+    try {
+      Map<String, String> parameter = {'genre': genre};
+      Response response = await dio.get(
+        Endpoints.moviesList,
+        queryParameters: parameter,
+      );
+      MovieResponseDto movieResponse = MovieResponseDto.fromJson(response.data);
+      if (movieResponse.status == 'ok') {
+        return movieResponse;
+      }
+      else {
+        throw DioException(
+
+          requestOptions: response.requestOptions,
+          message: "Failed to load Movies",
+        );
+      }
+
     } on DioException catch (e) {
       if (e.type == DioExceptionType.connectionTimeout) {
         throw Exception('connection Time out ');
@@ -74,10 +104,10 @@ class ApiManager {
           'password': password,
         },
       );
-      
+
       // Check if response status code indicates success (200-299)
-      if (response.statusCode != null && 
-          response.statusCode! >= 200 && 
+      if (response.statusCode != null &&
+          response.statusCode! >= 200 &&
           response.statusCode! < 300) {
         return LoginResponseDto.fromJson(response.data);
       } else {
@@ -97,7 +127,7 @@ class ApiManager {
       } else if (e.type == DioExceptionType.badResponse && e.response != null) {
         // Parse error response
         final errorData = e.response!.data;
-        if (errorData is Map<String, dynamic> && 
+        if (errorData is Map<String, dynamic> &&
             errorData.containsKey('message')) {
           throw Exception(errorData['message'] ?? 'Login failed');
         }

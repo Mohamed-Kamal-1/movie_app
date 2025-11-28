@@ -54,9 +54,9 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i687.MoviesListUseCase(gh<_i958.MoviesRepo>()),
     );
     gh.factory<_i103.LoginViewModel>(
-      () => _i103.LoginViewModel(gh<_i461.LoginUseCase>()),
+          () => _i103.LoginViewModel(gh<_i461.LoginUseCase>()),
     );
-    gh.factory<_i976.HomeScreenViewModel>(
+    gh.singleton<_i976.HomeScreenViewModel>(
       () => _i976.HomeScreenViewModel(gh<_i687.MoviesListUseCase>()),
     );
     return this;

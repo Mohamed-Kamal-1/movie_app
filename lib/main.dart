@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/core/app_theme/app_theme.dart';
 import 'package:movie_app/core/routes/app_routes.dart';
-import 'package:movie_app/presentation/ui/home_screen/home_screen.dart';
+import 'package:movie_app/presentation/ui/home_screen/tabs/home_tab/home_screen.dart';
+import 'package:movie_app/presentation/ui/home_screen/tabs/home_tab/home_tab.dart';
 import 'package:movie_app/ui/OnBoarding/basic_on_boarding.dart';
 import 'package:movie_app/ui/OnBoarding/on_boarding_screen.dart';
 import 'package:movie_app/ui/Register/register.dart';
@@ -44,7 +45,7 @@ class MyApp extends StatelessWidget {
       //   supportedLocales: AppLocalizations.supportedLocales,
       initialRoute: AppRoutes.UserProfileScreen.name,
       routes: {
-        AppRoutes.HomeScreen.name: (context) => HomeScreen(),
+        AppRoutes.HomeTab.name: (context) => HomeTab(),
         AppRoutes.OnBoardingScreen.name: (context) => const OnBoardingScreen(),
         AppRoutes.BasicOnBoarding.name: (context) => const BasicOnBoarding(),
         AppRoutes.UpdateProfile.name: (context) => UpdateProfile(),
