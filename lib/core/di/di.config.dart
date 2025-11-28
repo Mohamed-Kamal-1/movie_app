@@ -96,15 +96,16 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i786.UpdateProfileUseCase>(
       () => _i786.UpdateProfileUseCase(gh<_i152.UpdateProfileRepo>()),
     );
-    gh.factory<_i103.LoginViewModel>(
-      () => _i103.LoginViewModel(gh<_i461.LoginUseCase>()),
-    );
     gh.factory<_i1046.ProfileViewModel>(
       () => _i1046.ProfileViewModel(
         gh<_i591.ProfileUseCase>(),
         gh<_i786.UpdateProfileUseCase>(),
         gh<_i686.DeleteAccountUseCase>(),
+        gh<_i687.MoviesListUseCase>(),
       ),
+    );
+    gh.factory<_i103.LoginViewModel>(
+      () => _i103.LoginViewModel(gh<_i461.LoginUseCase>()),
     );
     gh.factory<_i976.HomeScreenViewModel>(
       () => _i976.HomeScreenViewModel(gh<_i687.MoviesListUseCase>()),

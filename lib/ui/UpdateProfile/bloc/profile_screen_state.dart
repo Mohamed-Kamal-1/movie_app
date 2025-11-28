@@ -1,4 +1,6 @@
 
+import 'package:movie_app/domain/model/movie_model.dart';
+
 import '../../../api/model/profile/profile_response_dto.dart';
 
 abstract class ProfileScreenState {}
@@ -11,4 +13,10 @@ class ProfileErrorState extends ProfileScreenState {
 class ProfileSuccessState extends ProfileScreenState {
   ProfileResponseDto profile;
   ProfileSuccessState(this.profile);
+}
+
+
+class ProfileMoviesListLoaded extends ProfileScreenState {
+  List<MovieModel>? list;
+  ProfileMoviesListLoaded(this.list);
 }

@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/core/colors/app_color.dart';
+import 'package:movie_app/presentation/ui/home_screen/cubit/home_screen_view_model.dart';
+import 'package:movie_app/ui/UpdateProfile/bloc/profile_screen_state.dart';
+import 'package:movie_app/ui/UpdateProfile/bloc/profile_view_model.dart';
+
+import '../../core/di/di.dart';
 
 class ProfileTabs extends StatelessWidget {
   const ProfileTabs({super.key});
@@ -16,7 +22,7 @@ class ProfileTabs extends StatelessWidget {
               labelColor: Colors.white,
               tabs: [
                 Tab(
-                  icon: Icon(Icons.list,size: 30,
+                  icon: Icon(Icons.list, size: 30,
                       color: AppColor.goldenYellow),
                   child: Text("Watch List",
                     style: TextStyle(
@@ -26,7 +32,7 @@ class ProfileTabs extends StatelessWidget {
                     ),),
                 ),
                 Tab(
-                  icon: Icon(Icons.folder,size: 30,
+                  icon: Icon(Icons.folder, size: 30,
                       color: AppColor.goldenYellow),
                   child: Text("History",
                     style: TextStyle(
@@ -64,18 +70,36 @@ class WatchListViewContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dummyList = List.generate(5, (i) => "item $i");
 
-    return GridView.builder(
-      padding: const EdgeInsets.all(12),
-      physics: const BouncingScrollPhysics(),
-      itemCount: dummyList.length,
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3,
-        childAspectRatio: 0.7,
-      ),
-      itemBuilder: (context, index) {
-        return Container(margin: const EdgeInsets.all(8), color: Colors.red);
+    return BlocBuilder<ProfileViewModel, ProfileScreenState>(
+      builder: (context, state) {
+
+        switch (state) {
+
+          case ProfileMoviesListLoaded():
+
+
+            return GridView.builder(
+              padding: const EdgeInsets.all(12),
+              physics: const BouncingScrollPhysics(),
+              itemCount: state.list?.length ?? 0,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                childAspectRatio: 0.7,
+              ),
+              itemBuilder: (context, index) {
+                return Container(
+                    margin: const EdgeInsets.all(8), color: Colors.red);
+              },
+            );
+
+
+
+          case _:
+            return Center(child: Text("list is empty"),);
+
+        }
+
       },
     );
   }
