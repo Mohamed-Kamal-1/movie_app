@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/core/colors/app_color.dart';
-import 'package:movie_app/ui/UpdateProfile/update_profile.dart';
 import '../../core/images/app_image.dart';
+import '../UpdateProfile/update_profile_screen.dart';
 
 class ProfileHeader extends StatelessWidget {
   const ProfileHeader({super.key});
@@ -20,7 +20,9 @@ class ProfileHeader extends StatelessWidget {
                 Column(
                   children: [
                     ClipOval(
-                      child: Image.asset(
+                      child:
+                      // Image.asset(imgList[selectedAvatar], width: 150, height: 150),
+                      Image.asset(
                         AppImage.avatar_1,
                         width: 118,
                         height: 118,
@@ -63,7 +65,7 @@ class ProfileHeader extends StatelessWidget {
                       Navigator.of(context).pushReplacement(
                         MaterialPageRoute(
                           builder: (context) {
-                            return UpdateProfile();
+                            return UpdateProfileScreen();
                           },
                         ),
                       );
