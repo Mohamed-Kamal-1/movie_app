@@ -22,24 +22,34 @@ class ProfileTabs extends StatelessWidget {
               labelColor: Colors.white,
               tabs: [
                 Tab(
-                  icon: Icon(Icons.list, size: 30,
-                      color: AppColor.goldenYellow),
-                  child: Text("Watch List",
+                  icon: Icon(
+                    Icons.list,
+                    size: 30,
+                    color: AppColor.goldenYellow,
+                  ),
+                  child: Text(
+                    "Watch List",
                     style: TextStyle(
                       fontSize: 16,
                       color: AppColor.white,
                       fontWeight: FontWeight.w400,
-                    ),),
+                    ),
+                  ),
                 ),
                 Tab(
-                  icon: Icon(Icons.folder, size: 30,
-                      color: AppColor.goldenYellow),
-                  child: Text("History",
+                  icon: Icon(
+                    Icons.folder,
+                    size: 30,
+                    color: AppColor.goldenYellow,
+                  ),
+                  child: Text(
+                    "History",
                     style: TextStyle(
                       fontSize: 16,
                       color: AppColor.white,
                       fontWeight: FontWeight.w400,
-                    ),),
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -70,15 +80,10 @@ class WatchListViewContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return BlocBuilder<ProfileViewModel, ProfileScreenState>(
       builder: (context, state) {
-
         switch (state) {
-
           case ProfileMoviesListLoaded():
-
-
             return GridView.builder(
               padding: const EdgeInsets.all(12),
               physics: const BouncingScrollPhysics(),
@@ -89,17 +94,29 @@ class WatchListViewContainer extends StatelessWidget {
               ),
               itemBuilder: (context, index) {
                 return Container(
-                    margin: const EdgeInsets.all(8), color: Colors.red);
+                  margin: const EdgeInsets.all(8),
+                  color: Colors.cyan,
+                  child: Stack(
+                    children: [
+                      Image.network(
+                        state.list![index].mediumCoverImage ?? "",
+                        fit: BoxFit.cover,
+                                      ),
+                      
+                      Container(
+
+                        color: Colors.yellow,
+                          child: Text("rate :  ${(state.list![index].rating.toString())}"))
+                      
+                    ],
+                  )
+                );
               },
             );
 
-
-
           case _:
-            return Center(child: Text("list is empty"),);
-
+            return Center(child: Text("list is empty"));
         }
-
       },
     );
   }
