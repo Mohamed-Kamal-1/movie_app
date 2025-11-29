@@ -95,19 +95,32 @@ class WatchListViewContainer extends StatelessWidget {
               itemBuilder: (context, index) {
                 return Container(
                   margin: const EdgeInsets.all(8),
-                  color: Colors.cyan,
+                  decoration: BoxDecoration(
+                      color: AppColor.black,
+                    borderRadius: BorderRadius.circular(16)
+                  ),
+                  clipBehavior: Clip.hardEdge,
                   child: Stack(
                     children: [
-                      Image.network(
-                        state.list![index].mediumCoverImage ?? "",
-                        fit: BoxFit.cover,
-                                      ),
+                      ClipRRect(
+                        borderRadius: BorderRadiusGeometry.circular(16),
+                        child: Image.network(
+                          state.list![index].mediumCoverImage ?? "",
+                          fit: BoxFit.cover,
+                                        ),
+                      ),
                       
                       Container(
+                        margin: EdgeInsets.all(8),
+                          padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                       decoration: BoxDecoration(
+                         color: AppColor.gray,
+                         borderRadius: BorderRadius.circular(12)
+                       ),
+                    child: Text("${(state.list![index].rating.toString())} *",
+                    style: Theme.of(context).textTheme.titleSmall,)
+                      )
 
-                        color: Colors.yellow,
-                          child: Text("rate :  ${(state.list![index].rating.toString())}"))
-                      
                     ],
                   )
                 );
