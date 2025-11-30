@@ -4,21 +4,16 @@ import 'package:movie_app/ui/OnBoarding/on_boarding_details.dart';
 
 import '../../../core/colors/app_color.dart';
 
-class PageViewWidget extends StatefulWidget {
+class PageViewWidget extends StatelessWidget {
   const PageViewWidget({super.key, required this.onBoarding});
 
   final OnBoardingDetails onBoarding;
 
   @override
-  State<PageViewWidget> createState() => _PageViewWidgetState();
-}
-
-class _PageViewWidgetState extends State<PageViewWidget> {
-  @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Image.asset(widget.onBoarding.image),
+        Image.asset(onBoarding.image),
         Container(
           padding: EdgeInsets.symmetric(horizontal: 16),
           child: Column(
@@ -26,14 +21,14 @@ class _PageViewWidgetState extends State<PageViewWidget> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Text(
-                widget.onBoarding.title,
+                onBoarding.title,
                 softWrap: true,
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.bodyLarge,
               ),
               SizedBox(height: 20),
               Text(
-                widget.onBoarding.description,
+                onBoarding.description,
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
                   color: Colors.white.withAlpha(153),

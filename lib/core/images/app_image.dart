@@ -57,4 +57,6 @@ class AppImage {
   static const String password_icon = "${_authIconPath}password.svg";
   static const String phone_icon    = "${_authIconPath}phone.svg";
 
+  static const String empty = 'assets/images/images_app/icon_app/Empty.png';
+
 }
