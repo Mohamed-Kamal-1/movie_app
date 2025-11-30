@@ -1,5 +1,6 @@
 /// message : "Profile fetched successfully"
 /// data : {"_id":"6929c0dd63a8bee530e5d425","email":"tijocij403@httpsu.com","password":"$2b$10$sBUGFeZSbjiBEmSPHR3GjeHBT.RHR8c03qv9yh3b5HteFacWQ2//.","name":"amr mustafa","phone":"+201141209334","avaterId":1,"createdAt":"2025-11-28T15:33:49.830Z","updatedAt":"2025-11-28T15:33:49.830Z","__v":0}
+library;
 
 class ProfileResponseDto {
   ProfileResponseDto({

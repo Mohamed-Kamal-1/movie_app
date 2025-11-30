@@ -1,14 +1,13 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:movie_app/core/colors/app_color.dart';
-import 'package:movie_app/core/di/di.dart';
 import 'package:movie_app/core/images/app_image.dart';
 import 'package:movie_app/extensions/extension.dart';
 import 'package:movie_app/l10n/app_string.dart';
-import 'package:movie_app/presentation/ui/home_screen/tabs/search_tab/search_screen.dart';
 import 'package:movie_app/presentation/ui/home_screen/tabs/home_tab/watch_now_section.dart';
 
-import '../../available_now_section/available_now_section.dart';
-import 'bottom_navigation_section.dart';
+import 'available_now_section.dart';
 import '../../cubit/home_screen_view_model.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -33,6 +32,8 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final List<String> genres = ["Comedy", "Action", "Drama","History"];
+    final randomGenre = genres[Random().nextInt(genres.length)];
     return Column(
       children: [
         Expanded(child: AvailableNowSection(viewModel: viewModel)),
@@ -40,7 +41,7 @@ class HomeScreen extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
           child: Row(
             children: [
-              Text(AppString.action, style: context.fonts.titleMedium),
+              Text(randomGenre, style: context.fonts.titleMedium),
               const Spacer(),
 
               GestureDetector(
@@ -66,7 +67,7 @@ class HomeScreen extends StatelessWidget {
         SizedBox(
           height: 220,
           width: double.infinity,
-          child: WatchNowSection(images: images),
+          child: WatchNowSection(randomGenre: randomGenre),
         ),
       ],
     );

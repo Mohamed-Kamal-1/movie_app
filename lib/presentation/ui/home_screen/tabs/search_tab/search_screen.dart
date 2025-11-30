@@ -1,81 +1,84 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:movie_app/core/colors/app_color.dart';
-import 'package:movie_app/domain/model/movie_model.dart';
-import 'package:movie_app/extensions/extension.dart';
-import 'package:movie_app/presentation/ui/home_screen/cubit/home_screen_view_model.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie_app/core/di/di.dart';
+import 'package:movie_app/core/images/app_image.dart';
+import 'package:movie_app/presentation/ui/home_screen/tabs/search_tab/cubit/search_screen_state.dart';
+import 'package:movie_app/presentation/ui/home_screen/tabs/search_tab/cubit/search_screen_view_model.dart';
 
-import '../../../../../core/images/app_image.dart';
+import 'package:movie_app/presentation/ui/movies_widget.dart';
 
-class SearchScreen extends StatelessWidget {
-  SearchScreen({super.key});
+import 'app_bar_sear_screen.dart';
 
-  final List<String> images = [
-    AppImage.leftImage,
-    AppImage.midImage,
-    AppImage.rightImage,
-    AppImage.leftImage,
-    AppImage.midImage,
-    AppImage.rightImage,
-    AppImage.leftImage,
-    AppImage.midImage,
-    AppImage.rightImage,
-    AppImage.leftImage,
-    AppImage.midImage,
-    AppImage.rightImage,
-  ];
+class SearchScreen extends StatefulWidget {
+  const SearchScreen({super.key});
 
   @override
+  State<SearchScreen> createState() => _SearchScreenState();
+}
+
+class _SearchScreenState extends State<SearchScreen> {
+  late SearchScreenViewModel viewModel;
+  bool isEmpty = false;
+  int imageIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    viewModel = getIt.get<SearchScreenViewModel>();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Column(
-          children: [
-            Expanded(
-              child: GridView.builder(
-                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                itemCount: 10,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 16,
-                  mainAxisSpacing: 8,
-                  childAspectRatio: 1 / 1.5,
-                ),
-
-                itemBuilder: (context, index) {
-                  return Stack(
-                    children: [
-                      Image.asset(images[index], fit: BoxFit.cover),
-
-                      Container(
-                        margin: EdgeInsets.symmetric(
-                          vertical: 13,
-                          horizontal: 10.11,
-                        ),
-                        padding: EdgeInsetsDirectional.all(6),
-                        alignment: Alignment.center,
-                        clipBehavior: Clip.antiAlias,
-                        decoration: BoxDecoration(
-                          color: AppColor.black.withAlpha(171),
-                          borderRadius: BorderRadiusGeometry.circular(10),
-                        ),
-                        width: 62,
-                        height: 30,
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text('7.7', style: context.fonts.titleSmall),
-                            Icon(Icons.star, color: AppColor.goldenYellow),
-                          ],
-                        ),
-                      ),
-                    ],
+        appBar: AppBarSearchWidget(
+          onSearch: (title) => viewModel.getMoviesListByTitle(title),
+        ),
+        body: BlocBuilder<SearchScreenViewModel, SearchScreenState>(
+          bloc: viewModel,
+          builder: (context, state) {
+            switch (state.runtimeType) {
+              case SearchInitialState:
+              case SearchEmptyState:
+                {
+                  return Center(
+                    child: Image.asset(AppImage.searchImage, fit: BoxFit.cover),
                   );
-                },
-              ),
-            ),
-          ],
+                }
+              case SearchLoadingState:
+                return const Center(child: CircularProgressIndicator());
+              case SearchErrorState:
+                {
+                  final errorState = state as SearchErrorState;
+                  return Center(
+                    child: Text(
+                      errorState.errorMessage!,
+                      style: const TextStyle(color: Colors.white),
+                    ),
+                  );
+                }
+              case SearchSuccessState:
+                {
+                  final successState = state as SearchSuccessState;
+                  if (state.moviesList != null &&
+                      state.moviesList!.isNotEmpty) {
+                    return MoviesWidget(
+                      moviesLength: state.moviesList?.length ?? 0,
+                      imageBuilder: (index) =>
+                          state.moviesList![index].mediumCoverImage,
+                    );
+                  } else {
+                    return Center(
+                      child: Image.asset(
+                        AppImage.searchImage,
+                        fit: BoxFit.cover,
+                      ),
+                    );
+                  }
+                }
+            }
+            return const SizedBox();
+          },
         ),
       ),
     );

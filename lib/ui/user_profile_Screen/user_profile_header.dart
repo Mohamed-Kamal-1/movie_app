@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/core/colors/app_color.dart';
@@ -19,17 +18,16 @@ class ProfileHeader extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(color: AppColor.whiteGrey),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+          padding:  const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
           child: Column(
             children: [
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Column(
                     children: [
                       ClipOval(
                         child:
-                            // Image.asset(imgList[selectedAvatar], width: 150, height: 150),
                             BlocBuilder<ProfileViewModel, ProfileScreenState>(
                               builder: (context, state) {
                                 int avatarId = 0;

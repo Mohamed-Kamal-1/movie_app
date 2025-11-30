@@ -9,7 +9,7 @@ class AppSharedPreferences {
     // private constructor
   }
 
-  static AppSharedPreferences? _app_shared_preferences = null;
+  static AppSharedPreferences? _app_shared_preferences;
 
   static Future<void> init() async {
     if (_app_shared_preferences == null) {

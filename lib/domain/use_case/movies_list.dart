@@ -20,4 +20,8 @@ class MoviesListUseCase {
   Future<List<MovieModel>> getMoviesListByGenres(String genre) async {
     return await moviesRepo.getMoviesListByGenres(genre);
   }
+
+  Future<List<MovieModel>> getMoviesListByTitle(String title) async {
+    return await moviesRepo.searchByMoveTitle(title);
+  }
 }

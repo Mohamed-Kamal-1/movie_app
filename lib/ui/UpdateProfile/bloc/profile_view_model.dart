@@ -1,7 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:movie_app/api/model/profile/profile_response_dto.dart';
 import 'package:movie_app/domain/api_result.dart';
 import 'package:movie_app/domain/use_case/delete_account_use_case.dart';
 import 'package:movie_app/domain/use_case/profile_use_case.dart';
@@ -13,9 +11,9 @@ import '../../../domain/use_case/movies_list.dart';
 
 @injectable
 class ProfileViewModel extends Cubit<ProfileScreenState> {
-  ProfileUseCase _useCase;
-  UpdateProfileUseCase _updateUseCase;
-  DeleteAccountUseCase _deleteAccountUseCase;
+  final ProfileUseCase _useCase;
+  final UpdateProfileUseCase _updateUseCase;
+  final DeleteAccountUseCase _deleteAccountUseCase;
   MoviesListUseCase moviesListUseCase;
   List<MovieModel>? listOfMovies;
 

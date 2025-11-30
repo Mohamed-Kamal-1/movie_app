@@ -1,4 +1,5 @@
 /// message : "Profile deleted successfully"
+library;
 
 class DeleteAccountDto {
   DeleteAccountDto({

@@ -6,7 +6,7 @@ import 'package:movie_app/extensions/extension.dart';
 import 'package:movie_app/presentation/ui/home_screen/cubit/hom_screen_state.dart';
 import 'package:movie_app/presentation/ui/home_screen/cubit/home_screen_view_model.dart';
 
-import '../../../../core/colors/app_color.dart';
+import '../../../../../core/colors/app_color.dart';
 
 class AvailableNowSection extends StatefulWidget {
   final HomeScreenViewModel viewModel;
@@ -26,7 +26,6 @@ class _AvailableNowSectionState extends State<AvailableNowSection> {
     _pageController.dispose();
     super.dispose();
     currentPage.dispose();
-    widget.viewModel.close();
   }
 
   @override
@@ -48,10 +47,7 @@ class _AvailableNowSectionState extends State<AvailableNowSection> {
       bloc: widget.viewModel,
       builder: (context, state) {
         if (state is HomeLoadingState) {
-          return const Expanded(
-            flex: 4,
-            child: Center(child: CircularProgressIndicator()),
-          );
+          return Center(child: CircularProgressIndicator());
         }
 
         if (state is HomeErrorState) {

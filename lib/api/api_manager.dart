@@ -51,25 +51,21 @@ class ApiManager {
       MovieResponseDto movieResponse = MovieResponseDto.fromJson(response.data);
       if (movieResponse.status == 'ok') {
         return movieResponse;
-      }
-      else {
+      } else {
         throw DioException(
-
           requestOptions: response.requestOptions,
           message: "Failed to load Movies",
         );
       }
-
     } on DioException catch (e) {
       if (e.type == DioExceptionType.connectionTimeout) {
         throw Exception('connection Time out');
-      }  else if (e.type == DioExceptionType.receiveTimeout) {
+      } else if (e.type == DioExceptionType.receiveTimeout) {
         throw Exception('connection Time out');
       }
       rethrow;
     }
   }
-
 
   Future<MovieResponseDto> getMoviesListByGenres(String genre) async {
     try {
@@ -81,17 +77,42 @@ class ApiManager {
       MovieResponseDto movieResponse = MovieResponseDto.fromJson(response.data);
       if (movieResponse.status == 'ok') {
         return movieResponse;
-      }
-      else {
+      } else {
         throw DioException(
-
           requestOptions: response.requestOptions,
           message: "Failed to load Movies",
         );
       }
-
     } on DioException catch (e) {
       if (e.type == DioExceptionType.connectionTimeout) {
+        throw Exception('connection Time out');
+      } else if (e.type == DioExceptionType.receiveTimeout) {
+        throw Exception('connection Time out');
+      }
+      rethrow;
+    }
+  }
+
+  Future<MovieResponseDto> searchByMoveTitle(String title) async {
+    try {
+      Map<String, String> parameter = {'date_added': title};
+      Response response = await dio.get(
+        Endpoints.moviesList,
+        queryParameters: parameter,
+      );
+      MovieResponseDto movieResponse = MovieResponseDto.fromJson(response.data);
+      if (movieResponse.status == 'ok') {
+        return movieResponse;
+      } else {
+        throw DioException(
+          requestOptions: response.requestOptions,
+          message: "Failed to load Movies",
+        );
+      }
+    } on DioException catch (e) {
+      if (e.type == DioExceptionType.connectionTimeout) {
+        throw Exception('connection Time out');
+      } else if (e.type == DioExceptionType.receiveTimeout) {
         throw Exception('connection Time out ');
       } else if (e.type == DioExceptionType.receiveTimeout) {
         throw Exception('connection Time out');

@@ -40,6 +40,12 @@ import '../../domain/use_case/profile_use_case.dart' as _i591;
 import '../../domain/use_case/update_profile_use_case.dart' as _i786;
 import '../../presentation/ui/home_screen/cubit/home_screen_view_model.dart'
     as _i976;
+import '../../presentation/ui/home_screen/cubit/watch_now_view_model.dart'
+    as _i185;
+import '../../presentation/ui/home_screen/provider/watch_now_section_view_model.dart'
+    as _i863;
+import '../../presentation/ui/home_screen/tabs/search_tab/cubit/search_screen_view_model.dart'
+    as _i341;
 import '../../ui/login_screen/login_view_model.dart' as _i103;
 import '../../ui/UpdateProfile/bloc/profile_view_model.dart' as _i1046;
 
@@ -109,6 +115,15 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i976.HomeScreenViewModel>(
       () => _i976.HomeScreenViewModel(gh<_i687.MoviesListUseCase>()),
+    );
+    gh.factory<_i863.WatchNowSectionViewModel>(
+      () => _i863.WatchNowSectionViewModel(gh<_i687.MoviesListUseCase>()),
+    );
+    gh.factory<_i341.SearchScreenViewModel>(
+      () => _i341.SearchScreenViewModel(gh<_i687.MoviesListUseCase>()),
+    );
+    gh.factory<_i185.WatchNowViewModel>(
+      () => _i185.WatchNowViewModel(gh<_i687.MoviesListUseCase>()),
     );
     return this;
   }

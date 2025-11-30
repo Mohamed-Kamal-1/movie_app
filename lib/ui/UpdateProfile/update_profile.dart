@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/core/colors/app_color.dart';
 import 'package:movie_app/core/images/app_image.dart';
 import 'package:movie_app/ui/UpdateProfile/bloc/profile_screen_state.dart';
-import 'package:movie_app/ui/user_profile_Screen/user_profile_screen.dart';
 
 import '../../core/di/di.dart';
 import 'bloc/profile_view_model.dart';

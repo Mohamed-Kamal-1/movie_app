@@ -1,27 +1,20 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_app/extensions/extension.dart';
 
 import '../../core/colors/app_color.dart';
-import '../../core/images/app_image.dart';
 
-class MoviesWidget extends StatelessWidget {
-  final List<String> images = [
-    AppImage.leftImage,
-    AppImage.midImage,
-    AppImage.rightImage,
-    AppImage.leftImage,
-    AppImage.midImage,
-    AppImage.rightImage,
-    AppImage.leftImage,
-    AppImage.midImage,
-    AppImage.rightImage,
-    AppImage.leftImage,
-    AppImage.midImage,
-    AppImage.rightImage,
-  ];
+class MoviesWidget extends StatefulWidget {
+  final String? Function(int index)? imageBuilder;
+  final int? moviesLength;
 
-  MoviesWidget({super.key});
+  const MoviesWidget({super.key, this.moviesLength, this.imageBuilder});
 
+  @override
+  State<MoviesWidget> createState() => _MoviesWidgetState();
+}
+
+class _MoviesWidgetState extends State<MoviesWidget> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -29,7 +22,7 @@ class MoviesWidget extends StatelessWidget {
         Expanded(
           child: GridView.builder(
             padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-            itemCount: 10,
+            itemCount: widget.moviesLength,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               crossAxisSpacing: 16,
@@ -40,7 +33,7 @@ class MoviesWidget extends StatelessWidget {
             itemBuilder: (context, index) {
               return Stack(
                 children: [
-                  Image.asset(images[index], fit: BoxFit.cover),
+                  CachedNetworkImage(imageUrl: widget.imageBuilder!(index)!),
 
                   Container(
                     margin: EdgeInsets.symmetric(

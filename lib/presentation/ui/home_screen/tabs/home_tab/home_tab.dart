@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/presentation/ui/home_screen/cubit/hom_screen_state.dart';
+import 'package:movie_app/presentation/ui/home_screen/tabs/brows_tab/browse_creen.dart';
 import 'package:movie_app/presentation/ui/home_screen/tabs/home_tab/home_screen.dart';
-import 'package:movie_app/presentation/ui/home_screen/tabs/profile_tab/search_tab.dart';
+import 'package:movie_app/presentation/ui/home_screen/tabs/profile_tab/profile.dart';
+import 'package:movie_app/ui/user_profile_Screen/user_profile_screen.dart';
 
 import '../../../../../core/di/di.dart';
 import '../../cubit/home_screen_view_model.dart';
@@ -24,14 +26,13 @@ class _HomeTabState extends State<HomeTab> {
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-    viewModel.close();
   }
 
   @override
   void initState() {
     super.initState();
     viewModel = getIt.get<HomeScreenViewModel>();
-    tabs = [HomeScreen(viewModel: viewModel), SearchScreen(), ProfileScreen()];
+    tabs = [HomeScreen(viewModel: viewModel), SearchScreen(), BrowseScreen(), ProfileTab()];
   }
 
   @override
@@ -42,6 +43,7 @@ class _HomeTabState extends State<HomeTab> {
         int currentIndex = 0;
         if (state is MoveToAnotherTabState) {
           currentIndex = state.index ?? 0;
+
         }
         return Scaffold(
           bottomNavigationBar: AppBottomNavigationSection(

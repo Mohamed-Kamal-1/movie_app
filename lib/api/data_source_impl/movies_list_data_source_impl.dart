@@ -36,13 +36,24 @@ class MoviesListDataSourceImpl implements MoviesListDataSource {
   }
 
   @override
-  Future<List<MovieModel>> getMoviesListByGenres(String genre)async {
-    MovieResponseDto response = await apiManager.getMoviesList(genre);
+  Future<List<MovieModel>> getMoviesListByGenres(String genre) async {
+    MovieResponseDto response = await apiManager.getMoviesListByGenres(genre);
     response.statusMessage = errorMessage;
     response.code = statusCode;
     return response.data?.movies
-        ?.map((moviesDto) => moviesDto.getMoviesList())
-        .toList() ??
+            ?.map((moviesDto) => moviesDto.getMoviesList())
+            .toList() ??
+        [];
+  }
+
+  @override
+  Future<List<MovieModel>> searchByMoveTitle(String title) async {
+    MovieResponseDto response = await apiManager.getMoviesListByGenres(title);
+    response.statusMessage = errorMessage;
+    response.code = statusCode;
+    return response.data?.movies
+            ?.map((moviesDto) => moviesDto.getMoviesList())
+            .toList() ??
         [];
   }
 }

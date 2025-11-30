@@ -1,4 +1,5 @@
 /// message : "Profile updated successfully"
+library;
 
 class UpdateProfileDto {
   UpdateProfileDto({

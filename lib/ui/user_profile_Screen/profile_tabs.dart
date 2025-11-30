@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/core/colors/app_color.dart';
-import 'package:movie_app/presentation/ui/home_screen/cubit/home_screen_view_model.dart';
 import 'package:movie_app/ui/UpdateProfile/bloc/profile_screen_state.dart';
 import 'package:movie_app/ui/UpdateProfile/bloc/profile_view_model.dart';
 
-import '../../core/di/di.dart';
 
 class ProfileTabs extends StatelessWidget {
   const ProfileTabs({super.key});
