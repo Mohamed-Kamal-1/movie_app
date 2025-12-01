@@ -13,7 +13,7 @@ class BrowseScreen extends StatelessWidget {
     return BlocProvider(
       create: (_) => getIt<BrowseCubit>()..loadMovies(),
       child: Scaffold(
-        backgroundColor: const Color(0xff1b1b1b),
+        backgroundColor: const Color(0xff121312),
         body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(16),
