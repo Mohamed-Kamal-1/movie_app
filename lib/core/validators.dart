@@ -7,5 +7,6 @@ bool isValidEmail(String? email) {
 
 bool isValidPhone(String? phone) {
   if (phone == null) return false;
-  return RegExp(r"^[0-9]{11}$").hasMatch(phone);
+  return RegExp(r"^\+?[0-9]{10,13}$").hasMatch(phone);
 }
+

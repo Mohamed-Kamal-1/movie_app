@@ -1,6 +1,6 @@
 import 'package:movie_app/domain/model/movie_model.dart';
 
-abstract class HomeScreenState {}
+  abstract class HomeScreenState {}
 
 class HomeInitialState extends HomeScreenState {}
 
@@ -15,5 +15,19 @@ class HomeErrorState extends HomeScreenState {
 class HomeSuccessState extends HomeScreenState {
   List<MovieModel>? moviesList;
 
+  // List<String>
+
   HomeSuccessState({this.moviesList});
+}
+
+class MoveToAnotherTabState extends HomeScreenState {
+  final int? index;
+
+  MoveToAnotherTabState({this.index});
+}
+
+class changeGenre extends HomeScreenState {
+  final int? index;
+
+  changeGenre({this.index});
 }

@@ -55,8 +55,9 @@ dependencies:
   readmore: ^3.0.0
   connectivity_plus: ^5.0.2
   http: ^1.1.2
+  dartz: ^0.10.1
 
-
+  get_it: any
 dev_dependencies:
   flutter_test:
     sdk: flutter

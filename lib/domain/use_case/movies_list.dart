@@ -2,15 +2,26 @@ import 'package:injectable/injectable.dart';
 import 'package:movie_app/domain/repos/movies_repo.dart';
 
 import '../model/movie_model.dart';
+
 @injectable
-class MoviesListUseCase{
+class MoviesListUseCase {
   MoviesRepo moviesRepo;
+
   MoviesListUseCase(this.moviesRepo);
 
-  Future<List<MovieModel>> getMoviesList(String dateAdded){
+  Future<List<MovieModel>> getMoviesList(String dateAdded) {
     return moviesRepo.getMoviesList(dateAdded);
   }
-  String getErrorMessage(){
+
+  String getErrorMessage() {
     return moviesRepo.getErrorMessage();
+  }
+
+  Future<List<MovieModel>> getMoviesListByGenres(String genre) async {
+    return await moviesRepo.getMoviesListByGenres(genre);
+  }
+
+  Future<List<MovieModel>> getMoviesListByTitle(String title) async {
+    return await moviesRepo.searchByMoveTitle(title);
   }
 }

@@ -19,4 +19,19 @@ class MoviesRepoImpl implements MoviesRepo {
   String getErrorMessage() {
     return moviesListDataSource.getErrorMessage();
   }
+
+  @override
+  String getErrorStatusCode() {
+    return moviesListDataSource.getErrorStatusCode();
+  }
+
+  @override
+  Future<List<MovieModel>> getMoviesListByGenres(String genre) {
+    return moviesListDataSource.getMoviesListByGenres(genre);
+  }
+
+  @override
+  Future<List<MovieModel>> searchByMoveTitle(String title) {
+    return moviesListDataSource.searchByMoveTitle(title);
+  }
 }

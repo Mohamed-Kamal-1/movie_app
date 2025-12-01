@@ -60,7 +60,7 @@ class _LoginScreenState extends State<LoginScreen> {
       child: BlocListener<LoginViewModel, LoginState>(
         listener: (context, state) {
           if (state is LoginSuccessState) {
-            Navigator.pushReplacementNamed(context, AppRoutes.HomeScreen.name);
+            Navigator.pushReplacementNamed(context, AppRoutes.HomeTab.name);
           } else if (state is LoginErrorState) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(

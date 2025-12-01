@@ -12,10 +12,12 @@ class HomeScreenViewModel extends Cubit<HomeScreenState> {
   HomeScreenViewModel(this.moviesListUseCase) : super(HomeInitialState());
 
   Future<void> getMoviesList(String dateAdded) async {
+    var errorMessage = moviesListUseCase.getErrorMessage();
     try {
       emit(HomeLoadingState());
-      var errorMessage = moviesListUseCase.getErrorMessage();
-      List<MovieModel> response = await moviesListUseCase.getMoviesList(dateAdded);
+      List<MovieModel> response = await moviesListUseCase.getMoviesList(
+        dateAdded,
+      );
       if (response.isEmpty) {
         emit(HomeErrorState(errorMessage: errorMessage));
       } else {
@@ -25,4 +27,10 @@ class HomeScreenViewModel extends Cubit<HomeScreenState> {
       emit(HomeErrorState(errorMessage: e.toString()));
     }
   }
+
+
+  void moveAnotherTab(int index){
+    emit(MoveToAnotherTabState(index: index));
+  }
 }
+

@@ -1,11 +1,17 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:movie_app/core/colors/app_color.dart';
 import 'package:movie_app/core/icons/app_icon.dart';
 import 'package:movie_app/extensions/extension.dart';
 
+typedef OnSelectedIndex = void Function(int index);
+
 class AppBottomNavigationSection extends StatefulWidget {
-  const AppBottomNavigationSection({super.key});
+  final OnSelectedIndex? onSelectedIndex;
+
+  const AppBottomNavigationSection({super.key,  this.onSelectedIndex});
 
   @override
   State<AppBottomNavigationSection> createState() =>
@@ -33,7 +39,9 @@ class _AppBottomNavigationSectionState
         type: BottomNavigationBarType.fixed,
         onTap: (value) {
           setState(() {
+
             selectedIndex = value;
+            widget.onSelectedIndex?.call(value);
           });
         },
         currentIndex: selectedIndex,

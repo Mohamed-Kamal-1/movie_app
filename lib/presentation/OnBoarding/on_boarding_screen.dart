@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/ui/OnBoarding/widgets/page_view_widget.dart';
+import 'package:movie_app/presentation/OnBoarding/widgets/page_view_widget.dart';
 
 import 'on_boarding_details.dart';
 

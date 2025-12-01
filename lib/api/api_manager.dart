@@ -10,9 +10,12 @@ import 'package:movie_app/api/model/favourite/get_all_favourite_model.dart';
 import 'package:movie_app/api/model/favourite/is_favourite_model.dart';
 import 'package:movie_app/api/model/favourite/remove_from_favourite_model.dart';
 import 'package:movie_app/SharedPreferences/auth_shared_preferences.dart';
+import 'package:movie_app/api/model/profile/delete_account_dto.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 import 'model/login/login_response.dart';
+import 'model/profile/profile_response_dto.dart';
+import 'model/profile/update_profile_dto.dart';
 
 @singleton
 class ApiManager {
@@ -32,7 +35,8 @@ class ApiManager {
         requestBody: true,
       ),
     );
-    
+
+
     authDio.options.baseUrl = _authBaseUrl;
     authDio.interceptors.add(
       PrettyDioLogger(
@@ -66,6 +70,8 @@ class ApiManager {
       }
     } on DioException catch (e) {
       if (e.type == DioExceptionType.connectionTimeout) {
+        throw Exception('connection Time out');
+      } else if (e.type == DioExceptionType.receiveTimeout) {
         throw Exception('connection Time out ');
       } else if (e.type == DioExceptionType.receiveTimeout) {
         throw Exception('connection Time out');
@@ -84,8 +90,8 @@ class ApiManager {
       );
       
       // Check if response status code indicates success (200-299)
-      if (response.statusCode != null && 
-          response.statusCode! >= 200 && 
+      if (response.statusCode != null &&
+          response.statusCode! >= 200 &&
           response.statusCode! < 300) {
         return LoginResponseDto.fromJson(response.data);
       } else {
@@ -105,7 +111,7 @@ class ApiManager {
       } else if (e.type == DioExceptionType.badResponse && e.response != null) {
         // Parse error response
         final errorData = e.response!.data;
-        if (errorData is Map<String, dynamic> && 
+        if (errorData is Map<String, dynamic> &&
             errorData.containsKey('message')) {
           throw Exception(errorData['message'] ?? 'Login failed');
         }
@@ -315,6 +321,150 @@ class ApiManager {
       } else if (e.type == DioExceptionType.receiveTimeout) {
         throw Exception('Request timeout. Please try again.');
       }
+      rethrow;
+    }
+  }
+
+  // TODO
+  // profile API
+  Future<ProfileResponseDto> getProfile()  async {
+    try {
+      Response response = await authDio.get(
+        Endpoints.profile,
+        options: Options(
+          headers: {
+            "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MmNiOWI1NDYwNTE4YTYyOGFlNDE5NSIsImVtYWlsIjoibW9oQDQ1NmdtYWlsLmNvbSIsImlhdCI6MTc2NDUzODk4MH0.O9BrX_F6mJ85ZTyxlmAooJNJXM8JnjiVx-6kPNqGOfs",
+          },
+        ),
+      );
+
+      if (response.statusCode != null &&
+          response.statusCode! >= 200 &&
+          response.statusCode! < 300) {
+        return ProfileResponseDto.fromJson(response.data);
+      } else {
+        // Handle non-success status codes
+        throw DioException(
+          requestOptions: response.requestOptions,
+          response: response,
+          type: DioExceptionType.badResponse,
+        );
+      }
+    } on DioException catch (e) {
+      // Handle Dio errors (network, timeout, etc.)
+      if (e.type == DioExceptionType.connectionTimeout) {
+        throw Exception('Connection timeout. Please check your internet connection.');
+      } else if (e.type == DioExceptionType.receiveTimeout) {
+        throw Exception('Request timeout. Please try again.');
+      } else if (e.type == DioExceptionType.badResponse && e.response != null) {
+        // Parse error response
+        final errorData = e.response!.data;
+        if (errorData is Map<String, dynamic> &&
+            errorData.containsKey('message')) {
+          throw Exception(errorData['message'] ?? 'get profile failed');
+        }
+        throw Exception('get profile failed. Please try again.');
+      } else {
+        throw Exception('Network error. Please check your connection.');
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  // updateProfile
+
+
+  Future<UpdateProfileDto> updateProfile(String email , int avatarId)  async {
+    try {
+      Response response = await authDio.put(
+        Endpoints.profile,
+        data: {
+          'email': email,
+          'avaterId': avatarId,
+        },
+        options: Options(
+          headers: {
+            "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MmNiOWI1NDYwNTE4YTYyOGFlNDE5NSIsImVtYWlsIjoibW9oQDQ1NmdtYWlsLmNvbSIsImlhdCI6MTc2NDUzODk4MH0.O9BrX_F6mJ85ZTyxlmAooJNJXM8JnjiVx-6kPNqGOfs",
+          },
+        ),
+      );
+
+      if (response.statusCode != null &&
+          response.statusCode! >= 200 &&
+          response.statusCode! < 300) {
+        return UpdateProfileDto.fromJson(response.data);
+      } else {
+        // Handle non-success status codes
+        throw DioException(
+          requestOptions: response.requestOptions,
+          response: response,
+          type: DioExceptionType.badResponse,
+        );
+      }
+    } on DioException catch (e) {
+      // Handle Dio errors (network, timeout, etc.)
+      if (e.type == DioExceptionType.connectionTimeout) {
+        throw Exception('Connection timeout. Please check your internet connection.');
+      } else if (e.type == DioExceptionType.receiveTimeout) {
+        throw Exception('Request timeout. Please try again.');
+      } else if (e.type == DioExceptionType.badResponse && e.response != null) {
+        // Parse error response
+        final errorData = e.response!.data;
+        if (errorData is Map<String, dynamic> &&
+            errorData.containsKey('message')) {
+          throw Exception(errorData['message'] ?? 'update profile failed');
+        }
+        throw Exception('update profile failed. Please try again.');
+      } else {
+        throw Exception('Network error. Please check your connection.');
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<DeleteAccountDto> deleteAccount()  async {
+    try {
+      Response response = await authDio.delete(
+        Endpoints.profile,
+        options: Options(
+          headers: {
+            "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MmNiOWI1NDYwNTE4YTYyOGFlNDE5NSIsImVtYWlsIjoibW9oQDQ1NmdtYWlsLmNvbSIsImlhdCI6MTc2NDUzODk4MH0.O9BrX_F6mJ85ZTyxlmAooJNJXM8JnjiVx-6kPNqGOfs",
+          },
+        ),
+      );
+
+      if (response.statusCode != null &&
+          response.statusCode! >= 200 &&
+          response.statusCode! < 300) {
+        return DeleteAccountDto.fromJson(response.data);
+      } else {
+        // Handle non-success status codes
+        throw DioException(
+          requestOptions: response.requestOptions,
+          response: response,
+          type: DioExceptionType.badResponse,
+        );
+      }
+    } on DioException catch (e) {
+      // Handle Dio errors (network, timeout, etc.)
+      if (e.type == DioExceptionType.connectionTimeout) {
+        throw Exception('Connection timeout. Please check your internet connection.');
+      } else if (e.type == DioExceptionType.receiveTimeout) {
+        throw Exception('Request timeout. Please try again.');
+      } else if (e.type == DioExceptionType.badResponse && e.response != null) {
+        // Parse error response
+        final errorData = e.response!.data;
+        if (errorData is Map<String, dynamic> &&
+            errorData.containsKey('message')) {
+          throw Exception(errorData['message'] ?? 'delete account failed');
+        }
+        throw Exception('delete account failed. Please try again.');
+      } else {
+        throw Exception('Network error. Please check your connection.');
+      }
+    } catch (e) {
       rethrow;
     }
   }

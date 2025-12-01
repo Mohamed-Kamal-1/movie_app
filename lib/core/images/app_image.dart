@@ -50,13 +50,13 @@ class AppImage {
   static const String avatar_8 = "${_avatarImage}Avatar_8.png";
   static const String avatar_9 = "${_avatarImage}Avatar_9.png";
 
-
   static const String _authIconPath = 'assets/images/auth/';
-  static const String profile_icon  = "${_authIconPath}profile.svg";
-  static const String email_icon    = "${_authIconPath}email.svg";
+  static const String profile_icon = "${_authIconPath}profile.svg";
+  static const String email_icon = "${_authIconPath}email.svg";
   static const String password_icon = "${_authIconPath}password.svg";
-  static const String phone_icon    = "${_authIconPath}phone.svg";
+  static const String phone_icon = "${_authIconPath}phone.svg";
 
+  static const String searchImage = "assets/images/images_app/search_image.png";
   static const String _movieDetailsIconPath = 'assets/images/movie_details_icon/';
   static const String backIcon = '${_movieDetailsIconPath}backIcon@3x.png';
   static const String bookmarkIcon = '${_movieDetailsIconPath}bookmarkIcon@3x.png';

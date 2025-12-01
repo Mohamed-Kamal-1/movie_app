@@ -10,6 +10,8 @@ import '../../core/icons/app_icon.dart';
 
 
 class LanguageSwitcher extends StatefulWidget {
+  const LanguageSwitcher({super.key});
+
 
   @override
   State<LanguageSwitcher> createState() => _LanguageSwitcherState();

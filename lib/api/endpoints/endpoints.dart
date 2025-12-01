@@ -7,4 +7,5 @@ abstract class Endpoints {
   static const String getAllFavourite =  '/favorites/all';
   static const String isFavourite = '/favorites/is-favorite';
   static const String removeFromFavourite = '/favorites/remove';
+static const String profile = "profile";
 }
