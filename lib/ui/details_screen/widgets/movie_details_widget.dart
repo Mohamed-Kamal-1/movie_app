@@ -202,6 +202,7 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
                       );
                     },
                     style: ElevatedButton.styleFrom(
+
                       backgroundColor: AppColor.red,
                       padding: EdgeInsets.symmetric(vertical: 16),
                       shape: RoundedRectangleBorder(

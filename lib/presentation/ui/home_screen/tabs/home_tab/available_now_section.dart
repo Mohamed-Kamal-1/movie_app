@@ -67,23 +67,17 @@ class _AvailableNowSectionState extends State<AvailableNowSection> {
                 valueListenable: currentPage,
                 builder: (context, value, child) {
                   return Positioned.fill(
-                    child: GestureDetector(
-                      onTap: () {
-                        // Navigator.pushNamed(context, AppRoutes.LoginScreen.name,arguments:state.moviesList![value].id );
-                      },
-                      child: CachedNetworkImage(
-                        fit: BoxFit.fill,
-                        imageUrl:
-                            state.moviesList![value].largeCoverImage ?? "",
+                    child: CachedNetworkImage(
+                      fit: BoxFit.fill,
+                      imageUrl: state.moviesList![value].largeCoverImage ?? "",
 
-                        placeholder: (context, url) =>
-                            Center(child: CircularProgressIndicator()),
+                      placeholder: (context, url) =>
+                          Center(child: CircularProgressIndicator()),
 
-                        errorWidget: (context, url, error) => Icon(
-                          Icons.broken_image,
-                          size: 40,
-                          color: Colors.grey,
-                        ),
+                      errorWidget: (context, url, error) => Icon(
+                        Icons.broken_image,
+                        size: 40,
+                        color: Colors.grey,
                       ),
                     ),
                   );
@@ -129,18 +123,28 @@ class _AvailableNowSectionState extends State<AvailableNowSection> {
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
                             ),
-                            child: CachedNetworkImage(
-                              fit: BoxFit.fill,
-                              imageUrl:
-                                  state.moviesList![index].mediumCoverImage ??
-                                  "",
-                              placeholder: (context, url) =>
-                                  Center(child: CircularProgressIndicator()),
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.pushNamed(
+                                  context,
+                                  AppRoutes.DetailsScreen.name,
+                                  arguments: state.moviesList![index].id
+                                      .toString(),
+                                );
+                              },
+                              child: CachedNetworkImage(
+                                fit: BoxFit.fill,
+                                imageUrl:
+                                    state.moviesList![index].mediumCoverImage ??
+                                    "",
+                                placeholder: (context, url) =>
+                                    Center(child: CircularProgressIndicator()),
 
-                              errorWidget: (context, url, error) => Icon(
-                                Icons.broken_image,
-                                size: 40,
-                                color: Colors.grey,
+                                errorWidget: (context, url, error) => Icon(
+                                  Icons.broken_image,
+                                  size: 40,
+                                  color: Colors.grey,
+                                ),
                               ),
                             ),
                           ),

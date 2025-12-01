@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/domain/model/movie_model.dart';
-
-import '../../../../../core/colors/app_color.dart';
+import 'package:movie_app/core/colors/app_color.dart';
 
 class MovieCard extends StatelessWidget {
   final MovieModel movie;
+  final VoidCallback? onTap;
 
-  const MovieCard({super.key, required this.movie});
+  const MovieCard({
+    super.key,
+    required this.movie,
+    this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        // TODO: navigate to movie details
-      },
+      onTap: onTap,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(16),
         child: Stack(
@@ -26,8 +28,8 @@ class MovieCard extends StatelessWidget {
               fit: BoxFit.cover,
               errorBuilder: (_, __, ___) => Container(
                 color: Colors.black26,
-                child: Center(
-                  child: const Icon(
+                child: const Center(
+                  child: Icon(
                     Icons.broken_image,
                     color: Colors.white12,
                     size: 40,
@@ -47,13 +49,14 @@ class MovieCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(16),
                 ),
                 child: Row(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      movie.rating?.toString() ?? "N/A",
+                      movie.rating?.toStringAsFixed(1) ?? "N/A",
                       style: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
-                        fontSize: 16,
+                        fontSize: 14,
                       ),
                     ),
                     const SizedBox(width: 4),

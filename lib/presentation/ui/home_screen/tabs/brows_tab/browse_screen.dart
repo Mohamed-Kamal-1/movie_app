@@ -1,7 +1,9 @@
+import 'package:dartz/dartz.dart' as movie;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/colors/app_color.dart';
 import '../../../../../core/di/di.dart';
+import '../../../../../core/routes/app_routes.dart';
 import '../../cubit/browse_cubit.dart';
 import 'movie_card.dart';
 
@@ -104,7 +106,11 @@ class BrowseScreen extends StatelessWidget {
                                       childAspectRatio: .62,
                                     ),
                                 itemBuilder: (_, index) {
-                                  return MovieCard(movie: state.movies[index]);
+                                  return MovieCard(movie: state.movies[index] , onTap: (){ Navigator.pushNamed(
+                                    context,
+                                    AppRoutes.DetailsScreen.name,
+                                    arguments: state.movies[index].id,
+                                  );});
                                 },
                               ),
                             ),

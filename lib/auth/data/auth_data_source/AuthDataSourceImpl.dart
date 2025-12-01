@@ -1,11 +1,15 @@
 import 'package:dio/dio.dart';
+import 'package:injectable/injectable.dart';
 import '../../../core/app_const/app_const.dart';
 import '../models/register_model.dart';
 
+@injectable
 class AuthDataSourceImpl {
   final Dio dio;
 
-  AuthDataSourceImpl(this.dio);
+  AuthDataSourceImpl() : dio = Dio() {
+    dio.options.baseUrl = 'https://route-movie-apis.vercel.app';
+  }
 
   Future<RegisterModel> register({
     required String name,

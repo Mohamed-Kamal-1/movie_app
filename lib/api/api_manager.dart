@@ -123,7 +123,31 @@ class ApiManager {
       rethrow;
     }
   }
-
+  Future<MovieResponseDto> getMoviesListByGenres(String genre) async {
+    try {
+      Map<String, String> parameter = {'genre': genre};
+      Response response = await dio.get(
+        Endpoints.moviesList,
+        queryParameters: parameter,
+      );
+      MovieResponseDto movieResponse = MovieResponseDto.fromJson(response.data);
+      if (movieResponse.status == 'ok') {
+        return movieResponse;
+      } else {
+        throw DioException(
+          requestOptions: response.requestOptions,
+          message: "Failed to load Movies",
+        );
+      }
+    } on DioException catch (e) {
+      if (e.type == DioExceptionType.connectionTimeout) {
+        throw Exception('connection Time out');
+      } else if (e.type == DioExceptionType.receiveTimeout) {
+        throw Exception('connection Time out');
+      }
+      rethrow;
+    }
+  }
   Future<MovieDetailsResponseDto> getMovieDetails(String movieId) async {
     try {
       Map<String, String> parameter = {

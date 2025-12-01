@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:movie_app/SharedPreferences/auth_shared_preferences.dart';
 import 'package:movie_app/api/model/favourite/add_to_favourite_data_model.dart';
 import 'package:movie_app/domain/use_case/favourite_use_case.dart';
 import 'package:movie_app/domain/use_case/movie_details_use_case.dart';
@@ -43,14 +44,22 @@ class DetailsScreenViewModel extends Cubit<DetailsScreenState> {
 
   Future<void> checkIsFavourite(String movieId) async {
     try {
+      // Check if user is logged in before making the API call
+      final token = AuthSharedPreferences.getToken();
+      if (token == null || token.isEmpty) {
+        return;
+      }
+
       final result = await favouriteUseCase.isFavourite(movieId);
       if (result != null) {
         emit(IsFavouriteSuccessState(isFavouriteModel: result));
-      } else {
-        emit(IsFavouriteErrorState(message: "Failed to check favourite status"));
       }
+      // If result is null, silently fail - don't emit error state
+      // This prevents the error state from replacing the success state
     } catch (e) {
-      emit(IsFavouriteErrorState(message: e.toString()));
+      // Silently fail - don't emit error state to avoid replacing the main success state
+      // The favorite check is a secondary feature that shouldn't block the UI
+      print('Error checking favourite status: $e');
     }
   }
 

@@ -95,7 +95,7 @@ class _OnBoardingView extends StatelessWidget {
                           if (index == mySlides.length - 1) {
                             Navigator.pushReplacementNamed(
                               context,
-                              AppRoutes.HomeTab.name,
+                              AppRoutes.LoginScreen.name,
                             );
                           } else {
                             context.read<OnboardingBloc>().add(OnNextSlide());

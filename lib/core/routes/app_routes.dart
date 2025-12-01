@@ -9,5 +9,6 @@ enum AppRoutes {
   UserProfileScreen,
   ProfileTab,
   DetailsScreen,
+  HomeTab
   ;
 }

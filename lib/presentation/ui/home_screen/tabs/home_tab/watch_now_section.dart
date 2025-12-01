@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/core/di/di.dart';
 
+import '../../../../../core/routes/app_routes.dart';
 import '../../cubit/watch_now_state.dart';
 import '../../cubit/watch_now_view_model.dart';
 
@@ -55,9 +56,18 @@ class _WatchNowSectionState extends State<WatchNowSection> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                 ),
-                child: CachedNetworkImage(
-                  imageUrl: state.moviesList![index].mediumCoverImage ?? "",
-                  fit: BoxFit.fill,
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(
+                      context,
+                      AppRoutes.DetailsScreen.name,
+                      arguments: state.moviesList![index].id,
+                    );
+                  },
+                  child: CachedNetworkImage(
+                    imageUrl: state.moviesList![index].mediumCoverImage ?? "",
+                    fit: BoxFit.fill,
+                  ),
                 ),
               );
             },

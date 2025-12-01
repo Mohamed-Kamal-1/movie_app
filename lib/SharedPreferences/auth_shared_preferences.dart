@@ -3,6 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class AuthSharedPreferences {
   static const String _tokenKey = 'auth_token';
   static const String _emailKey = 'user_email';
+  static const String _firstTimeKey = 'is_first_time';
   static late SharedPreferences _sharedPreferences;
 
   AuthSharedPreferences._();
@@ -40,6 +41,14 @@ class AuthSharedPreferences {
 
   static bool isLoggedIn() {
     return _sharedPreferences.getString(_tokenKey) != null;
+  }
+  static Future<bool> isFirstTime() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getBool(_firstTimeKey) ?? true;
+  }
+  static Future<void> setFirstTime(bool value) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(_firstTimeKey, value);
   }
 }
 
