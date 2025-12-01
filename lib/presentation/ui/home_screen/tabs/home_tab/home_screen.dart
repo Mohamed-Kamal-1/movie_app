@@ -13,26 +13,11 @@ import '../../cubit/home_screen_view_model.dart';
 class HomeScreen extends StatelessWidget {
   final HomeScreenViewModel viewModel;
 
-  HomeScreen({super.key, required this.viewModel});
-
-  final List<String> images = [
-    AppImage.leftImage,
-    AppImage.midImage,
-    AppImage.rightImage,
-    AppImage.leftImage,
-    AppImage.midImage,
-    AppImage.rightImage,
-    AppImage.leftImage,
-    AppImage.midImage,
-    AppImage.rightImage,
-    AppImage.leftImage,
-    AppImage.midImage,
-    AppImage.rightImage,
-  ];
+  const HomeScreen({super.key, required this.viewModel});
 
   @override
   Widget build(BuildContext context) {
-    final List<String> genres = ["Comedy", "Action", "Drama","History"];
+    final List<String> genres = ["Comedy", "Action", "Drama", "History"];
     final randomGenre = genres[Random().nextInt(genres.length)];
     return Column(
       children: [

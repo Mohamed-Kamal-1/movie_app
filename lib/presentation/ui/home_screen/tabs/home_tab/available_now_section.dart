@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/core/images/app_image.dart';
+import 'package:movie_app/core/routes/app_routes.dart';
 import 'package:movie_app/extensions/extension.dart';
 import 'package:movie_app/presentation/ui/home_screen/cubit/hom_screen_state.dart';
 import 'package:movie_app/presentation/ui/home_screen/cubit/home_screen_view_model.dart';
@@ -66,17 +67,23 @@ class _AvailableNowSectionState extends State<AvailableNowSection> {
                 valueListenable: currentPage,
                 builder: (context, value, child) {
                   return Positioned.fill(
-                    child: CachedNetworkImage(
-                      fit: BoxFit.fill,
-                      imageUrl: state.moviesList![value].largeCoverImage ?? "",
+                    child: GestureDetector(
+                      onTap: () {
+                        // Navigator.pushNamed(context, AppRoutes.LoginScreen.name,arguments:state.moviesList![value].id );
+                      },
+                      child: CachedNetworkImage(
+                        fit: BoxFit.fill,
+                        imageUrl:
+                            state.moviesList![value].largeCoverImage ?? "",
 
-                      placeholder: (context, url) =>
-                          Center(child: CircularProgressIndicator()),
+                        placeholder: (context, url) =>
+                            Center(child: CircularProgressIndicator()),
 
-                      errorWidget: (context, url, error) => Icon(
-                        Icons.broken_image,
-                        size: 40,
-                        color: Colors.grey,
+                        errorWidget: (context, url, error) => Icon(
+                          Icons.broken_image,
+                          size: 40,
+                          color: Colors.grey,
+                        ),
                       ),
                     ),
                   );

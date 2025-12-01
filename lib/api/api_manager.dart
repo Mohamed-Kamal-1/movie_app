@@ -173,7 +173,7 @@ class ApiManager {
         Endpoints.profile,
         options: Options(
           headers: {
-            "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjlkZThlNDVhMDA2ZWEzMTQ3MDZjNiIsImVtYWlsIjoidGlqb2NpajQwM0BodHRwc3UuY29tIiwiaWF0IjoxNzY0MzUxNjQ4fQ.fBR94z6kxx3c8WZz16ZQ-S52Yu3Eqe4rNFugROoSirc",
+            "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MmNiOWI1NDYwNTE4YTYyOGFlNDE5NSIsImVtYWlsIjoibW9oQDQ1NmdtYWlsLmNvbSIsImlhdCI6MTc2NDUzODk4MH0.O9BrX_F6mJ85ZTyxlmAooJNJXM8JnjiVx-6kPNqGOfs",
           },
         ),
       );
@@ -217,7 +217,7 @@ class ApiManager {
 
   Future<UpdateProfileDto> updateProfile(String email , int avatarId)  async {
     try {
-      Response response = await authDio.patch(
+      Response response = await authDio.put(
         Endpoints.profile,
         data: {
           'email': email,
@@ -225,7 +225,7 @@ class ApiManager {
         },
         options: Options(
           headers: {
-            "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjlkZThlNDVhMDA2ZWEzMTQ3MDZjNiIsImVtYWlsIjoidGlqb2NpajQwM0BodHRwc3UuY29tIiwiaWF0IjoxNzY0MzUxNjQ4fQ.fBR94z6kxx3c8WZz16ZQ-S52Yu3Eqe4rNFugROoSirc",
+            "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MmNiOWI1NDYwNTE4YTYyOGFlNDE5NSIsImVtYWlsIjoibW9oQDQ1NmdtYWlsLmNvbSIsImlhdCI6MTc2NDUzODk4MH0.O9BrX_F6mJ85ZTyxlmAooJNJXM8JnjiVx-6kPNqGOfs",
           },
         ),
       );
@@ -266,11 +266,11 @@ class ApiManager {
 
   Future<DeleteAccountDto> deleteAccount()  async {
     try {
-      Response response = await authDio.patch(
+      Response response = await authDio.delete(
         Endpoints.profile,
         options: Options(
           headers: {
-            "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjlkZThlNDVhMDA2ZWEzMTQ3MDZjNiIsImVtYWlsIjoidGlqb2NpajQwM0BodHRwc3UuY29tIiwiaWF0IjoxNzY0MzUxNjQ4fQ.fBR94z6kxx3c8WZz16ZQ-S52Yu3Eqe4rNFugROoSirc",
+            "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MmNiOWI1NDYwNTE4YTYyOGFlNDE5NSIsImVtYWlsIjoibW9oQDQ1NmdtYWlsLmNvbSIsImlhdCI6MTc2NDUzODk4MH0.O9BrX_F6mJ85ZTyxlmAooJNJXM8JnjiVx-6kPNqGOfs",
           },
         ),
       );

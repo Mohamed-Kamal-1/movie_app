@@ -67,9 +67,11 @@ class ProfileHeader extends StatelessWidget {
                                 name = null;
                             }
 
-                            return Text(
-                              name ?? "unKnown",
-                              style: Theme.of(context).textTheme.titleMedium,
+                            return FittedBox(
+                              child: Text(
+                                name ?? "unKnown",
+                                style: Theme.of(context).textTheme.titleMedium,
+                              ),
                             );
                           },
                         ),
