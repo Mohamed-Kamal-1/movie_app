@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/core/colors/app_color.dart';
+import 'package:movie_app/core/routes/app_routes.dart';
 import 'package:movie_app/ui/UpdateProfile/bloc/profile_screen_state.dart';
 import 'package:movie_app/ui/UpdateProfile/update_profile.dart';
 import '../../core/di/di.dart';
@@ -18,74 +19,80 @@ class ProfileHeader extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(color: AppColor.whiteGrey),
         child: Padding(
-          padding:  const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
           child: Column(
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Column(
-                    children: [
-                      ClipOval(
-                        child:
-                            BlocBuilder<ProfileViewModel, ProfileScreenState>(
-                              builder: (context, state) {
-                                int avatarId = 0;
+                  Expanded(
+                    child: Column(
+                      children: [
+                        ClipOval(
+                          child:
+                              BlocBuilder<ProfileViewModel, ProfileScreenState>(
+                                builder: (context, state) {
+                                  int avatarId = 0;
 
-                                switch (state) {
-                                  case ProfileSuccessState():
-                                    avatarId =
-                                        state.profile.data?.avaterId ?? 0;
-                                    return Image.asset(
-                                      imgList[avatarId],
-                                      width: 118,
-                                      height: 118,
-                                      fit: BoxFit.cover,
-                                    );
+                                  switch (state) {
+                                    case ProfileSuccessState():
+                                      avatarId =
+                                          state.profile.data?.avaterId ?? 0;
+                                      return Image.asset(
+                                        imgList[avatarId],
+                                        width: 118,
+                                        height: 118,
+                                        fit: BoxFit.cover,
+                                      );
 
-                                  case _:
-                                    return Image.asset(
-                                      AppImage.avatar_1,
-                                      width: 118,
-                                      height: 118,
-                                      fit: BoxFit.cover,
-                                    );
-                                }
-                              },
-                            ),
-                      ),
-                      SizedBox(height: 20),
-                      BlocBuilder<ProfileViewModel, ProfileScreenState>(
-                        builder: (context, state) {
-                          String? name;
-                          switch (state) {
-                            case ProfileSuccessState():
-                              name = state.profile.data?.name;
-                            case _:
-                              name = null;
-                          }
+                                    case _:
+                                      return Image.asset(
+                                        AppImage.avatar_1,
+                                        width: 118,
+                                        height: 118,
+                                        fit: BoxFit.cover,
+                                      );
+                                  }
+                                },
+                              ),
+                        ),
+                        SizedBox(height: 20),
+                        BlocBuilder<ProfileViewModel, ProfileScreenState>(
+                          builder: (context, state) {
+                            String? name;
+                            switch (state) {
+                              case ProfileSuccessState():
+                                name = state.profile.data?.name;
+                              case _:
+                                name = null;
+                            }
 
-                          return Text(
-                            name ?? "unKnown",
-                            style: Theme.of(context).textTheme.headlineSmall,
-                          );
-                        },
-                      ),
-                    ],
+                            return FittedBox(
+                              child: Text(
+                                name ?? "unKnown",
+                                style: Theme.of(context).textTheme.titleMedium,
+                              ),
+                            );
+                          },
+                        ),
+                      ],
+                    ),
                   ),
 
-                  Column(
-                    children: [
-                      Text(
-                        "12",
-                        style: Theme.of(context).textTheme.headlineSmall,
-                      ),
-                      SizedBox(height: 20),
-                      Text(
-                        "Wish List",
-                        style: Theme.of(context).textTheme.headlineSmall,
-                      ),
-                    ],
+                  Expanded(
+                    child: Column(
+                      children: [
+                        Text(
+                          "12",
+                          style: Theme.of(context).textTheme.headlineSmall,
+                        ),
+                        SizedBox(height: 20),
+                        Text(
+                          "Wish List",
+                          style: Theme.of(context).textTheme.headlineSmall,
+                        ),
+                      ],
+                    ),
                   ),
                   Column(
                     children: [
@@ -103,7 +110,7 @@ class ProfileHeader extends StatelessWidget {
                 ],
               ),
 
-              SizedBox(height: 20),
+              SizedBox(height: 33),
 
               Row(
                 children: [
@@ -126,13 +133,24 @@ class ProfileHeader extends StatelessWidget {
                   Expanded(
                     flex: 2,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.popAndPushNamed(
+                          context,
+                          AppRoutes.LoginScreen.name,
+                        );
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColor.red,
                       ),
-                      child: Text(
-                        "Exit",
-                        style: Theme.of(context).textTheme.titleSmall,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "Exit",
+                            style: Theme.of(context).textTheme.titleSmall,
+                          ),
+                          const Icon(Icons.exit_to_app_outlined,size: 24,color: Colors.white,),
+                        ],
                       ),
                     ),
                   ),

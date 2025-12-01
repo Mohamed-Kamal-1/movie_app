@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/core/colors/app_color.dart';
@@ -93,98 +95,102 @@ class _UpdateProfileState extends State<UpdateProfile> {
                   },
                 ),
               ),
+
               body: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    SizedBox(height: 16),
-                    GestureDetector(
-                      onTap: () => _showBottomSheet(context, imgList),
-                      child: Image.asset(
-                        imgList[displayedAvatarIndex],
-                        width: 150,
-                        height: 150,
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      SizedBox(height: 16),
+                      GestureDetector(
+                        onTap: () => _showBottomSheet(context, imgList),
+                        child: Image.asset(
+                          imgList[displayedAvatarIndex],
+                          width: 150,
+                          height: 150,
+                        ),
                       ),
-                    ),
-                    SizedBox(height: 16),
-                    AppFormField(
-                      controller: nameController,
-                      label: "Name",
-                      hint: "name",
-                      icon: Icons.person,
-                      keyboardType: TextInputType.name,
-                      validator: (text) {
-                        if (text?.trim().isEmpty == true) {
-                          return "Please enter Name";
-                        }
-                        return null;
-                      },
-                    ),
-                    SizedBox(height: 16),
-                    AppFormField(
-                      controller: phoneController,
-                      label: "phone",
-                      icon: Icons.phone,
-                      hint: "phone number",
-                      keyboardType: TextInputType.phone,
-                      validator: (text) {
-                        if (text?.trim().isEmpty == true) {
-                          return "Please enter phone number";
-                        }
-                        return null;
-                      },
-                    ),
-
-                    SizedBox(height: 16),
-
-                    Text(
-                      "reset password",
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-
-                    const Spacer(),
-
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          ElevatedButton(
-                            onPressed: () {
-                              getIt<ProfileViewModel>().deleteAcc();
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.red,
-                            ),
-                            child: Text(
-                              "Delete Account",
-                              style: Theme.of(context).textTheme.titleMedium,
-                            ),
-                          ),
-                          SizedBox(height: 20),
-                          ElevatedButton(
-                            onPressed: () {
-                              final avatarToSend = (selectedAvatar >= 0)
-                                  ? selectedAvatar
-                                  : profileAvatarId;
-                              getIt<ProfileViewModel>().updateData(
-                                nameController.text,
-                                avatarToSend,
-                              );
-                            },
-                            child: Text(
-                              "Update Data",
-                              style: TextStyle(color: Colors.black),
-                            ),
-                          ),
-                        ],
+                      SizedBox(height: 16),
+                      AppFormField(
+                        controller: nameController,
+                        label: "Name",
+                        hint: "name",
+                        icon: Icons.person,
+                        keyboardType: TextInputType.name,
+                        validator: (text) {
+                          if (text?.trim().isEmpty == true) {
+                            return "Please enter Name";
+                          }
+                          return null;
+                        },
                       ),
-                    ),
+                      SizedBox(height: 16),
+                      AppFormField(
+                        controller: phoneController,
+                        label: "phone",
+                        icon: Icons.phone,
+                        hint: "phone number",
+                        keyboardType: TextInputType.phone,
+                        validator: (text) {
+                          if (text?.trim().isEmpty == true) {
+                            return "Please enter phone number";
+                          }
+                          return null;
+                        },
+                      ),
 
-                    SizedBox(height: 32),
-                  ],
+                      SizedBox(height: 16),
+
+                      Text(
+                        "reset password",
+                        style: Theme.of(context).textTheme.titleMedium,
+                      ),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.25,
+                      ),
+
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            ElevatedButton(
+                              onPressed: () {
+                                getIt<ProfileViewModel>().deleteAcc();
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.red,
+                              ),
+                              child: Text(
+                                "Delete Account",
+                                style: Theme.of(context).textTheme.titleMedium,
+                              ),
+                            ),
+                            SizedBox(height: 20),
+                            ElevatedButton(
+                              onPressed: () {
+                                final avatarToSend = (selectedAvatar >= 0)
+                                    ? selectedAvatar
+                                    : profileAvatarId;
+                                getIt<ProfileViewModel>().updateData(
+                                  nameController.text,
+                                  avatarToSend,
+                                );
+                              },
+                              child: Text(
+                                "Update Data",
+                                style: TextStyle(color: Colors.black),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      SizedBox(height: 32),
+                    ],
+                  ),
                 ),
               ),
             );
