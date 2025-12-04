@@ -28,9 +28,7 @@ class HomeScreenViewModel extends Cubit<HomeScreenState> {
     }
   }
 
-
-  void moveAnotherTab(int index){
+  void moveAnotherTab(int index) {
     emit(MoveToAnotherTabState(index: index));
   }
 }
-

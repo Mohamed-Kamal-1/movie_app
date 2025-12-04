@@ -144,7 +144,7 @@ class WatchListViewContainer extends StatelessWidget {
                         "${movie.rating.toString()} *",
                         style: Theme.of(context).textTheme.titleSmall,
                       ),
-                    ),
+                    ), //
                   ],
                 ),
               );

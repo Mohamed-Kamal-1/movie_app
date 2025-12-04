@@ -22,6 +22,7 @@ class AvailableNowSection extends StatefulWidget {
 class _AvailableNowSectionState extends State<AvailableNowSection> {
   final PageController _pageController = PageController(viewportFraction: 0.65);
   final ValueNotifier<int> currentPage = ValueNotifier(0);
+  double? rate;
 
   @override
   void dispose() {
@@ -125,32 +126,42 @@ class _AvailableNowSectionState extends State<AvailableNowSection> {
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
                             ),
-                            child: GestureDetector(
-                              onTap: () {
-                                Navigator.pushNamed(
-                                  context,
-                                  AppRoutes.DetailsScreen.name,
-                                  arguments: state.moviesList![index].id
-                                      .toString(),
-                                );
-                              },
-                              child: CachedNetworkImage(
-                                fit: BoxFit.fill,
-                                imageUrl:
-                                    state.moviesList![index].mediumCoverImage ??
-                                    "",
-                                placeholder: (context, url) => const Center(
-                                  child: CircularProgressIndicator(
-                                    color: AppColor.yellow,
+                            child: Stack(
+                              children: [
+                                GestureDetector(
+                                  child: CachedNetworkImage(
+                                    fit: BoxFit.fill,
+                                    imageUrl:
+                                        state
+                                            .moviesList![index]
+                                            .mediumCoverImage ??
+                                        "",
+                                    placeholder: (context, url) => const Center(
+                                      child: CircularProgressIndicator(
+                                        color: AppColor.yellow,
+                                      ),
+                                    ),
+
+                                    errorWidget: (context, url, error) =>
+                                        const Icon(
+                                          Icons.broken_image,
+                                          size: 40,
+                                          color: Colors.grey,
+                                        ),
                                   ),
+
+                                  onTap: () {
+                                    Navigator.pushNamed(
+                                      context,
+                                      AppRoutes.DetailsScreen.name,
+                                      arguments: state.moviesList![index].id
+                                          .toString(),
+                                    );
+                                  },
                                 ),
 
-                                errorWidget: (context, url, error) => const Icon(
-                                  Icons.broken_image,
-                                  size: 40,
-                                  color: Colors.grey,
-                                ),
-                              ),
+
+                              ],
                             ),
                           ),
                         );
