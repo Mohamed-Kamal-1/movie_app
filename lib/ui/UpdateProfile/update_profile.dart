@@ -178,6 +178,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                                   nameController.text,
                                   avatarToSend,
                                 );
+                                Navigator.pop(context);
                               },
                               child: Text(
                                 "Update Data",
