@@ -151,8 +151,9 @@ class _RegisterScreenContentState extends State<RegisterScreenContent> {
                           label: "Email",
                           icon: SvgPicture.asset(AppImage.email_icon),
                           validator: (text) {
-                            if (text?.trim().isEmpty ?? true)
+                            if (text?.trim().isEmpty ?? true) {
                               return "Enter email";
+                            }
                             if (!isValidEmail(text)) return "Invalid email";
                             return null;
                           },
@@ -163,8 +164,9 @@ class _RegisterScreenContentState extends State<RegisterScreenContent> {
                           isPassword: true,
                           icon: SvgPicture.asset(AppImage.password_icon),
                           validator: (text) {
-                            if (text?.trim().isEmpty ?? true)
+                            if (text?.trim().isEmpty ?? true) {
                               return "Enter password";
+                            }
                             if ((text?.length ?? 0) < 6) return "Min 6 chars";
                             return null;
                           },

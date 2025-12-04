@@ -1,7 +1,6 @@
 import 'package:injectable/injectable.dart';
 
 import '../../api/model/profile/update_profile_dto.dart';
-import '../api_result.dart';
 import '../repos/update_profile_repo.dart';
 
 @injectable

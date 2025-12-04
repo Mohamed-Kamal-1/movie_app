@@ -1,6 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:movie_app/domain/api_result.dart';
 import 'package:movie_app/domain/use_case/delete_account_use_case.dart';
 import 'package:movie_app/domain/use_case/profile_use_case.dart';
 import 'package:movie_app/domain/use_case/update_profile_use_case.dart';

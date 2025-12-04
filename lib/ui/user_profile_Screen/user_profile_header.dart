@@ -8,7 +8,6 @@ import '../../core/di/di.dart';
 import '../../core/images/app_image.dart';
 import '../UpdateProfile/bloc/profile_view_model.dart';
 import '../UpdateProfile/update_profile_screen.dart';
-import '../UpdateProfile/update_profile.dart';
 import 'widgets/profile_shimmer_widget.dart';
 
 class ProfileHeader extends StatelessWidget {

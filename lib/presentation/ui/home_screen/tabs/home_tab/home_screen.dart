@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:movie_app/core/colors/app_color.dart';
-import 'package:movie_app/core/images/app_image.dart';
 import 'package:movie_app/extensions/extension.dart';
 import 'package:movie_app/l10n/app_string.dart';
 import 'package:movie_app/presentation/ui/home_screen/tabs/brows_tab/browse_screen.dart';

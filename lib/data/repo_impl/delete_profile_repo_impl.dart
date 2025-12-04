@@ -1,6 +1,5 @@
 import 'package:injectable/injectable.dart';
 import 'package:movie_app/api/model/profile/delete_account_dto.dart';
-import 'package:movie_app/domain/api_result.dart';
 
 import '../../domain/repos/delete_account_repo.dart';
 import '../data_source/delete_account_source.dart';
