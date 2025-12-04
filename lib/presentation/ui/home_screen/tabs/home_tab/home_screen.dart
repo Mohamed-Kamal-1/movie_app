@@ -32,6 +32,7 @@ class HomeScreen extends StatelessWidget {
 
               GestureDetector(
                 onTap: () {
+                  Feedback.forTap(context);
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (_) => const BrowseScreen()),

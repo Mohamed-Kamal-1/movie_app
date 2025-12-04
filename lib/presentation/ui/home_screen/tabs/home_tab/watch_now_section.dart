@@ -64,9 +64,12 @@ class _WatchNowSectionState extends State<WatchNowSection> {
                       arguments: state.moviesList![index].id,
                     );
                   },
-                  child: CachedNetworkImage(
-                    imageUrl: state.moviesList![index].mediumCoverImage ?? "",
-                    fit: BoxFit.fill,
+                  child: ClipRRect(
+                    borderRadius: BorderRadiusGeometry.circular(20),
+                    child: CachedNetworkImage(
+                      imageUrl: state.moviesList![index].mediumCoverImage ?? "",
+                      fit: BoxFit.fill,
+                    ),
                   ),
                 ),
               );

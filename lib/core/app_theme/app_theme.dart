@@ -5,8 +5,18 @@ import '../colors/app_color.dart';
 
 class AppTheme {
   static ThemeData Theme = ThemeData(
-    appBarTheme: AppBarTheme(backgroundColor: AppColor.black,foregroundColor: AppColor.yellow,),
+    appBarTheme: AppBarTheme(
+      backgroundColor: AppColor.black,
+      foregroundColor: AppColor.yellow,
+    ),
     scaffoldBackgroundColor: AppColor.black,
+
+    textSelectionTheme: TextSelectionThemeData(
+      selectionColor: AppColor.yellow,
+      cursorColor: AppColor.yellow,
+      selectionHandleColor: AppColor.yellow,
+    ),
+
     textTheme: TextTheme(
       bodyLarge: GoogleFonts.inter(
         fontSize: 36,
@@ -37,7 +47,7 @@ class AppTheme {
       ),
     ),
     inputDecorationTheme: InputDecorationTheme(
-      filled:true ,
+      filled: true,
       // focusColor: AppColor.darkBluePrimaryColor,
       fillColor: Colors.transparent,
 
@@ -53,9 +63,9 @@ class AppTheme {
         // borderSide: BorderSide(color: AppColor.bluePrimaryColor, width: 1.5),
         borderRadius: BorderRadius.circular(16),
       ),
-      activeIndicatorBorder:BorderSide(
+      activeIndicatorBorder: BorderSide(
         // color: AppColor.bluePrimaryColor
-      ) ,
+      ),
 
       labelStyle: GoogleFonts.inter(
         color: AppColor.white,
@@ -74,9 +84,9 @@ class AppTheme {
         backgroundColor: AppColor.goldenYellow,
         // foregroundColor: AppColor.whitePrimaryColor,
         textStyle: TextStyle(
-            color: AppColor.black,
-            fontSize: 20,
-            fontWeight: FontWeight.w500
+          color: AppColor.black,
+          fontSize: 20,
+          fontWeight: FontWeight.w500,
         ),
         padding: EdgeInsets.all(16),
         shape: RoundedRectangleBorder(
@@ -85,7 +95,6 @@ class AppTheme {
       ),
     ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
-
       backgroundColor: AppColor.gray,
 
       selectedItemColor: AppColor.yellow,
