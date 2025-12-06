@@ -1,10 +1,12 @@
-You got it\! Here is the complete `README.md` file in English, based on the identified technologies (Flutter | Dart | REST API | BLoC (Cubit) | Dio | Clean Architecture).
+بالتأكيد. سأضيف قسم **التحميل (Download)** إلى ملف `README.md` الإنجليزي. هذا القسم عادةً ما يوجه المستخدمين إلى النسخة المُجمَّعة (Compiled) من التطبيق (مثل ملف APK للأندرويد).
+
+إليك ملف `README.md` كاملاً ومحدثاً:
 
 -----
 
 # Movie App 🎬
 
-A movie discovery and details application built with the **Flutter** framework and structured based on **Clean Architecture** principles. This design ensures high scalability, maintainability, and code efficiency.
+A movie discovery and details application built with the **Flutter** framework and structured based on **Clean Architecture** principles, ensuring high scalability, maintainability, and code efficiency.
 
 ## ✨ Key Features
 
@@ -12,6 +14,14 @@ A movie discovery and details application built with the **Flutter** framework a
   * **Detailed Information:** Access comprehensive details for each film, including synopsis, ratings, and release dates.
   * **High Performance:** Enjoy a fast and smooth user experience due to Flutter's native compilation.
   * **Effective State Management:** Utilizes the BLoC/Cubit pattern for reliable and testable data flow.
+
+## 📥 Download (التحميل)
+
+You can download and install the latest compiled version of the application for quick testing.
+
+  * **Android (APK):** [Link to the latest `.apk` file in the GitHub Releases section]
+  * 
+*Note: For the best experience or to contribute, please refer to the **Getting Started** section to build the project locally.*
 
 ## 🛠 Technology Stack
 
@@ -71,11 +81,3 @@ Ensure you have the following installed:
     ```bash
     flutter run
     ```
-
-## 📜 License
-
-This project is licensed under the **[Insert License Type Here, e.g., MIT License]**.
-
------
-
-Would you like me to generate a basic **contribution guide** to include in your repository?
