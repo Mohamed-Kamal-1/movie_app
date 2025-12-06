@@ -1,9 +1,3 @@
-بالتأكيد. سأضيف قسم **التحميل (Download)** إلى ملف `README.md` الإنجليزي. هذا القسم عادةً ما يوجه المستخدمين إلى النسخة المُجمَّعة (Compiled) من التطبيق (مثل ملف APK للأندرويد).
-
-إليك ملف `README.md` كاملاً ومحدثاً:
-
------
-
 # Movie App 🎬
 
 A movie discovery and details application built with the **Flutter** framework and structured based on **Clean Architecture** principles, ensuring high scalability, maintainability, and code efficiency.
@@ -19,7 +13,7 @@ A movie discovery and details application built with the **Flutter** framework a
 
 You can download and install the latest compiled version of the application for quick testing.
 
-  * **Android (APK):** [Link to the latest `.apk` file in the GitHub Releases section]
+  * **Android (APK):** [https://drive.google.com/file/d/1L883JO15jm-9tfctq_0Fxa7Ws7YWMrpz/view?usp=sharing]
   * 
 *Note: For the best experience or to contribute, please refer to the **Getting Started** section to build the project locally.*
 
