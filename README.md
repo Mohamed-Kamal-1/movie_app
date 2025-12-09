@@ -13,7 +13,7 @@ A movie discovery and details application built with the **Flutter** framework a
 
 You can download and install the latest compiled version of the application for quick testing.
 
-  * **Android (APK):** [https://drive.google.com/file/d/1L883JO15jm-9tfctq_0Fxa7Ws7YWMrpz/view?usp=sharing]
+  * **Android (APK):** https://bit.ly/4oKFYbk
   * 
 *Note: For the best experience or to contribute, please refer to the **Getting Started** section to build the project locally.*
 
