@@ -1,17 +1,17 @@
-flutter_native_splash:
-
-  color: "#121312"
-  android: true
-  ios: true
-  image: assets/images/Splash/logo_splash.png
-  branding: assets/images/Splash/branding.png
-  branding_mode: bottom
-  branding_bottom_padding: 24
-
-
-  android_12:
-    color_android: "#121312"
-    image: assets/images/Splash/android_logo.png
-    branding: assets/images/Splash/branding.png
-    branding_mode: bottom
-    branding_bottom_padding: 24
+#flutter_native_splash:
+#
+#  color: "#121312"
+#  android: true
+#  ios: true
+#  image: assets/images/Splash/logo_splash.png
+#  branding: assets/images/Splash/branding.png
+#  branding_mode: bottom
+#  branding_bottom_padding: 24
+#
+#
+#  android_12:
+#    color_android: "#121312"
+#    image: assets/images/Splash/android_logo.png
+#    branding: assets/images/Splash/branding.png
+#    branding_mode: bottom
+#    branding_bottom_padding: 24
