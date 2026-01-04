@@ -38,19 +38,29 @@ class _HomeTabState extends State<HomeTab> {
     return BlocBuilder<HomeScreenViewModel, HomeScreenState>(
       bloc: viewModel,
       buildWhen: (previous, current) =>
-          current is MoveToAnotherTabState ||
-          previous.runtimeType != current.runtimeType,
+          current is MoveToAnotherTabState &&
+          previous != current,
       builder: (context, state) {
         final currentIndex = state is MoveToAnotherTabState
             ? (state.index ?? 0)
             : 0;
         return Scaffold(
-          bottomNavigationBar: AppBottomNavigationSection(
-            onSelectedIndex: (index) {
-              viewModel.moveAnotherTab(index);
-            },
+          bottomNavigationBar: Container(
+            clipBehavior: Clip.antiAlias,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(37),
+            ),
+            margin: EdgeInsets.only(bottom: 16,right: 8,left: 8),
+            child: AppBottomNavigationSection(
+              onSelectedIndex: (index) {
+                viewModel.moveAnotherTab(index);
+              },
+            ),
           ),
-          body: tabs[currentIndex],
+          body:IndexedStack(
+            index: currentIndex,
+            children: tabs,
+          ),
         );
       },
     );

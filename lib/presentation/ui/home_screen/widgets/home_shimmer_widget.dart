@@ -49,6 +49,7 @@ class AvailableNowShimmer extends StatelessWidget {
               Expanded(
                 flex: 3,
                 child: PageView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
                   itemCount: 3,
                   itemBuilder: (context, index) {
                     return Container(

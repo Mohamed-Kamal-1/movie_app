@@ -57,95 +57,98 @@ class _OnBoardingView extends StatelessWidget {
                 ),
               ),
 
-              IntrinsicHeight(
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  decoration: const BoxDecoration(
-                    color: Colors.black,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(40),
-                      topRight: Radius.circular(40),
+              SafeArea(
+                bottom: true,
+                child: IntrinsicHeight(
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    decoration: const BoxDecoration(
+                      color: Colors.black,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(40),
+                        topRight: Radius.circular(40),
+                      ),
                     ),
-                  ),
-                  width: double.infinity,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      const SizedBox(height: 32),
-                      Text(
-                        mySlides[index].title,
-                        textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.headlineSmall,
-                      ),
-                      const SizedBox(height: 16),
-
-                      mySlides[index].description.isNotEmpty
-                          ? Text(
-                              mySlides[index].description,
-                              textAlign: TextAlign.center,
-                              style: Theme.of(context).textTheme.titleMedium,
-                            )
-                          : const SizedBox.shrink(),
-
-                      const SizedBox(height: 24),
-
-                      // NEXT / FINISH BUTTON
-                      ElevatedButton(
-                        onPressed: () async {
-                          if (index == mySlides.length - 1) {
-                            // Mark that onboarding is complete (not first time anymore)
-                            await AuthSharedPreferences.setFirstTime(false);
-                            if (context.mounted) {
-                              Navigator.pushReplacementNamed(
-                                context,
-                                AppRoutes.LoginScreen.name,
-                              );
-                            }
-                          } else {
-                            context.read<OnboardingBloc>().add(OnNextSlide());
-                          }
-                        },
-                        child: Text(
-                          index != (mySlides.length - 1) ? "Next" : "Finish",
-                          style: Theme.of(
-                            context,
-                          ).textTheme.bodyLarge?.copyWith(fontSize: 20),
+                    width: double.infinity,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        const SizedBox(height: 32),
+                        Text(
+                          mySlides[index].title,
+                          textAlign: TextAlign.center,
+                          style: Theme.of(context).textTheme.headlineSmall,
                         ),
-                      ),
+                        const SizedBox(height: 16),
 
-                      const SizedBox(height: 16),
+                        mySlides[index].description.isNotEmpty
+                            ? Text(
+                                mySlides[index].description,
+                                textAlign: TextAlign.center,
+                                style: Theme.of(context).textTheme.titleMedium,
+                              )
+                            : const SizedBox.shrink(),
 
-                      // BACK BUTTON
-                      index == 0
-                          ? const SizedBox.shrink()
-                          : InkWell(
-                              onTap: () {
-                                context.read<OnboardingBloc>().add(
-                                  OnPreviousSlide(),
+                        const SizedBox(height: 24),
+
+                        // NEXT / FINISH BUTTON
+                        ElevatedButton(
+                          onPressed: () async {
+                            if (index == mySlides.length - 1) {
+                              // Mark that onboarding is complete (not first time anymore)
+                              await AuthSharedPreferences.setFirstTime(false);
+                              if (context.mounted) {
+                                Navigator.pushReplacementNamed(
+                                  context,
+                                  AppRoutes.LoginScreen.name,
                                 );
-                              },
-                              child: Container(
-                                width: double.infinity,
-                                decoration: BoxDecoration(
-                                  border: Border.all(color: Colors.yellow),
-                                  color: Colors.transparent,
-                                  borderRadius: BorderRadius.circular(15),
-                                ),
-                                child: const Padding(
-                                  padding: EdgeInsets.all(16.0),
-                                  child: Center(
-                                    child: Text(
-                                      "Back",
-                                      style: TextStyle(color: Colors.yellow),
+                              }
+                            } else {
+                              context.read<OnboardingBloc>().add(OnNextSlide());
+                            }
+                          },
+                          child: Text(
+                            index != (mySlides.length - 1) ? "Next" : "Finish",
+                            style: Theme.of(
+                              context,
+                            ).textTheme.bodyLarge?.copyWith(fontSize: 20),
+                          ),
+                        ),
+
+                        const SizedBox(height: 16),
+
+                        // BACK BUTTON
+                        index == 0
+                            ? const SizedBox.shrink()
+                            : InkWell(
+                                onTap: () {
+                                  context.read<OnboardingBloc>().add(
+                                    OnPreviousSlide(),
+                                  );
+                                },
+                                child: Container(
+                                  width: double.infinity,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.yellow),
+                                    color: Colors.transparent,
+                                    borderRadius: BorderRadius.circular(15),
+                                  ),
+                                  child: const Padding(
+                                    padding: EdgeInsets.all(16.0),
+                                    child: Center(
+                                      child: Text(
+                                        "Back",
+                                        style: TextStyle(color: Colors.yellow),
+                                      ),
                                     ),
                                   ),
                                 ),
                               ),
-                            ),
 
-                      const SizedBox(height: 16),
-                    ],
+                        const SizedBox(height: 16),
+                      ],
+                    ),
                   ),
                 ),
               ),

@@ -35,17 +35,20 @@ class PageViewWidget extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return BasicOnBoarding();
-                      },
-                    ),
-                  );
-                },
-                child: Text("Explore Now" , style:TextStyle(color: AppColor.black),),
+              SafeArea(
+                bottom: true,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return BasicOnBoarding();
+                        },
+                      ),
+                    );
+                  },
+                  child: Text("Explore Now" , style:TextStyle(color: AppColor.black),),
+                ),
               ),
               SizedBox(height: 33),
             ],

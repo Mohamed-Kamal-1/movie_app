@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:movie_app/core/colors/app_color.dart';
@@ -10,7 +9,7 @@ typedef OnSelectedIndex = void Function(int index);
 class AppBottomNavigationSection extends StatefulWidget {
   final OnSelectedIndex? onSelectedIndex;
 
-  const AppBottomNavigationSection({super.key,  this.onSelectedIndex});
+  const AppBottomNavigationSection({super.key, this.onSelectedIndex});
 
   @override
   State<AppBottomNavigationSection> createState() =>
@@ -30,15 +29,15 @@ class _AppBottomNavigationSectionState
         hoverColor: Colors.transparent,
       ),
       child: BottomNavigationBar(
+        useLegacyColorScheme: false,
         backgroundColor: context.bottomNavBarTheme.backgroundColor,
         elevation: 0,
-        showSelectedLabels: false,
         selectedItemColor: AppColor.yellow,
         unselectedItemColor: AppColor.white,
+
         type: BottomNavigationBarType.fixed,
         onTap: (value) {
           setState(() {
-
             selectedIndex = value;
             widget.onSelectedIndex?.call(value);
           });
@@ -47,16 +46,23 @@ class _AppBottomNavigationSectionState
 
         items: [
           BottomNavigationBarItem(
-            icon: SvgPicture.asset(AppIcon.ic_home),
+            icon: SvgPicture.asset(AppIcon.ic_home, height: 30),
             activeIcon: SvgPicture.asset(
               AppIcon.ic_home,
+              height: 25,
+
               colorFilter: ColorFilter.mode(AppColor.yellow, BlendMode.srcIn),
             ),
 
             label: '',
           ),
           BottomNavigationBarItem(
-            icon: SvgPicture.asset(AppIcon.ic_search),
+            icon: Container(
+              alignment: Alignment.center,
+              width: 24,
+              height: 24,
+              child: SvgPicture.asset(AppIcon.ic_search),
+            ),
             activeIcon: SvgPicture.asset(
               AppIcon.ic_search,
               colorFilter: ColorFilter.mode(AppColor.yellow, BlendMode.srcIn),
@@ -85,4 +91,6 @@ class _AppBottomNavigationSectionState
       ),
     );
   }
+
+
 }

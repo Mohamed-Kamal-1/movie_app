@@ -75,7 +75,7 @@ class _LoginScreenState extends State<LoginScreen> {
             child: SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.all(19.0).copyWith(
-                  top: 50
+                  top: 70
                 ),
                 child: Form(
                   key: _formKey,
