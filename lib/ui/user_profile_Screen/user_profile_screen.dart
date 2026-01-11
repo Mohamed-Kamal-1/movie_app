@@ -9,9 +9,9 @@ import '../UpdateProfile/bloc/profile_view_model.dart';
 
 
 class UserProfileScreen extends StatefulWidget {
-  final List<int> movies;
+  // final List<int> movies;
 
-  const UserProfileScreen({super.key, required this.movies});
+  const UserProfileScreen({super.key});
   @override
   State<UserProfileScreen> createState() => _UserProfileScreenState();
 }

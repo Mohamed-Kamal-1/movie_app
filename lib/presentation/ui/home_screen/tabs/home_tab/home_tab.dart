@@ -21,12 +21,6 @@ class _HomeTabState extends State<HomeTab> {
   late List<Widget> tabs;
 
   @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-  }
-
-  @override
   void initState() {
     super.initState();
     viewModel = getIt.get<HomeScreenViewModel>();
