@@ -23,37 +23,24 @@ import 'model/profile/update_profile_dto.dart';
 class ApiManager {
   final dio = Dio();
   final authDio = Dio();
-  final rateDio = Dio();
   static const String _baseUrl = 'https://yts.lt/api/v2/';
   static const String _authBaseUrl = 'https://route-movie-apis.vercel.app/';
-  static const String _rateBaseUrl = 'https://imdb236.p.rapidapi.com/';
 
   ApiManager() {
     dio.options.baseUrl = _baseUrl;
     dio.interceptors.add(
       PrettyDioLogger(
-        responseBody: false,
-        // responseHeader: true,
-        error: false,
-        // requestHeader: true,
-        // requestBody: true,
+        responseBody: true,
+        responseHeader: true,
+        error: true,
+        requestHeader: true,
+        requestBody: true,
       ),
     );
 
 
-    // authDio.options.baseUrl = _authBaseUrl;
-    // authDio.interceptors.add(
-    //   PrettyDioLogger(
-    //     responseBody: true,
-    //     responseHeader: true,
-    //     error: true,
-    //     requestHeader: true,
-    //     requestBody: true,
-    //   ),
-    // );
-
-    rateDio.options.baseUrl = _rateBaseUrl;
-    rateDio.interceptors.add(
+    authDio.options.baseUrl = _authBaseUrl;
+    authDio.interceptors.add(
       PrettyDioLogger(
         responseBody: true,
         responseHeader: true,
@@ -80,7 +67,6 @@ class ApiManager {
       MovieResponseDto movieResponse = MovieResponseDto.fromJson(response.data);
         return movieResponse;
   }
-
 
 
 
