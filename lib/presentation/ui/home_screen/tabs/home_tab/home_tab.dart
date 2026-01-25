@@ -47,6 +47,7 @@ class _HomeTabState extends State<HomeTab> {
             margin: EdgeInsets.only(bottom: 16,right: 8,left: 8),
             child: AppBottomNavigationSection(
               onSelectedIndex: (index) {
+                if(index == currentIndex)return;
                 viewModel.moveAnotherTab(index);
               },
             ),
