@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/core/di/di.dart';
@@ -20,11 +22,35 @@ class _SearchScreenState extends State<SearchScreen> {
   late SearchScreenViewModel viewModel;
   bool isEmpty = false;
   int imageIndex = 0;
-
+  Timer? _debounce;
   @override
   void initState() {
     super.initState();
     viewModel = getIt.get<SearchScreenViewModel>();
+  }
+
+  void _onSearchChanged(String title) {
+    if (title.isEmpty) {
+      _debounce?.cancel();
+
+      isEmpty = true;
+
+      return;
+    }
+
+    if (_debounce?.isActive ?? false) _debounce?.cancel();
+    _debounce = Timer(const Duration(milliseconds: 820), () {
+      if (title.isNotEmpty) {
+        viewModel.getMoviesListByTitle(title);
+        isEmpty = false;
+      }
+    },);
+  }
+
+  @override
+  void dispose() {
+    _debounce?.cancel();
+    super.dispose();
   }
 
   @override
@@ -32,55 +58,46 @@ class _SearchScreenState extends State<SearchScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBarSearchWidget(
-          onSearch: (title) => viewModel.getMoviesListByTitle(title),
+          onSearch: (title) {
+            _onSearchChanged(title);
+            if(title.isEmpty){
+              isEmpty = true;
+            }
+          },
         ),
         body: BlocBuilder<SearchScreenViewModel, SearchScreenState>(
           bloc: viewModel,
           builder: (context, state) {
-            switch (state.runtimeType) {
-              case SearchInitialState:
-              case SearchEmptyState:
-                {
-                  return Center(
-                    child: Image.asset(AppImage.searchImage, fit: BoxFit.cover),
-                  );
-                }
-              case SearchLoadingState:
-                return const Center(child: CircularProgressIndicator());
-              case SearchErrorState:
-                {
-                  final errorState = state as SearchErrorState;
-                  return Center(
-                    child: Text(
-                      context.getErrorMessage(errorState.errorMessage),
-                      style: const TextStyle(color: Colors.white),
-                    ),
-                  );
-                }
-              case SearchSuccessState:
-                {
-                  final successState = state as SearchSuccessState;
-                  if (state.moviesList != null &&
-                      state.moviesList!.isNotEmpty) {
-                    return MoviesWidget(
-                      moviesLength: state.moviesList?.length ?? 0,
-                      imageBuilder: (index) {
-                        imageIndex = index;
-                        return state.moviesList?[index].mediumCoverImage;
-                      },
-                      rating: successState.moviesList?[imageIndex].rating
-                          ?.toStringAsFixed(1),
-                    );
-                  } else {
-                    return Center(
-                      child: Image.asset(
-                        AppImage.searchImage,
-                        fit: BoxFit.cover,
-                      ),
-                    );
-                  }
-                }
+            if (state is SearchInitialState || state is SearchEmptyState) {
+              return Center(
+                  child: Image.asset(AppImage.searchImage, fit: BoxFit.cover));
             }
+
+            if (state is SearchLoadingState) {
+              return const Center(
+                  child: CircularProgressIndicator(color: Colors.amber));
+            }
+
+            if (state is SearchErrorState) {
+              return Center(
+                child: Text(
+                  context.getErrorMessage(state.errorMessage),
+                  style: const TextStyle(color: Colors.white),
+                ),
+              );
+            }
+
+            if (state is SearchSuccessState) {
+              final movies = state.moviesList ?? [];
+
+              if (movies.isNotEmpty && state.moviesList != null) {
+                return MoviesWidget(movies: movies);
+              } else {
+                return Center(child: Image.asset(
+                    AppImage.searchImage, fit: BoxFit.cover));
+              }
+            }
+
             return const SizedBox();
           },
         ),
