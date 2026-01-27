@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/api/model/favourite/add_to_favourite_data_model.dart';
 import 'package:movie_app/api/model/movie_details/movie_details_dto.dart';
 import 'package:movie_app/core/colors/app_color.dart';
+import 'package:movie_app/core/di/di.dart';
 import 'package:movie_app/core/images/app_image.dart';
 import 'package:movie_app/core/styles/app_styles.dart';
 import 'package:movie_app/ui/details_screen/details_screen_state.dart';
@@ -27,232 +28,242 @@ class MovieDetailsWidget extends StatefulWidget {
 class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
   bool isFavourite = false;
 
-  @override
-  void initState() {
-    super.initState();
-    widget.viewModel.checkIsFavourite(widget.movieDetails.id.toString());
-  }
 
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
 
-    return BlocListener<DetailsScreenViewModel, DetailsScreenState>(
-      bloc: widget.viewModel,
-      listener: (context, state) {
-        if (state is IsFavouriteSuccessState) {
-          setState(() {
-            isFavourite = state.isFavouriteModel.data ?? false;
-          });
-        } else if (state is AddToFavouriteSuccessState) {
-          widget.viewModel.checkIsFavourite(widget.movieDetails.id.toString());
-        } else if (state is RemoveFromFavouriteSuccessState) {
-          widget.viewModel.checkIsFavourite(widget.movieDetails.id.toString());
-        }
-      },
-      child: BlocBuilder<DetailsScreenViewModel, DetailsScreenState>(
-        bloc: widget.viewModel,
-        buildWhen: (previous, current) =>
-            current is IsFavouriteSuccessState ||
-            current is AddToFavouriteSuccessState ||
-            current is RemoveFromFavouriteSuccessState,
-        builder: (context, state) {
-          return SingleChildScrollView(
-            child: Column(
-              children: [
-                Stack(
-                  alignment: Alignment.bottomCenter,
-                  children: [
-                    CachedNetworkImage(
-                      height: height * 0.7,
-                      imageUrl: widget.movieDetails.largeCoverImage ?? "",
-                      placeholder: (context, url) => const Center(
-                        child: CircularProgressIndicator(color: AppColor.yellow),
-                      ),
-                      errorWidget: (context, url, error) => const Center(
-                        child: Icon(Icons.error, color: Colors.red, size: 35),
-                      ),
-                    ),
-                    Container(
-                      width: double.infinity,
-                      height: height * 0.7,
-                      decoration: const BoxDecoration(
-                        gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: [
-                            Color.fromARGB(230, 0, 0, 0),
-                            Color.fromARGB(150, 0, 0, 0),
-                            Color.fromARGB(100, 0, 0, 0),
-                            Color.fromARGB(230, 12, 13, 12),
-                          ],
-                          stops: [0.0, 0.3, 0.6, 1.0],
+    return BlocProvider(
+      create: (context) =>
+      getIt.get<DetailsScreenViewModel>()
+        ..checkIsFavourite(widget.movieDetails.id.toString()),
+      child: BlocListener<DetailsScreenViewModel, DetailsScreenState>(
+        listener: (context, state) {
+          if (state is IsFavouriteSuccessState) {
+            setState(() {
+              isFavourite = state.isFavouriteModel.data ?? false;
+            });
+          } else if (state is AddToFavouriteSuccessState) {
+            widget.viewModel.checkIsFavourite(
+                widget.movieDetails.id.toString());
+          } else if (state is RemoveFromFavouriteSuccessState) {
+            widget.viewModel.checkIsFavourite(
+                widget.movieDetails.id.toString());
+          }
+        },
+        child: BlocBuilder<DetailsScreenViewModel, DetailsScreenState>(
+          bloc: widget.viewModel,
+          buildWhen: (previous, current) =>
+          current is IsFavouriteSuccessState ||
+              current is AddToFavouriteSuccessState ||
+              current is RemoveFromFavouriteSuccessState,
+          builder: (context, state) {
+            return SingleChildScrollView(
+              child: Column(
+                children: [
+                  Stack(
+                    alignment: Alignment.bottomCenter,
+                    children: [
+                      CachedNetworkImage(
+                        height: height * 0.7,
+                        imageUrl: widget.movieDetails.largeCoverImage ?? "",
+                        placeholder: (context, url) =>
+                        const Center(
+                          child: CircularProgressIndicator(
+                              color: AppColor.yellow),
+                        ),
+                        errorWidget: (context, url, error) =>
+                        const Center(
+                          child: Icon(Icons.error, color: Colors.red, size: 35),
                         ),
                       ),
-                    ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(
-                            left: width * 0.04,
-                            right: width * 0.04,
-                            top: height * 0.05,
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              InkWell(
-                                onTap: () {
-                                  Navigator.pop(context);
-                                },
-                                child: Image.asset(
-                                  AppImage.backIcon,
-                                  width: 28,
-                                  height: 28,
-                                ),
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  if (!isFavourite) {
-                                    final addFavouriteData =
-                                        AddToFavouriteDataModel(
-                                      imageURL: widget.movieDetails.largeCoverImage,
-                                      movieId:
-                                          widget.movieDetails.id.toString(),
-                                      name: widget.movieDetails.title,
-                                      rating: widget.movieDetails.rating,
-                                      year: widget.movieDetails.year?.toString(),
-                                    );
-                                    widget.viewModel.addMovieToFavourite(
-                                      addFavouriteData: addFavouriteData,
-                                    );
-                                  } else {
-                                    widget.viewModel.removeFromFavourite(
-                                      widget.movieDetails.id.toString(),
-                                    );
-                                  }
-                                },
-                                child: Image.asset(
-                                  AppImage.bookmarkIcon,
-                                  width: 28,
-                                  height: 28,
-                                  color: isFavourite
-                                      ? AppColor.yellow
-                                      : AppColor.white,
-                                ),
-                              ),
+                      Container(
+                        width: double.infinity,
+                        height: height * 0.7,
+                        decoration: const BoxDecoration(
+                          gradient: LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            colors: [
+                              Color.fromARGB(230, 0, 0, 0),
+                              Color.fromARGB(150, 0, 0, 0),
+                              Color.fromARGB(100, 0, 0, 0),
+                              Color.fromARGB(230, 12, 13, 12),
                             ],
+                            stops: [0.0, 0.3, 0.6, 1.0],
                           ),
                         ),
-                        SizedBox(height: height * 0.21),
-                        Center(
-                          child: InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => WebViewScreen(
-                                    newsUrl: widget.movieDetails.url ?? "",
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(
+                              left: width * 0.04,
+                              right: width * 0.04,
+                              top: height * 0.05,
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                InkWell(
+                                  onTap: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: Image.asset(
+                                    AppImage.backIcon,
+                                    width: 28,
+                                    height: 28,
                                   ),
                                 ),
-                              );
-                            },
-                            child: Image.asset(
-                              AppImage.playIcon,
-                              width: 80,
-                              height: 80,
+                                GestureDetector(
+                                  onTap: () {
+                                    if (!isFavourite) {
+                                      final addFavouriteData =
+                                      AddToFavouriteDataModel(
+                                        imageURL: widget.movieDetails
+                                            .largeCoverImage,
+                                        movieId:
+                                        widget.movieDetails.id.toString(),
+                                        name: widget.movieDetails.title,
+                                        rating: widget.movieDetails.rating,
+                                        year: widget.movieDetails.year
+                                            ?.toString(),
+                                      );
+                                      widget.viewModel.addMovieToFavourite(
+                                        addFavouriteData: addFavouriteData,
+                                      );
+                                    } else {
+                                      widget.viewModel.removeFromFavourite(
+                                        widget.movieDetails.id.toString(),
+                                      );
+                                    }
+                                  },
+                                  child: Image.asset(
+                                    AppImage.bookmarkIcon,
+                                    width: 28,
+                                    height: 28,
+                                    color: isFavourite
+                                        ? AppColor.yellow
+                                        : AppColor.white,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                        ),
-                        SizedBox(height: height * 0.17),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              widget.movieDetails.title ?? "",
-                              style: AppStyles.bold24White,
-                              textAlign: TextAlign.center,
+                          SizedBox(height: height * 0.21),
+                          Center(
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        WebViewScreen(
+                                          newsUrl: widget.movieDetails.url ??
+                                              "",
+                                        ),
+                                  ),
+                                );
+                              },
+                              child: Image.asset(
+                                AppImage.playIcon,
+                                width: 80,
+                                height: 80,
+                              ),
                             ),
-                            Text(
-                              widget.movieDetails.year.toString(),
-                              style: AppStyles.bold20White,
-                            ),
-                          ],
-                        )
-                      ],
-                    )
-                  ],
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: width * 0.04,
-                    vertical: height * 0.01,
-                  ),
-                    child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => WebViewScreen(
-                            newsUrl: widget.movieDetails.url ?? "",
                           ),
-                        ),
-                      );
-                    },
-                    style: ElevatedButton.styleFrom(
-                      minimumSize: Size(width * 0.9,60),
-                      backgroundColor: AppColor.red,
-                      padding: const EdgeInsets.symmetric(vertical: 16),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                    ),
-                    child: Text(
-                      'Watch',
-                      style: AppStyles.bold20White,
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: width * 0.04,
-                    vertical: height * 0.01,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Expanded(
-                        child: _CustomContainerWidget(
-                          icon: Icons.favorite,
-                          number:
-                              widget.movieDetails.likeCount?.toString() ?? "0",
-                        ),
-                      ),
-                      SizedBox(width: width * 0.02),
-                      Expanded(
-                        child: _CustomContainerWidget(
-                          icon: Icons.access_time,
-                          number: widget.movieDetails.runtime?.toString() ?? "0",
-                        ),
-                      ),
-                      SizedBox(width: width * 0.02),
-                      Expanded(
-                        child: _CustomContainerWidget(
-                          icon: Icons.star,
-                          number: widget.movieDetails.rating
-                                  ?.toStringAsFixed(1) ??
-                              "0",
-                        ),
-                      ),
+                          SizedBox(height: height * 0.17),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                widget.movieDetails.title ?? "",
+                                style: AppStyles.bold24White,
+                                textAlign: TextAlign.center,
+                              ),
+                              Text(
+                                widget.movieDetails.year.toString(),
+                                style: AppStyles.bold20White,
+                              ),
+                            ],
+                          )
+                        ],
+                      )
                     ],
                   ),
-                )
-              ],
-            ),
-          );
-        },
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: width * 0.04,
+                      vertical: height * 0.01,
+                    ),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                WebViewScreen(
+                                  newsUrl: widget.movieDetails.url ?? "",
+                                ),
+                          ),
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        minimumSize: Size(width * 0.9, 60),
+                        backgroundColor: AppColor.red,
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                      ),
+                      child: Text(
+                        'Watch',
+                        style: AppStyles.bold20White,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: width * 0.04,
+                      vertical: height * 0.01,
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: _CustomContainerWidget(
+                            icon: Icons.favorite,
+                            number:
+                            widget.movieDetails.likeCount?.toString() ?? "0",
+                          ),
+                        ),
+                        SizedBox(width: width * 0.02),
+                        Expanded(
+                          child: _CustomContainerWidget(
+                            icon: Icons.access_time,
+                            number: widget.movieDetails.runtime?.toString() ??
+                                "0",
+                          ),
+                        ),
+                        SizedBox(width: width * 0.02),
+                        Expanded(
+                          child: _CustomContainerWidget(
+                            icon: Icons.star,
+                            number: widget.movieDetails.rating
+                                ?.toStringAsFixed(1) ??
+                                "0",
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            );
+          },
+        ),
       ),
     );
   }

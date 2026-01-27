@@ -1,17 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-class WebViewScreen extends StatelessWidget {
+class WebViewScreen extends StatefulWidget {
   final String newsUrl;
 
   const WebViewScreen({super.key, required this.newsUrl});
 
   @override
-  Widget build(BuildContext context) {
-    WebViewController controller = WebViewController()
+  State<WebViewScreen> createState() => _WebViewScreenState();
+}
+
+class _WebViewScreenState extends State<WebViewScreen> {
+  late WebViewController controller;
+  bool isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = WebViewController();
+
+    controller
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setNavigationDelegate(
         NavigationDelegate(
+          onPageFinished: (url) {
+            setState(() {
+              isLoading = false;
+            });
+          },
           onNavigationRequest: (NavigationRequest request) {
             if (request.url.startsWith('https://www.youtube.com/')) {
               return NavigationDecision.prevent;
@@ -20,13 +36,19 @@ class WebViewScreen extends StatelessWidget {
           },
         ),
       )
-      ..loadRequest(Uri.parse(newsUrl));
+      ..loadRequest(Uri.parse(widget.newsUrl));
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: WebViewWidget(controller: controller),
+        body: (isLoading)
+            ? const Center(
+                child: CircularProgressIndicator(color: Colors.amberAccent),
+              )
+            : WebViewWidget(controller: controller),
       ),
     );
   }
 }
-

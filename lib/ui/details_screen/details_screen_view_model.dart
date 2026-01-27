@@ -98,11 +98,9 @@ class DetailsScreenViewModel extends Cubit<DetailsScreenState> {
             movieSuggestionResponse: movieSuggestionResponse,
           ));
         }
-        // If details not loaded yet, they will combine when details finish loading
       }
     } catch (e) {
-      // Don't emit error state for suggestions to avoid blocking the UI
-      // Just keep the current state (movie details should still be visible)
+
       print('Error loading suggestions: $e');
     }
   }
