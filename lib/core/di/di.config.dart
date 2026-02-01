@@ -9,7 +9,6 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:dio/dio.dart' as _i361;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
@@ -28,7 +27,6 @@ import '../../auth/data/auth_data_source/AuthDataSourceImpl.dart' as _i571;
 import '../../auth/data/auth_repository_impl/auth_repository_impl.dart'
     as _i342;
 import '../../auth/domain/auth_repository/auth_repository.dart' as _i967;
-import '../../auth/presentation/auth_cubit/register_cubit.dart' as _i291;
 import '../../data/data_source/auth_data_source.dart' as _i862;
 import '../../data/data_source/delete_account_source.dart' as _i508;
 import '../../data/data_source/favourite_data_source.dart' as _i1002;
@@ -72,8 +70,8 @@ import '../../presentation/ui/home_screen/tabs/search_tab/cubit/search_screen_vi
     as _i341;
 import '../../ui/details_screen/details_screen_view_model.dart' as _i790;
 import '../../ui/login_screen/login_view_model.dart' as _i103;
+import '../../ui/Register/auth_cubit/register_cubit.dart' as _i345;
 import '../../ui/UpdateProfile/bloc/profile_view_model.dart' as _i1046;
-import 'register_module.dart' as _i291;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -82,19 +80,8 @@ extension GetItInjectableX on _i174.GetIt {
     _i526.EnvironmentFilter? environmentFilter,
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
-    final registerModule = _$RegisterModule();
     gh.factory<_i571.AuthDataSourceImpl>(() => _i571.AuthDataSourceImpl());
     gh.singleton<_i149.ApiManager>(() => _i149.ApiManager());
-    gh.lazySingleton<_i361.Dio>(() => registerModule.dio());
-    gh.factory<_i261.GetProfileSource>(
-      () => _i382.GetProfileDataSourceImpl(gh<_i149.ApiManager>()),
-    );
-    gh.factory<_i1002.FavouriteDataSource>(
-      () => _i1029.FavouriteDataSourceImpl(gh<_i149.ApiManager>()),
-    );
-    gh.factory<_i709.UpdateProfileSource>(
-      () => _i167.UpdateProfileSourceImpl(gh<_i149.ApiManager>()),
-    );
     gh.lazySingleton<_i967.AuthRepository>(
       () => _i342.AuthRepositoryImpl(gh<_i571.AuthDataSourceImpl>()),
     );
@@ -107,24 +94,33 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i862.AuthDataSource>(
       () => _i1033.AuthDataSourceImpl(gh<_i149.ApiManager>()),
     );
+    gh.factory<_i261.GetProfileSource>(
+      () => _i382.GetProfileDataSourceImpl(gh<_i149.ApiManager>()),
+    );
+    gh.factory<_i709.UpdateProfileSource>(
+      () => _i167.UpdateProfileSourceImpl(gh<_i149.ApiManager>()),
+    );
+    gh.factory<_i1002.FavouriteDataSource>(
+      () => _i1029.FavouriteDataSourceImpl(gh<_i149.ApiManager>()),
+    );
+    gh.factory<_i862.ProfileRepo>(
+      () => _i676.GetProfileRepoImpl(gh<_i261.GetProfileSource>()),
+    );
     gh.factory<_i595.AuthRepo>(
       () => _i540.AuthRepoImpl(gh<_i862.AuthDataSource>()),
-    );
-    gh.factory<_i514.MovieSuggestionRepo>(
-      () =>
-          _i564.MovieSuggestionRepoImpl(gh<_i1019.MovieSuggestionDataSource>()),
     );
     gh.factory<_i245.MovieDetailsDataSource>(
       () => _i189.MovieDetailsDataSourceImpl(gh<_i149.ApiManager>()),
     );
-    gh.factory<_i2.FavouriteRepo>(
-      () => _i708.FavouriteRepoImpl(gh<_i1002.FavouriteDataSource>()),
-    );
-    gh.factory<_i291.RegisterCubit>(
-      () => _i291.RegisterCubit(gh<_i967.AuthRepository>()),
-    );
     gh.factory<_i508.DeleteAccountSource>(
       () => _i859.DeleteAccountSoucreImpl(gh<_i149.ApiManager>()),
+    );
+    gh.factory<_i461.LoginUseCase>(
+      () => _i461.LoginUseCase(gh<_i595.AuthRepo>()),
+    );
+    gh.factory<_i514.MovieSuggestionRepo>(
+      () =>
+          _i564.MovieSuggestionRepoImpl(gh<_i1019.MovieSuggestionDataSource>()),
     );
     gh.factory<_i958.MoviesRepo>(
       () => _i274.MoviesRepoImpl(gh<_i1043.MoviesListDataSource>()),
@@ -132,14 +128,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i295.MovieSuggestionUseCase>(
       () => _i295.MovieSuggestionUseCase(gh<_i514.MovieSuggestionRepo>()),
     );
-    gh.factory<_i862.ProfileRepo>(
-      () => _i676.GetProfileRepoImpl(gh<_i261.GetProfileSource>()),
-    );
     gh.factory<_i152.UpdateProfileRepo>(
       () => _i383.UpdateProfileRepoImpl(gh<_i709.UpdateProfileSource>()),
-    );
-    gh.factory<_i567.DeleteAccountRepo>(
-      () => _i729.DeleteAccountRepoImpl(gh<_i508.DeleteAccountSource>()),
     );
     gh.factory<_i912.MovieDetailsRepo>(
       () => _i951.MovieDetailsRepoImpl(gh<_i245.MovieDetailsDataSource>()),
@@ -147,31 +137,42 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i591.ProfileUseCase>(
       () => _i591.ProfileUseCase(gh<_i862.ProfileRepo>()),
     );
-    gh.factory<_i461.LoginUseCase>(
-      () => _i461.LoginUseCase(gh<_i595.AuthRepo>()),
+    gh.factory<_i103.LoginViewModel>(
+      () => _i103.LoginViewModel(gh<_i595.AuthRepo>()),
+    );
+    gh.factory<_i2.FavouriteRepo>(
+      () => _i708.FavouriteRepoImpl(gh<_i1002.FavouriteDataSource>()),
+    );
+    gh.factory<_i567.DeleteAccountRepo>(
+      () => _i729.DeleteAccountRepoImpl(gh<_i508.DeleteAccountSource>()),
+    );
+    gh.factory<_i345.RegisterCubit>(
+      () => _i345.RegisterCubit(gh<_i595.AuthRepo>()),
     );
     gh.factory<_i670.FavouriteUseCase>(
       () => _i670.FavouriteUseCase(gh<_i2.FavouriteRepo>()),
     );
+    gh.factory<_i687.MoviesListUseCase>(
+      () => _i687.MoviesListUseCase(gh<_i958.MoviesRepo>()),
+    );
+    gh.factory<_i185.WatchNowViewModel>(
+      () => _i185.WatchNowViewModel(gh<_i687.MoviesListUseCase>()),
+    );
     gh.factory<_i686.DeleteAccountUseCase>(
       () => _i686.DeleteAccountUseCase(gh<_i567.DeleteAccountRepo>()),
     );
-    gh.factory<_i687.MoviesListUseCase>(
-      () => _i687.MoviesListUseCase(gh<_i958.MoviesRepo>()),
+    gh.factory<_i246.MovieDetailsUseCase>(
+      () => _i246.MovieDetailsUseCase(gh<_i912.MovieDetailsRepo>()),
     );
     gh.factory<_i786.UpdateProfileUseCase>(
       () => _i786.UpdateProfileUseCase(gh<_i152.UpdateProfileRepo>()),
     );
-    gh.factory<_i1046.ProfileViewModel>(
-      () => _i1046.ProfileViewModel(
-        gh<_i591.ProfileUseCase>(),
-        gh<_i786.UpdateProfileUseCase>(),
-        gh<_i686.DeleteAccountUseCase>(),
-        gh<_i687.MoviesListUseCase>(),
+    gh.factory<_i790.DetailsScreenViewModel>(
+      () => _i790.DetailsScreenViewModel(
+        gh<_i246.MovieDetailsUseCase>(),
+        gh<_i295.MovieSuggestionUseCase>(),
+        gh<_i670.FavouriteUseCase>(),
       ),
-    );
-    gh.factory<_i103.LoginViewModel>(
-      () => _i103.LoginViewModel(gh<_i461.LoginUseCase>()),
     );
     gh.factory<_i466.BrowseCubit>(
       () => _i466.BrowseCubit(gh<_i687.MoviesListUseCase>()),
@@ -185,21 +186,14 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i341.SearchScreenViewModel>(
       () => _i341.SearchScreenViewModel(gh<_i687.MoviesListUseCase>()),
     );
-    gh.factory<_i246.MovieDetailsUseCase>(
-      () => _i246.MovieDetailsUseCase(gh<_i912.MovieDetailsRepo>()),
-    );
-    gh.factory<_i185.WatchNowViewModel>(
-      () => _i185.WatchNowViewModel(gh<_i687.MoviesListUseCase>()),
-    );
-    gh.factory<_i790.DetailsScreenViewModel>(
-      () => _i790.DetailsScreenViewModel(
-        gh<_i246.MovieDetailsUseCase>(),
-        gh<_i295.MovieSuggestionUseCase>(),
-        gh<_i670.FavouriteUseCase>(),
+    gh.factory<_i1046.ProfileViewModel>(
+      () => _i1046.ProfileViewModel(
+        gh<_i591.ProfileUseCase>(),
+        gh<_i786.UpdateProfileUseCase>(),
+        gh<_i686.DeleteAccountUseCase>(),
+        gh<_i687.MoviesListUseCase>(),
       ),
     );
     return this;
   }
 }
-
-class _$RegisterModule extends _i291.RegisterModule {}

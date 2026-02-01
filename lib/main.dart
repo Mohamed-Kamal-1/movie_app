@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/core/app_theme/app_theme.dart';
 import 'package:movie_app/core/extention/update_app.dart';
 import 'package:movie_app/core/routes/app_routes.dart';
@@ -11,22 +12,26 @@ import 'package:movie_app/ui/UpdateProfile/update_profile_screen.dart';
 import 'package:movie_app/ui/forget_password_screen/forget_screen.dart';
 import 'package:movie_app/ui/login_screen/login_screen.dart';
 import 'package:movie_app/ui/user_profile_Screen/user_profile_screen.dart';
+import 'package:provider/provider.dart';
 import 'package:shorebird_code_push/shorebird_code_push.dart';
 
+import 'SharedPreferences/auth_shared_preferences.dart';
+import 'SharedPreferences/language_shared_preferences.dart';
+import 'api/my_bloc_observer.dart';
+import 'bloc/language_provider.dart';
 import 'core/di/di.dart';
 
-void main()  {
-  // WidgetsFlutterBinding.ensureInitialized();
+void main()async{
+  WidgetsFlutterBinding.ensureInitialized();
   configureDependencies();
-  // Bloc.observer = MyBlocObserver();
-  // await AppSharedPreferences.init();
-  // await AuthSharedPreferences.init();
+  Bloc.observer = MyBlocObserver();
+  await AppSharedPreferences.init();
+  await AuthSharedPreferences.init();
   runApp(
-      const MyApp()
-    // ChangeNotifierProvider(
-    //   create: (context) => LanguageProvider(),
-    //   child: const MyApp(),
-    // ),
+    ChangeNotifierProvider(
+      create: (context) => LanguageProvider(),
+      child: const MyApp(),
+    ),
   );
 }
 
@@ -70,7 +75,7 @@ class _MyAppState extends State<MyApp> {
       darkTheme: AppTheme.Theme,
       themeMode: ThemeMode.dark,
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.HomeTab.name,
+      initialRoute: AppRoutes.InitialRoute.name,
       routes: {
         AppRoutes.HomeTab.name: (context) => const HomeTab(),
         AppRoutes.InitialRoute.name: (context) => const InitialRoute(),

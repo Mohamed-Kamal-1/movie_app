@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:movie_app/core/AppFromField.dart';
 import 'package:movie_app/core/colors/app_color.dart';
 import 'package:movie_app/core/di/di.dart';
+import 'package:movie_app/core/extention/error_extention.dart';
 import 'package:movie_app/core/icons/app_icon.dart';
 import 'package:movie_app/core/validators.dart';
 import 'package:movie_app/extensions/extension.dart';
@@ -50,7 +51,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void _handleGoogleLogin() {
-    _viewModel.loginWithGoogle();
+    // _viewModel.loginWithGoogle();
   }
 
   @override
@@ -64,7 +65,7 @@ class _LoginScreenState extends State<LoginScreen> {
           } else if (state is LoginErrorState) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content: Text(state.errorMessage ?? 'Login failed'),
+  content: Text(context.getErrorMessage(state.errorMessage)),
                 backgroundColor: AppColor.yellow,
               ),
             );

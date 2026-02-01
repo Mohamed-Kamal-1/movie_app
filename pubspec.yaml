@@ -48,7 +48,7 @@ dependencies:
   provider: ^6.1.5+1
   flutter_svg: ^2.2.2
   pretty_dio_logger: ^1.4.0
-  injectable: ^2.6.0
+  injectable: ^2.7.1+4
   flutter_bloc: ^9.1.1
   cached_network_image: ^3.4.1
   webview_flutter: ^4.4.2
@@ -63,6 +63,8 @@ dependencies:
   flutter_native_splash: ^2.4.7
   flutter_dotenv: ^6.0.0
   shorebird_code_push: ^2.0.5
+  dio_cache_interceptor: ^4.0.5
+  lean_builder: ^0.1.6
 
 dev_dependencies:
   flutter_test:
@@ -74,6 +76,8 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^5.0.0
+  injectable_generator:
+  build_runner: ^2.10.5
 
 flutter_launcher_icons:
   android: "launcher_icon"
@@ -81,8 +85,7 @@ flutter_launcher_icons:
   image_path: "assets/icon_app.png"
   min_sdk_android: 21 # android min sdk min:16, default 21
 
-  injectable_generator:
-  build_runner:
+
 
 
 # For information on the generic Dart part of this file, see the

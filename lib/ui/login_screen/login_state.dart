@@ -5,9 +5,9 @@ class LoginInitialState extends LoginState {}
 class LoginLoadingState extends LoginState {}
 
 class LoginErrorState extends LoginState {
-  String? errorMessage;
+  Exception errorMessage;
 
-  LoginErrorState({this.errorMessage});
+  LoginErrorState({required this.errorMessage});
 }
 
 class LoginSuccessState extends LoginState {}

@@ -1,42 +1,49 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+import 'package:movie_app/auth/data/models/Auth_response_dto.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
+
 import '../../../core/app_const/app_const.dart';
-import '../models/register_model.dart';
 
 @injectable
 class AuthDataSourceImpl {
   final Dio dio;
 
   AuthDataSourceImpl() : dio = Dio() {
-    dio.options.baseUrl = 'https://route-movie-apis.vercel.app';
+    dio.options.baseUrl = 'https://ecommerce.routemisr.com/';
+    dio.interceptors.add(
+      PrettyDioLogger(
+        responseBody: true,
+        responseHeader: true,
+        error: true,
+        requestHeader: true,
+        requestBody: true,
+      ),
+    );
   }
 
-  Future<RegisterModel> register({
+  Future<AuthResponseDto> register({
     required String name,
     required String email,
     required String password,
     required String confirmPassword,
     required String phone,
-    required int avaterId,
   }) async {
-    final response = await dio.post(
-      AppConst.registerUrl,
+    final Response response = await dio.post(
+      AppConst.registerEndPoint,
       data: {
         "name": name,
         "email": email,
         "password": password,
-        "confirmPassword": confirmPassword,
+        "rePassword": confirmPassword,
         "phone": phone,
-        "avaterId": avaterId,
       },
     );
 
-    final data = response.data['data'];
+    final AuthResponseDto authResponse = AuthResponseDto.fromJson(
+        response.data);
 
-    if (data is Map<String, dynamic>) {
-      return RegisterModel.fromJson(data);
-    } else {
-      throw Exception("Invalid data format");
-    }
+    return authResponse;
+
   }
 }

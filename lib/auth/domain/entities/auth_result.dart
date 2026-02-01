@@ -1,8 +1,23 @@
-import 'package:movie_app/auth/data/models/data_model.dart';
+import 'package:movie_app/auth/domain/entities/user_entity.dart';
+
+// class AuthResult {
+//   final String message;
+//   final DataModel? data;
+//
+//   AuthResult({required this.message, required this.data});
+// }
+
 
 class AuthResult {
-  final String message;
-  final DataModel? data;
+  AuthResult({
+    // this.message,
+    this.user,
+    this.token,});
 
-  AuthResult({required this.message, required this.data});
+
+  // String? message;
+  UserEntity? user;
+  String? token;
+
+
 }

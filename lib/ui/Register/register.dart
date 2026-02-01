@@ -3,7 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_app/auth/presentation/auth_cubit/register_cubit.dart';
+import 'package:movie_app/core/extention/error_extention.dart';
 import 'package:movie_app/core/images/app_image.dart';
+import 'package:movie_app/ui/Register/avatar_section.dart';
+
 import '../../auth/presentation/auth_cubit/register_state.dart';
 import '../../core/AppFromField.dart';
 import '../../core/colors/app_color.dart';
@@ -11,6 +14,8 @@ import '../../core/di/di.dart';
 import '../../core/validators.dart';
 import '../login_screen/login_screen.dart';
 import '../login_screen/toogle_switch_widget.dart';
+import 'auth_cubit/register_cubit.dart';
+import 'auth_cubit/register_state.dart';
 
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({super.key});
@@ -69,7 +74,8 @@ class _RegisterScreenContentState extends State<RegisterScreenContent> {
 
         if (state is ErrorState) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(state.message), backgroundColor: Colors.red),
+            SnackBar(content: Text(context.getErrorMessage(state.message)),
+                backgroundColor: Colors.red),
           );
         }
       },
@@ -84,42 +90,7 @@ class _RegisterScreenContentState extends State<RegisterScreenContent> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  /// ------- AVATAR --------
-                  SizedBox(
-                    height: 120,
-                    child: PageView.builder(
-                      controller: avatarController,
-                      itemCount: avatars.length,
-                      itemBuilder: (context, index) {
-                        return AnimatedBuilder(
-                          animation: avatarController,
-                          builder: (context, child) {
-                            double value = 1.0;
-                            if (avatarController.position.haveDimensions) {
-                              value = (avatarController.page! - index).abs();
-                              value = (1 - (value * 0.5)).clamp(0.5, 1.6);
-                            }
-                            return Center(
-                              child: Transform.scale(
-                                scale: value,
-                                child: GestureDetector(
-                                  onTap: () => avatarController.animateToPage(
-                                    index,
-                                    duration: const Duration(milliseconds: 300),
-                                    curve: Curves.easeOut,
-                                  ),
-                                  child: CircleAvatar(
-                                    radius: 47 + (80 - 47) * value,
-                                    backgroundImage: AssetImage(avatars[index]),
-                                  ),
-                                ),
-                              ),
-                            );
-                          },
-                        );
-                      },
-                    ),
-                  ),
+                  const AvatarSection(),
                   const SizedBox(height: 10),
                   Text(
                     "Avatar",
@@ -200,11 +171,12 @@ class _RegisterScreenContentState extends State<RegisterScreenContent> {
                                       name: nameController.text.trim(),
                                       email: emailController.text.trim(),
                                       password: passwordController.text.trim(),
+                                      phone: phoneController.text.trim(),
                                       confirmPassword: rePasswordController.text
                                           .trim(),
-                                      phone: phoneController.text.trim(),
-                                      avaterId:
-                                          avatarController.page?.round() ?? 0,
+
+                                      // avaterId:
+                                      //     avatarController.page?.round() ?? 0,
                                     );
                                   }
                                 },

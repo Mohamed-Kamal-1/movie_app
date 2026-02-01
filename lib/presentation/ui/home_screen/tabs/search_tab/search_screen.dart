@@ -60,9 +60,6 @@ class _SearchScreenState extends State<SearchScreen> {
         appBar: AppBarSearchWidget(
           onSearch: (title) {
             _onSearchChanged(title);
-            if(title.isEmpty){
-              isEmpty = true;
-            }
           },
         ),
         body: BlocBuilder<SearchScreenViewModel, SearchScreenState>(

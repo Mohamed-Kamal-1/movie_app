@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:injectable/injectable.dart';
 import 'package:movie_app/SharedPreferences/auth_shared_preferences.dart';
 import 'package:movie_app/api/endpoints/endpoints.dart';
@@ -9,22 +8,21 @@ import 'package:movie_app/api/model/favourite/get_all_favourite_model.dart';
 import 'package:movie_app/api/model/favourite/is_favourite_model.dart';
 import 'package:movie_app/api/model/favourite/remove_from_favourite_model.dart';
 import 'package:movie_app/api/model/movie_details/movie_details_response_dto.dart';
-import 'package:movie_app/api/model/movie_list/Rating_dto.dart';
 import 'package:movie_app/api/model/movie_list/movie_response_dto.dart';
 import 'package:movie_app/api/model/movie_suggestion/movie_suggestion_response_dto.dart';
 import 'package:movie_app/api/model/profile/delete_account_dto.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
-import 'model/login/login_response.dart';
+import '../auth/data/models/Auth_response_dto.dart';
 import 'model/profile/profile_response_dto.dart';
 import 'model/profile/update_profile_dto.dart';
 
 @singleton
 class ApiManager {
   final dio = Dio();
-  final authDio = Dio();
+  final authAndUpdateDio = Dio();
   static const String _baseUrl = 'https://yts.lt/api/v2/';
-  static const String _authBaseUrl = 'https://route-movie-apis.vercel.app/';
+  static const String _authAndUpdateBaseUrl = 'https://ecommerce.routemisr.com/';
 
   ApiManager() {
     dio.options.baseUrl = _baseUrl;
@@ -39,8 +37,8 @@ class ApiManager {
     );
 
 
-    authDio.options.baseUrl = _authBaseUrl;
-    authDio.interceptors.add(
+    authAndUpdateDio.options.baseUrl = _authAndUpdateBaseUrl;
+    authAndUpdateDio.interceptors.add(
       PrettyDioLogger(
         responseBody: true,
         responseHeader: true,
@@ -96,51 +94,51 @@ class ApiManager {
   }
 
 
-  Future<LoginResponseDto> login(String email, String password) async {
-    try {
-      Response response = await authDio.post(
-        Endpoints.login,
-        data: {
-          'email': email,
-          'password': password,
-        },
-      );
+  Future<AuthResponseDto> login(String email, String password) async {
 
-      // Check if response status code indicates success (200-299)
-      if (response.statusCode != null &&
-          response.statusCode! >= 200 &&
-          response.statusCode! < 300) {
-        return LoginResponseDto.fromJson(response.data);
-      } else {
-        // Handle non-success status codes
-        throw DioException(
-          requestOptions: response.requestOptions,
-          response: response,
-          type: DioExceptionType.badResponse,
-        );
-      }
-    } on DioException catch (e) {
-      // Handle Dio errors (network, timeout, etc.)
-      if (e.type == DioExceptionType.connectionTimeout) {
-        throw Exception(
-            'Connection timeout. Please check your internet connection.');
-      } else if (e.type == DioExceptionType.receiveTimeout) {
-        throw Exception('Request timeout. Please try again.');
-      } else if (e.type == DioExceptionType.badResponse && e.response != null) {
-        // Parse error response
-        final errorData = e.response!.data;
-        if (errorData is Map<String, dynamic> &&
-            errorData.containsKey('message')) {
-          throw Exception(errorData['message'] ?? 'Login failed');
-        }
-        throw Exception('Login failed. Please try again.');
-      } else {
-        throw Exception('Network error. Please check your connection.');
-      }
-    } catch (e) {
-      rethrow;
-    }
+    Map<String, Object> bodyData = {
+      "email": email,
+      "password": password,
+    };
+    final Response response = await dio.post(
+      Endpoints.register,
+      data: bodyData,
+    );
+
+    final AuthResponseDto authResponse = AuthResponseDto.fromJson(
+        response.data);
+
+    return authResponse;
   }
+
+  Future<AuthResponseDto> register({
+    required String name,
+    required String email,
+    required String password,
+    required String confirmPassword,
+    required String phone,
+  }) async {
+    Map<String, Object> bodyData = {
+
+      "name": name,
+      "email": email,
+      "password": password,
+      "rePassword": confirmPassword,
+      "phone": phone,
+
+    };
+    final Response response = await dio.post(
+      Endpoints.register,
+      data: bodyData,
+
+    );
+
+    final AuthResponseDto authResponse = AuthResponseDto.fromJson(
+        response.data);
+
+    return authResponse;
+  }
+
 
   Future<MovieSuggestionResponseDto> getMovieSuggestion(int movieId) async {
     try {
@@ -176,7 +174,7 @@ class ApiManager {
   }) async {
     try {
       final token = AuthSharedPreferences.getToken();
-      Response response = await authDio.post(
+      Response response = await authAndUpdateDio.post(
         Endpoints.addToFavourite,
         data: {
           "movieId": addFavouriteData.movieId,
@@ -217,7 +215,7 @@ class ApiManager {
   Future<GetAllFavouriteModel?> getAllFavourite() async {
     try {
       final token = AuthSharedPreferences.getToken();
-      Response response = await authDio.get(
+      Response response = await authAndUpdateDio.get(
         Endpoints.getAllFavourite,
         options: Options(
           headers: {
@@ -250,7 +248,7 @@ class ApiManager {
   Future<IsFavouriteModel?> isFavourite(String movieId) async {
     try {
       final token = AuthSharedPreferences.getToken();
-      Response response = await authDio.get(
+      Response response = await authAndUpdateDio.get(
         '${Endpoints.isFavourite}/$movieId',
         options: Options(
           headers: {
@@ -283,7 +281,7 @@ class ApiManager {
   Future<RemoveFromFavouriteModel?> removeFromFavourite(String movieId) async {
     try {
       final token = AuthSharedPreferences.getToken();
-      Response response = await authDio.delete(
+      Response response = await authAndUpdateDio.delete(
         '${Endpoints.removeFromFavourite}/$movieId',
         options: Options(
           headers: {
@@ -318,7 +316,7 @@ class ApiManager {
   Future<ProfileResponseDto> getProfile()  async {
     final token = AuthSharedPreferences.getToken();
     try {
-      Response response = await authDio.get(
+      Response response = await authAndUpdateDio.get(
         Endpoints.profile,
         options: Options(
           headers: {
@@ -366,7 +364,7 @@ class ApiManager {
   Future<UpdateProfileDto> updateProfile(String email , int avatarId)  async {
     final token = AuthSharedPreferences.getToken();
     try {
-      Response response = await authDio.patch(
+      Response response = await authAndUpdateDio.patch(
         Endpoints.profile,
         data: {
           'email': email,
@@ -416,7 +414,7 @@ class ApiManager {
   Future<DeleteAccountDto> deleteAccount()  async {
     final token = AuthSharedPreferences.getToken();
     try {
-      Response response = await authDio.delete(
+      Response response = await authAndUpdateDio.delete(
         Endpoints.profile,
         options: Options(
           headers: {

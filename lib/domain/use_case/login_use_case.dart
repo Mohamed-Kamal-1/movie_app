@@ -9,12 +9,5 @@ class LoginUseCase {
 
   LoginUseCase(this.authRepo);
 
-  Future<Result<UserModel>> login(String email, String password) {
-    return authRepo.login(email, password);
-  }
-
-  String getErrorMessage() {
-    return authRepo.getErrorMessage();
-  }
 }
 

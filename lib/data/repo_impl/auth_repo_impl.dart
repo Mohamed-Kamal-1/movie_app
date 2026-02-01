@@ -1,7 +1,7 @@
 import 'package:injectable/injectable.dart';
+import 'package:movie_app/auth/domain/entities/auth_result.dart';
 import 'package:movie_app/data/data_source/auth_data_source.dart';
 import 'package:movie_app/domain/api_result.dart';
-import 'package:movie_app/domain/model/user_model.dart';
 import 'package:movie_app/domain/repos/auth_repo.dart';
 
 @Injectable(as: AuthRepo)
@@ -10,29 +10,22 @@ class AuthRepoImpl implements AuthRepo {
 
   AuthRepoImpl(this.authDataSource);
 
+
   @override
-  Future<Result<UserModel>> login(String email, String password) async {
-    try {
-      final response = await authDataSource.login(email, password);
-      
-      // Extract token from response (response.data contains the token)
-      if (response.data != null && response.data!.isNotEmpty) {
-        final userModel = UserModel(
-          email: email,
-          token: response.data,
-        );
-        return Success(userModel);
-      } else {
-        return Failure(Exception(authDataSource.getErrorMessage()));
-      }
-    } catch (e) {
-      return Failure(Exception(authDataSource.getErrorMessage()));
-    }
+  Future<Result<AuthResult>> login(String email, String password) {
+    return authDataSource.login(email, password);
   }
 
   @override
-  String getErrorMessage() {
-    return authDataSource.getErrorMessage();
+  Future<Result<AuthResult>> register(
+      {required String name, required String email, required String password, required String confirmPassword, required String phone}) {
+    return authDataSource.register(name: name,
+        email: email,
+        password: password,
+        confirmPassword: confirmPassword,
+        phone: phone);
   }
+
+
 }
 
