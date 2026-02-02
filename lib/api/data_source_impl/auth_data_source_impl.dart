@@ -1,11 +1,12 @@
 import 'package:injectable/injectable.dart';
 import 'package:movie_app/api/api_manager.dart';
 import 'package:movie_app/api/execute_api.dart';
-import 'package:movie_app/auth/domain/entities/auth_result.dart';
 import 'package:movie_app/data/data_source/auth_data_source.dart';
 import 'package:movie_app/domain/api_result.dart';
 
-import '../../auth/data/models/Auth_response_dto.dart';
+import '../../domain/model/entities/auth_result.dart';
+import '../model/authentication/Auth_response_dto.dart';
+
 
 @Injectable(as: AuthDataSource)
 class AuthDataSourceImpl implements AuthDataSource {

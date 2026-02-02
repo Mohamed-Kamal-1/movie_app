@@ -3,6 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class AuthSharedPreferences {
   static const String _tokenKey = 'auth_token';
   static const String _emailKey = 'user_email';
+  static const String _nameKey = 'user_name';
   static const String _firstTimeKey = 'is_first_time';
   static late SharedPreferences _sharedPreferences;
 
@@ -30,8 +31,12 @@ class AuthSharedPreferences {
     await _sharedPreferences.setString(_emailKey, email);
   }
 
-  static String? getEmail() {
-    return _sharedPreferences.getString(_emailKey);
+  static Future<void> saveName(String name) async {
+    await _sharedPreferences.setString(_emailKey, name);
+  }
+
+  static String? getName() {
+    return _sharedPreferences.getString(_nameKey);
   }
 
   static Future<void> clearAuth() async {

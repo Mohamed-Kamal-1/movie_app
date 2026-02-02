@@ -23,10 +23,6 @@ import '../../api/data_source_impl/movie_suggestion_data_source_impl.dart'
     as _i374;
 import '../../api/data_source_impl/movies_list_data_source_impl.dart' as _i116;
 import '../../api/data_source_impl/update_profile_source_impl.dart' as _i167;
-import '../../auth/data/auth_data_source/AuthDataSourceImpl.dart' as _i571;
-import '../../auth/data/auth_repository_impl/auth_repository_impl.dart'
-    as _i342;
-import '../../auth/domain/auth_repository/auth_repository.dart' as _i967;
 import '../../data/data_source/auth_data_source.dart' as _i862;
 import '../../data/data_source/delete_account_source.dart' as _i508;
 import '../../data/data_source/favourite_data_source.dart' as _i1002;
@@ -80,11 +76,7 @@ extension GetItInjectableX on _i174.GetIt {
     _i526.EnvironmentFilter? environmentFilter,
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
-    gh.factory<_i571.AuthDataSourceImpl>(() => _i571.AuthDataSourceImpl());
     gh.singleton<_i149.ApiManager>(() => _i149.ApiManager());
-    gh.lazySingleton<_i967.AuthRepository>(
-      () => _i342.AuthRepositoryImpl(gh<_i571.AuthDataSourceImpl>()),
-    );
     gh.factory<_i1019.MovieSuggestionDataSource>(
       () => _i374.MovieSuggestionDataSourceImpl(gh<_i149.ApiManager>()),
     );

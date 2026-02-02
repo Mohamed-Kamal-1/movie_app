@@ -13,7 +13,8 @@ import 'package:movie_app/api/model/movie_suggestion/movie_suggestion_response_d
 import 'package:movie_app/api/model/profile/delete_account_dto.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
-import '../auth/data/models/Auth_response_dto.dart';
+
+import 'model/authentication/Auth_response_dto.dart';
 import 'model/profile/profile_response_dto.dart';
 import 'model/profile/update_profile_dto.dart';
 
@@ -100,8 +101,8 @@ class ApiManager {
       "email": email,
       "password": password,
     };
-    final Response response = await dio.post(
-      Endpoints.register,
+    final Response response = await authAndUpdateDio.post(
+      Endpoints.login,
       data: bodyData,
     );
 
@@ -127,7 +128,7 @@ class ApiManager {
       "phone": phone,
 
     };
-    final Response response = await dio.post(
+    final Response response = await authAndUpdateDio.post(
       Endpoints.register,
       data: bodyData,
 

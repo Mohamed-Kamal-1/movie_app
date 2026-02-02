@@ -1,4 +1,5 @@
-import '../../../auth/domain/entities/user_entity.dart';
+
+import '../../../domain/model/entities/user_entity.dart';
 
 class User {
   User({this.name, this.email});

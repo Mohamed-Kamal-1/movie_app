@@ -1,6 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-
 import 'package:movie_app/ui/Register/auth_cubit/register_state.dart';
 
 import '../../../SharedPreferences/auth_shared_preferences.dart';
@@ -33,9 +32,13 @@ class RegisterCubit extends Cubit<RegisterState> {
     switch (authResponse) {
       case Success():
         if (authResponse.data.token != null) {
-          await AuthSharedPreferences.init();
-          await AuthSharedPreferences.saveToken(authResponse.data.token!);
-          await AuthSharedPreferences.saveEmail(email);
+         await Future.wait([
+            AuthSharedPreferences.saveEmail(
+                authResponse.data.user?.email ?? ''),
+            AuthSharedPreferences.saveName(authResponse.data.user?.name ?? ''),
+            AuthSharedPreferences.saveToken(authResponse.data.token!),
+          ]);
+
           isAuthorized = true;
         }
 

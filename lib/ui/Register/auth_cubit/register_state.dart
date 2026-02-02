@@ -1,4 +1,5 @@
-import 'package:movie_app/auth/domain/entities/auth_result.dart';
+
+import '../../../domain/model/entities/auth_result.dart';
 
 abstract class RegisterState {}
 class InitState extends RegisterState {}

@@ -7,13 +7,13 @@ abstract class ProfileScreenState {}
 class ProfileInitialState extends ProfileScreenState {}
 class ProfileLoadingState extends ProfileScreenState {}
 class ProfileErrorState extends ProfileScreenState {
-  String errorMessage;
-  Exception? exception;
-  ProfileErrorState(this.errorMessage, {this.exception});
+  Exception errorMessage;
+  ProfileErrorState({required this.errorMessage});
 }
 class ProfileSuccessState extends ProfileScreenState {
-  ProfileResponseDto profile;
-  ProfileSuccessState(this.profile);
+  // ProfileResponseDto profile;
+  String? name;
+  ProfileSuccessState({required this.name});
 }
 
 

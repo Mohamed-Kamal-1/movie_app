@@ -4,17 +4,22 @@ import 'package:google_fonts/google_fonts.dart';
 import 'colors/app_color.dart';
 
 typedef Validator = String? Function(String? text);
+typedef OnChange = void Function(String? text);
 
 class AppFormField extends StatefulWidget {
-  String label;
+  final String label;
+  final OnChange? onChange;
   final Widget? icon;
-  TextInputType keyboardType;
-  bool isPassword;
-  Validator? validator;
-  TextEditingController? controller;
-  int lines;
+  final TextInputType keyboardType;
+  final bool isPassword;
+  final Validator? validator;
+  final TextEditingController? controller;
+  final int lines;
+  final FocusNode? focusNode;
 
-  AppFormField({
+  final TextInputAction? textInputAction;
+
+  const AppFormField({
     required this.label,
     this.icon,
     this.keyboardType = TextInputType.text,
@@ -23,6 +28,9 @@ class AppFormField extends StatefulWidget {
     this.controller,
     this.lines = 1,
     super.key,
+    this.textInputAction = TextInputAction.next,
+    this.onChange,
+    this.focusNode
   });
 
   @override
@@ -39,10 +47,19 @@ class _AppFormFieldState extends State<AppFormField> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8),
       child: TextFormField(
+        focusNode: widget.focusNode,
+        autovalidateMode: AutovalidateMode.onUserInteraction,
+        onChanged: widget.onChange,
+        textInputAction: widget.textInputAction,
         controller: widget.controller,
         maxLines: widget.lines,
         style: GoogleFonts.inter(fontSize: 16, color: AppColor.white),

@@ -1,8 +1,9 @@
 import 'package:injectable/injectable.dart';
-import 'package:movie_app/auth/domain/entities/auth_result.dart';
 import 'package:movie_app/data/data_source/auth_data_source.dart';
 import 'package:movie_app/domain/api_result.dart';
 import 'package:movie_app/domain/repos/auth_repo.dart';
+
+import '../../domain/model/entities/auth_result.dart';
 
 @Injectable(as: AuthRepo)
 class AuthRepoImpl implements AuthRepo {

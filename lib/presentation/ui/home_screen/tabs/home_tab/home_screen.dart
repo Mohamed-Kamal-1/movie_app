@@ -1,72 +1,65 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movie_app/auth/presentation/auth_cubit/register_state.dart';
 import 'package:movie_app/core/colors/app_color.dart';
 import 'package:movie_app/extensions/extension.dart';
 import 'package:movie_app/l10n/app_string.dart';
-import 'package:movie_app/presentation/ui/home_screen/cubit/hom_screen_state.dart';
 import 'package:movie_app/presentation/ui/home_screen/tabs/brows_tab/browse_screen.dart';
 import 'package:movie_app/presentation/ui/home_screen/tabs/home_tab/watch_now_section.dart';
 
 import 'available_now_section.dart';
-import '../../cubit/home_screen_view_model.dart';
 
-class HomeScreen extends StatefulWidget {
-
-
+class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final List<String> genres = const ["Comedy", "Action", "Drama", "History"];
     final randomGenre = genres[Random().nextInt(genres.length)];
-    return Column(
-      children: [
-        Expanded(child: AvailableNowSection()),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-          child: Row(
-            children: [
-              Text(randomGenre, style: context.fonts.titleMedium),
-              const Spacer(),
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
 
-              GestureDetector(
-                onTap: () {
-                  Feedback.forTap(context);
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (_) => const BrowseScreen()),
-                  );
-                },
-                child: Row(
-                  spacing: 6,
-                  children: [
-                    Text(
-                      AppString.seeMore,
-                      style: context.fonts.titleSmall?.copyWith(
-                        color: AppColor.yellow,
+      body: Column(
+        children: [
+          Expanded(child: AvailableNowSection()),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            child: Row(
+              children: [
+                Text(randomGenre, style: context.fonts.titleMedium),
+                const Spacer(),
+
+                GestureDetector(
+                  onTap: () {
+                    Feedback.forTap(context);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => const BrowseScreen()),
+                    );
+                  },
+                  child: Row(
+                    spacing: 6,
+                    children: [
+                      Text(
+                        AppString.seeMore,
+                        style: context.fonts.titleSmall?.copyWith(
+                          color: AppColor.yellow,
+                        ),
                       ),
-                    ),
-                    const Icon(Icons.arrow_forward, color: AppColor.yellow),
-                  ],
+                      const Icon(Icons.arrow_forward, color: AppColor.yellow),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-        SizedBox(
-          height: 220,
-          width: double.infinity,
-          child: WatchNowSection(randomGenre: randomGenre),
-        ),
-      ],
+          SizedBox(
+            height: 220,
+            width: double.infinity,
+            child: WatchNowSection(randomGenre: randomGenre),
+          ),
+        ],
+      ),
     );
   }
 }

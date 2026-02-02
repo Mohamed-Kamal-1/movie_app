@@ -1,7 +1,6 @@
-import 'package:movie_app/api/model/login/login_response.dart';
-import 'package:movie_app/auth/domain/entities/auth_result.dart';
 
 import '../../domain/api_result.dart';
+import '../../domain/model/entities/auth_result.dart';
 
 abstract interface class AuthDataSource {
   Future<Result<AuthResult>> login(String email, String password);

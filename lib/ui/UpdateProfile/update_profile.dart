@@ -5,7 +5,6 @@ import 'package:movie_app/core/colors/app_color.dart';
 import 'package:movie_app/core/images/app_image.dart';
 import 'package:movie_app/ui/UpdateProfile/bloc/profile_screen_state.dart';
 
-import '../../core/di/di.dart';
 import 'bloc/profile_view_model.dart';
 import 'widget/CutomFormField.dart';
 
@@ -55,22 +54,22 @@ class _UpdateProfileState extends State<UpdateProfile> {
       builder: (context, state) {
         switch (state) {
           case ProfileSuccessState():
-            final rawId = state.profile.data?.avaterId ?? 0;
-            final profileAvatarId = (rawId >= 0 && rawId < imgList.length)
-                ? rawId
-                : 0;
-            final profileEmail = state.profile.data?.email ?? '';
-            final profilePhone = state.profile.data?.phone ?? '';
-            if (nameController.text != profileEmail) {
-              nameController.text = profileEmail;
-            }
-            if (phoneController.text != profilePhone) {
-              phoneController.text = profilePhone;
-            }
-            final displayedAvatarIndex =
-                (selectedAvatar >= 0 && selectedAvatar < imgList.length)
-                ? selectedAvatar
-                : profileAvatarId;
+          // final rawId = state.profile.data?.avaterId ?? 0;
+          // final profileAvatarId = (rawId >= 0 && rawId < imgList.length)
+          //     ? rawId
+          //     : 0;
+          // final profileEmail = state.profile.data?.email ?? '';
+          // final profilePhone = state.profile.data?.phone ?? '';
+          // if (nameController.text != profileEmail) {
+          //   nameController.text = profileEmail;
+          // }
+          // if (phoneController.text != profilePhone) {
+          //   phoneController.text = profilePhone;
+          // }
+          // final displayedAvatarIndex =
+          //     (selectedAvatar >= 0 && selectedAvatar < imgList.length)
+          //     ? selectedAvatar
+          //     : profileAvatarId;
 
             return Scaffold(
               backgroundColor: Colors.black,
@@ -105,7 +104,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                       GestureDetector(
                         onTap: () => _showBottomSheet(context, imgList),
                         child: Image.asset(
-                          imgList[displayedAvatarIndex],
+                          imgList[0],
                           width: 150,
                           height: 150,
                         ),
@@ -157,7 +156,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                           children: [
                             ElevatedButton(
                               onPressed: () {
-                                getIt<ProfileViewModel>().deleteAcc();
+                                // getIt<ProfileViewModel>().deleteAcc();
                               },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.red,
@@ -170,14 +169,14 @@ class _UpdateProfileState extends State<UpdateProfile> {
                             SizedBox(height: 20),
                             ElevatedButton(
                               onPressed: () {
-                                final avatarToSend = (selectedAvatar >= 0)
-                                    ? selectedAvatar
-                                    : profileAvatarId;
-                                getIt<ProfileViewModel>().updateData(
-                                  nameController.text,
-                                  avatarToSend,
-                                );
-                                Navigator.pop(context);
+                                // final avatarToSend = (selectedAvatar >= 0)
+                                //     ? selectedAvatar
+                                //     // : profileAvatarId;
+                                // getIt<ProfileViewModel>().updateData(
+                                //   nameController.text,
+                                //   avatarToSend,
+                                // );
+                                // Navigator.pop(context);
                               },
                               child: Text(
                                 "Update Data",

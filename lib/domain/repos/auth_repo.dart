@@ -1,5 +1,5 @@
-import '../../auth/domain/entities/auth_result.dart';
 import '../api_result.dart';
+import '../model/entities/auth_result.dart';
 
 
 abstract interface class AuthRepo {

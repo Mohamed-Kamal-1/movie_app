@@ -1,13 +1,16 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:movie_app/SharedPreferences/auth_shared_preferences.dart';
 import 'package:movie_app/domain/api_result.dart';
 import 'package:movie_app/domain/repos/auth_repo.dart';
 import 'package:movie_app/ui/login_screen/login_state.dart';
+import 'package:movie_app/ui/user_profile_Screen/user_info.dart';
+
+import '../../SharedPreferences/auth_shared_preferences.dart';
 
 @injectable
 class LoginViewModel extends Cubit<LoginState> {
   final AuthRepo _loginAuthRepo;
+
 
   LoginViewModel(this._loginAuthRepo) : super(LoginInitialState());
 
@@ -18,11 +21,19 @@ class LoginViewModel extends Cubit<LoginState> {
       case Success():
         {
           if (response.data.token != null) {
-            await AuthSharedPreferences.init();
-            await AuthSharedPreferences.saveToken(response.data.token!);
+            if (response.data.user?.name != null &&
+                response.data.user?.email != null) {
+
+              UserInfo().setUser(
+                  response.data.user!.name, response.data.user!.email);
+              print('UserName');
+              print(  UserInfo().getName());
+              print('=============================');
+              await AuthSharedPreferences.saveToken(response.data.token!);
+                emit(LoginSuccessState());
+            }
           }
-        emit(LoginSuccessState());
-      }
+        }
 
       case Failure():
         emit(LoginErrorState(errorMessage: response.exception));

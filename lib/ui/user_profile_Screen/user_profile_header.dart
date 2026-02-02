@@ -4,6 +4,7 @@ import 'package:movie_app/core/colors/app_color.dart';
 import 'package:movie_app/core/routes/app_routes.dart';
 import 'package:movie_app/ui/UpdateProfile/bloc/profile_screen_state.dart';
 import 'package:movie_app/ui/UpdateProfile/update_profile.dart';
+
 import '../../core/di/di.dart';
 import '../../core/images/app_image.dart';
 import '../UpdateProfile/bloc/profile_view_model.dart';
@@ -41,7 +42,7 @@ class ProfileHeader extends StatelessWidget {
                                   int avatarId = 0;
 
                                   if (state is ProfileSuccessState) {
-                                    avatarId = state.profile.data?.avaterId ?? 0;
+                                    avatarId = 0;
                                     return Image.asset(
                                       imgList[avatarId],
                                       width: 118,
@@ -62,17 +63,18 @@ class ProfileHeader extends StatelessWidget {
                             const SizedBox(height: 20),
                             Builder(
                               builder: (context) {
-                                String? name;
                                 if (state is ProfileSuccessState) {
-                                  name = state.profile.data?.name;
+                                  return FittedBox(
+                                    child: Text(state.name ?? 'unKnown',
+                                      style: Theme
+                                          .of(context)
+                                          .textTheme
+                                          .titleMedium,
+                                    ),
+                                  );
                                 }
 
-                                return FittedBox(
-                                  child: Text(
-                                    name ?? "unKnown",
-                                    style: Theme.of(context).textTheme.titleMedium,
-                                  ),
-                                );
+                                return const Text('Some thing went wrong');
                               },
                             ),
                           ],

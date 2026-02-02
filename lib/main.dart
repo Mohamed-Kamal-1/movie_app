@@ -25,7 +25,6 @@ void main()async{
   WidgetsFlutterBinding.ensureInitialized();
   configureDependencies();
   Bloc.observer = MyBlocObserver();
-  await AppSharedPreferences.init();
   await AuthSharedPreferences.init();
   runApp(
     ChangeNotifierProvider(

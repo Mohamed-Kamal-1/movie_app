@@ -1,4 +1,5 @@
-import '../../../auth/domain/entities/auth_result.dart';
+
+import '../../../domain/model/entities/auth_result.dart';
 import 'User.dart';
 
 class AuthResponseDto {
