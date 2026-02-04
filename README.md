@@ -9,14 +9,6 @@ A movie discovery and details application built with the **Flutter** framework a
   * **High Performance:** Enjoy a fast and smooth user experience due to Flutter's native compilation.
   * **Effective State Management:** Utilizes the BLoC/Cubit pattern for reliable and testable data flow.
 
-## 📥 Download 
-
-You can download and install the latest compiled version of the application for quick testing.
-
-  * **Android (APK):** https://bit.ly/45c2TFw
-  * 
-*Note: For the best experience or to contribute, please refer to the **Getting Started** section to build the project locally.*
-
 ## 🛠 Technology Stack
 
 This project is built using a modern and robust set of tools within the Flutter ecosystem:
