@@ -17,10 +17,13 @@ This project is built using a modern and robust set of tools within the Flutter 
 | :--- | :--- | :--- |
 | **Framework** | **[Flutter](https://flutter.dev/)** | Cross-platform UI toolkit. |
 | **Language** | **[Dart](https://dart.dev/)** | The core programming language for the application. |
-| **State Management** | **[BLoC / Cubit](https://bloclibrary.dev/)** | A pattern for predictable and scalable state management. |
-| **Networking** | **[Dio](https://pub.dev/packages/dio)** | A powerful HTTP client for executing **REST API** requests. |
-| **Architecture** | **Clean Architecture** | The architectural blueprint for separating application layers. |
-| **Dependency Injection** | **[GetIt](https://pub.dev/packages/get_it)** | A service locator used for easy access to shared services. |
+| **State Management** | **[BLoC / Cubit](https://bloclibrary.dev/)** | Predictable and scalable state management. |
+| **Networking** | **[Dio](https://pub.dev/packages/dio)** | HTTP client for executing **REST API** requests. |
+| **Architecture** | **Clean Architecture** | Architectural blueprint for separating application layers. |
+| **Dependency Injection** | **[GetIt](https://pub.dev/packages/get_it)** | Service locator for easy access to shared services. |
+| **Local Storage** | **[Hive](https://pub.dev/packages/hive)** | Lightweight and blazing fast key-value database. |
+| **OTA Updates** | **[Shorebird](https://shorebird.dev/)** | Code Push for instant app updates without App Store review. |
+| **Notifications** | **[FCM](https://firebase.google.com/docs/cloud-messaging)** | Firebase Cloud Messaging for push notifications. |
 
 ## 📐 Project Architecture
 
